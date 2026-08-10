@@ -17,18 +17,45 @@ PRINT '============================================';
 GO
 
 -- =============================================
--- 1. SEDES (5)
+-- 1. UBIGEOS (11)
+-- Tabla de ayuda: codigos oficiales RENIEC.
+-- =============================================
+IF NOT EXISTS (SELECT 1 FROM core.Ubigeos WHERE CodigoUbigeo = '150101')
+BEGIN
+    SET IDENTITY_INSERT core.Ubigeos ON;
+    INSERT INTO core.Ubigeos (UbigeoId, CodigoUbigeo, Departamento, Provincia, Distrito)
+    VALUES
+        (1,  '150101', 'Lima',        'Lima',        'Lima'),
+        (2,  '150103', 'Lima',        'Lima',        'Ate'),
+        (3,  '150115', 'Lima',        'Lima',        'La Victoria'),
+        (4,  '150117', 'Lima',        'Lima',        'Los Olivos'),
+        (5,  '150131', 'Lima',        'Lima',        'San Juan de Lurigancho'),
+        (6,  '150141', 'Lima',        'Lima',        'Villa El Salvador'),
+        (7,  '040101', 'Arequipa',    'Arequipa',    'Arequipa'),
+        (8,  '080101', 'Cusco',       'Cusco',       'Cusco'),
+        (9,  '130101', 'La Libertad', 'Trujillo',    'Trujillo'),
+        (10, '140101', 'Lambayeque',  'Chiclayo',    'Chiclayo'),
+        (11, '160101', 'Loreto',      'Maynas',      'Iquitos');
+    SET IDENTITY_INSERT core.Ubigeos OFF;
+    PRINT 'OK: 11 ubigeos insertados.';
+END
+ELSE
+    PRINT 'OK: Ubigeos ya cargados (se omite).';
+GO
+
+-- =============================================
+-- 2. SEDES (5)
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM core.Sedes WHERE CodigoSede = 'SEDE-LIM')
 BEGIN
     SET IDENTITY_INSERT core.Sedes ON;
-    INSERT INTO core.Sedes (SedeId, CodigoSede, NombreSede, Direccion, Ciudad, Departamento, Telefono, Email)
+    INSERT INTO core.Sedes (SedeId, CodigoSede, NombreSede, Direccion, UbigeoId, Telefono, Email)
     VALUES
-        (1, 'SEDE-LIM', 'Sede Lima Centro', 'Av. Arequipa 1234', 'Lima', 'Lima', '014567890', 'lima@edufuturo.edu.pe'),
-        (2, 'SEDE-ATE', 'Sede Ate Vitarte', 'Av. Separadora Industrial 2345', 'Lima', 'Lima', '013456789', 'ate@edufuturo.edu.pe'),
-        (3, 'SEDE-CUS', 'Sede Cusco', 'Av. El Sol 456', 'Cusco', 'Cusco', '084234567', 'cusco@edufuturo.edu.pe'),
-        (4, 'SEDE-ARQ', 'Sede Arequipa', 'Calle Mercaderes 789', 'Arequipa', 'Arequipa', '054345678', 'arequipa@edufuturo.edu.pe'),
-        (5, 'SEDE-TRU', 'Sede Trujillo', 'Av. Espana 321', 'Trujillo', 'La Libertad', '044456789', 'trujillo@edufuturo.edu.pe');
+        (1, 'SEDE-LIM', 'Sede Lima Centro', 'Av. Arequipa 1234', 1, '014567890', 'lima@edufuturo.edu.pe'),
+        (2, 'SEDE-ATE', 'Sede Ate Vitarte', 'Av. Separadora Industrial 2345', 2, '013456789', 'ate@edufuturo.edu.pe'),
+        (3, 'SEDE-CUS', 'Sede Cusco', 'Av. El Sol 456', 8, '084234567', 'cusco@edufuturo.edu.pe'),
+        (4, 'SEDE-ARQ', 'Sede Arequipa', 'Calle Mercaderes 789', 7, '054345678', 'arequipa@edufuturo.edu.pe'),
+        (5, 'SEDE-TRU', 'Sede Trujillo', 'Av. Espana 321', 9, '044456789', 'trujillo@edufuturo.edu.pe');
     SET IDENTITY_INSERT core.Sedes OFF;
     PRINT 'OK: 5 sedes insertadas.';
 END
@@ -37,7 +64,7 @@ ELSE
 GO
 
 -- =============================================
--- 2. CARRERAS (7)
+-- 3. CARRERAS (7)
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM core.Carreras WHERE CodigoCarrera = 'ING-SIS')
 BEGIN
@@ -59,7 +86,7 @@ ELSE
 GO
 
 -- =============================================
--- 3. PERIODOS ACADEMICOS (4)
+-- 4. PERIODOS ACADEMICOS (4)
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM core.PeriodosAcademicos WHERE CodigoPeriodo = '2025-1')
 BEGIN
@@ -78,23 +105,48 @@ ELSE
 GO
 
 -- =============================================
--- 4. PROFESORES (10)
+-- 5. ESPECIALIDADES (10)
 -- =============================================
-IF NOT EXISTS (SELECT 1 FROM academic.Profesores WHERE DNI = '12345678')
+IF NOT EXISTS (SELECT 1 FROM academic.Especialidades WHERE NombreEspecialidad = 'Ingenieria de Software')
+BEGIN
+    SET IDENTITY_INSERT academic.Especialidades ON;
+    INSERT INTO academic.Especialidades (EspecialidadId, NombreEspecialidad, Descripcion)
+    VALUES
+        (1,  'Ingenieria de Software', 'Diseno y desarrollo de sistemas de software'),
+        (2,  'Base de Datos', 'Modelado, administracion y optimizacion de bases de datos'),
+        (3,  'Redes y Comunicaciones', 'Infraestructura de redes y telecomunicaciones'),
+        (4,  'Gestion Empresarial', 'Administracion y gestion de organizaciones'),
+        (5,  'Matematica Aplicada', 'Matematicas aplicadas a la ingenieria'),
+        (6,  'Contabilidad', 'Contabilidad financiera y costos'),
+        (7,  'Marketing', 'Estrategias de marketing y ventas'),
+        (8,  'Enfermeria', 'Cuidado de la salud y atencion al paciente'),
+        (9,  'Gastronomia', 'Arte culinario y gestion de cocina'),
+        (10, 'Gestion de Proyectos', 'Planificacion y direccion de proyectos');
+    SET IDENTITY_INSERT academic.Especialidades OFF;
+    PRINT 'OK: 10 especialidades insertadas.';
+END
+ELSE
+    PRINT 'OK: Especialidades ya cargadas (se omite).';
+GO
+
+-- =============================================
+-- 6. PROFESORES (10)
+-- =============================================
+IF NOT EXISTS (SELECT 1 FROM academic.Profesores WHERE NumeroDocumento = '12345678')
 BEGIN
     SET IDENTITY_INSERT academic.Profesores ON;
-    INSERT INTO academic.Profesores (ProfesorId, DNI, Nombres, Apellidos, Email, Celular, Especialidad, GradoAcademico)
+    INSERT INTO academic.Profesores (ProfesorId, TipoDocumento, NumeroDocumento, Nombres, Apellidos, Email, Celular, EspecialidadId, GradoAcademico)
     VALUES
-        (1, '12345678', 'Carlos Alberto', 'Rodriguez Sanchez', 'carlos.rodriguez@edufuturo.edu.pe', '987654321', 'Ingenieria de Software', 'Magister'),
-        (2, '23456789', 'Maria Fernanda', 'Garcia Lopez', 'maria.garcia@edufuturo.edu.pe', '987654322', 'Base de Datos', 'Magister'),
-        (3, '34567890', 'Jose Luis', 'Martinez Torres', 'jose.martinez@edufuturo.edu.pe', '987654323', 'Redes y Comunicaciones', 'Doctor'),
-        (4, '45678901', 'Ana Patricia', 'Flores Vega', 'ana.flores@edufuturo.edu.pe', '987654324', 'Gestion Empresarial', 'Magister'),
-        (5, '56789012', 'Roberto Carlos', 'Diaz Mendoza', 'roberto.diaz@edufuturo.edu.pe', '987654325', 'Matematica Aplicada', 'Magister'),
-        (6, '67890123', 'Carmen Rosa', 'Huaman Quispe', 'carmen.huaman@edufuturo.edu.pe', '987654326', 'Contabilidad', 'Licenciado'),
-        (7, '78901234', 'Fernando Miguel', 'Castro Rojas', 'fernando.castro@edufuturo.edu.pe', '987654327', 'Marketing', 'Magister'),
-        (8, '89012345', 'Lucia Beatriz', 'Paredes Silva', 'lucia.paredes@edufuturo.edu.pe', '987654328', 'Enfermeria', 'Licenciado'),
-        (9, '90123456', 'Diego Alejandro', 'Vargas Leon', 'diego.vargas@edufuturo.edu.pe', '987654329', 'Gastronomia', 'Licenciado'),
-        (10, '01234567', 'Patricia Elena', 'Ramos Cruz', 'patricia.ramos@edufuturo.edu.pe', '987654330', 'Gestion de Proyectos', 'Doctor');
+        (1, 'DNI', '12345678', 'Carlos Alberto', 'Rodriguez Sanchez', 'carlos.rodriguez@edufuturo.edu.pe', '987654321', 1, 'Magister'),
+        (2, 'DNI', '23456789', 'Maria Fernanda', 'Garcia Lopez', 'maria.garcia@edufuturo.edu.pe', '987654322', 2, 'Magister'),
+        (3, 'DNI', '34567890', 'Jose Luis', 'Martinez Torres', 'jose.martinez@edufuturo.edu.pe', '987654323', 3, 'Doctor'),
+        (4, 'DNI', '45678901', 'Ana Patricia', 'Flores Vega', 'ana.flores@edufuturo.edu.pe', '987654324', 4, 'Magister'),
+        (5, 'DNI', '56789012', 'Roberto Carlos', 'Diaz Mendoza', 'roberto.diaz@edufuturo.edu.pe', '987654325', 5, 'Magister'),
+        (6, 'DNI', '67890123', 'Carmen Rosa', 'Huaman Quispe', 'carmen.huaman@edufuturo.edu.pe', '987654326', 6, 'Licenciado'),
+        (7, 'DNI', '78901234', 'Fernando Miguel', 'Castro Rojas', 'fernando.castro@edufuturo.edu.pe', '987654327', 7, 'Magister'),
+        (8, 'DNI', '89012345', 'Lucia Beatriz', 'Paredes Silva', 'lucia.paredes@edufuturo.edu.pe', '987654328', 8, 'Licenciado'),
+        (9, 'DNI', '90123456', 'Diego Alejandro', 'Vargas Leon', 'diego.vargas@edufuturo.edu.pe', '987654329', 9, 'Licenciado'),
+        (10, 'CE', '0123456789012', 'Patricia Elena', 'Ramos Cruz', 'patricia.ramos@edufuturo.edu.pe', '987654330', 10, 'Doctor');
     SET IDENTITY_INSERT academic.Profesores OFF;
     PRINT 'OK: 10 profesores insertados.';
 END
@@ -103,7 +155,7 @@ ELSE
 GO
 
 -- =============================================
--- 5. CURSOS (10)
+-- 7. CURSOS (10)
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM academic.Cursos WHERE CodigoCurso = 'MAT-101')
 BEGIN
@@ -128,35 +180,35 @@ ELSE
 GO
 
 -- =============================================
--- 6. MALLA CURRICULAR: CARRERA-CURSOS (16)
+-- 8. MALLA CURRICULAR: CARRERA-CURSOS (16)
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM academic.CarreraCursos WHERE CarreraCursoId = 1)
 BEGIN
     SET IDENTITY_INSERT academic.CarreraCursos ON;
-    INSERT INTO academic.CarreraCursos (CarreraCursoId, CarreraId, CursoId, Semestre, EsObligatorio)
+    INSERT INTO academic.CarreraCursos (CarreraCursoId, CarreraId, CursoId, Semestre)
     VALUES
         -- Ingenieria de Sistemas
-        (1, 1, 1, 1, 1),
-        (2, 1, 2, 1, 1),
-        (3, 1, 3, 3, 1),
-        (4, 1, 4, 4, 1),
-        (5, 1, 5, 5, 1),
+        (1, 1, 1, 1),
+        (2, 1, 2, 1),
+        (3, 1, 3, 3),
+        (4, 1, 4, 4),
+        (5, 1, 5, 5),
         -- Administracion de Empresas (comparte Matematica con Sistemas)
-        (6, 3, 1, 1, 1),
-        (7, 3, 6, 1, 1),
-        (8, 3, 7, 2, 1),
-        (9, 3, 8, 3, 1),
+        (6, 3, 1, 1),
+        (7, 3, 6, 1),
+        (8, 3, 7, 2),
+        (9, 3, 8, 3),
         -- Contabilidad y Finanzas
-        (10, 4, 1, 1, 1),
-        (11, 4, 7, 1, 1),
-        (12, 4, 6, 2, 1),
+        (10, 4, 1, 1),
+        (11, 4, 7, 1),
+        (12, 4, 6, 2),
         -- Marketing Digital
-        (13, 5, 8, 1, 1),
-        (14, 5, 5, 2, 1),
+        (13, 5, 8, 1),
+        (14, 5, 5, 2),
         -- Enfermeria Tecnica
-        (15, 6, 9, 1, 1),
+        (15, 6, 9, 1),
         -- Gastronomia y Turismo
-        (16, 7, 10, 1, 1);
+        (16, 7, 10, 1);
     SET IDENTITY_INSERT academic.CarreraCursos OFF;
     PRINT 'OK: 16 relaciones carrera-curso insertadas.';
 END
@@ -165,19 +217,19 @@ ELSE
 GO
 
 -- =============================================
--- 7. PROMOTORES (6)
+-- 9. PROMOTORES (6)
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM sales.Promotores WHERE CodigoPromotor = 'PROM-001')
 BEGIN
     SET IDENTITY_INSERT sales.Promotores ON;
-    INSERT INTO sales.Promotores (PromotorId, CodigoPromotor, DNI, Nombres, Apellidos, Email, Celular, SedeId, PorcentajeComision)
+    INSERT INTO sales.Promotores (PromotorId, CodigoPromotor, TipoDocumento, NumeroDocumento, Nombres, Apellidos, Email, Celular, SedeId, PorcentajeComision)
     VALUES
-        (1, 'PROM-001', '11111111', 'Juan Carlos', 'Perez Gutierrez', 'juan.perez@edufuturo.edu.pe', '999888777', 1, 8.00),
-        (2, 'PROM-002', '22222222', 'Maria Isabel', 'Lopez Ramirez', 'maria.lopez@edufuturo.edu.pe', '999888778', 1, 7.50),
-        (3, 'PROM-003', '33333333', 'Pedro Antonio', 'Gonzalez Silva', 'pedro.gonzalez@edufuturo.edu.pe', '999888779', 2, 7.00),
-        (4, 'PROM-004', '44444444', 'Sofia Alejandra', 'Torres Medina', 'sofia.torres@edufuturo.edu.pe', '999888780', 3, 8.50),
-        (5, 'PROM-005', '55555555', 'Luis Fernando', 'Sanchez Vega', 'luis.sanchez@edufuturo.edu.pe', '999888781', 4, 7.50),
-        (6, 'PROM-006', '66666666', 'Andrea Gabriela', 'Morales Castro', 'andrea.morales@edufuturo.edu.pe', '999888782', 5, 8.00);
+        (1, 'PROM-001', 'DNI', '11111111', 'Juan Carlos', 'Perez Gutierrez', 'juan.perez@edufuturo.edu.pe', '999888777', 1, 8.00),
+        (2, 'PROM-002', 'DNI', '22222222', 'Maria Isabel', 'Lopez Ramirez', 'maria.lopez@edufuturo.edu.pe', '999888778', 1, 7.50),
+        (3, 'PROM-003', 'DNI', '33333333', 'Pedro Antonio', 'Gonzalez Silva', 'pedro.gonzalez@edufuturo.edu.pe', '999888779', 2, 7.00),
+        (4, 'PROM-004', 'DNI', '44444444', 'Sofia Alejandra', 'Torres Medina', 'sofia.torres@edufuturo.edu.pe', '999888780', 3, 8.50),
+        (5, 'PROM-005', 'DNI', '55555555', 'Luis Fernando', 'Sanchez Vega', 'luis.sanchez@edufuturo.edu.pe', '999888781', 4, 7.50),
+        (6, 'PROM-006', 'CE', '777777777777', 'Andrea Gabriela', 'Morales Castro', 'andrea.morales@edufuturo.edu.pe', '999888782', 5, 8.00);
     SET IDENTITY_INSERT sales.Promotores OFF;
     PRINT 'OK: 6 promotores insertados.';
 END
@@ -186,7 +238,7 @@ ELSE
 GO
 
 -- =============================================
--- 8. CAMPANAS DE ADMISION (4)
+-- 10. CAMPANAS DE ADMISION (4)
 -- Cada campana esta vinculada a su periodo academico (RN-09).
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM sales.CampaniasAdmision WHERE CodigoCampania = 'CAMP-2025-1')
@@ -206,23 +258,23 @@ ELSE
 GO
 
 -- =============================================
--- 9. ESTUDIANTES (10)
+-- 11. ESTUDIANTES (10)
 -- =============================================
-IF NOT EXISTS (SELECT 1 FROM core.Estudiantes WHERE DNI = '70123456')
+IF NOT EXISTS (SELECT 1 FROM core.Estudiantes WHERE NumeroDocumento = '70123456')
 BEGIN
     SET IDENTITY_INSERT core.Estudiantes ON;
-    INSERT INTO core.Estudiantes (EstudianteId, DNI, Nombres, Apellidos, Email, Celular, FechaNacimiento, Genero, Direccion, Distrito, Provincia, Departamento)
+    INSERT INTO core.Estudiantes (EstudianteId, TipoDocumento, NumeroDocumento, Nombres, Apellidos, Email, Celular, FechaNacimiento, Genero, Direccion, UbigeoId)
     VALUES
-        (1, '70123456', 'Carlos Andres', 'Mendoza Rios', 'cmendoza@gmail.com', '987111222', '2004-05-15', 'M', 'Jr. Las Flores 123', 'San Juan de Lurigancho', 'Lima', 'Lima'),
-        (2, '70234567', 'Ana Lucia', 'Fernandez Cruz', 'afernandez@gmail.com', '987111223', '2003-08-22', 'F', 'Av. Los Alamos 456', 'Los Olivos', 'Lima', 'Lima'),
-        (3, '70345678', 'Miguel Angel', 'Vargas Salazar', 'mvargas@gmail.com', '987111224', '2004-11-10', 'M', 'Calle Los Pinos 789', 'Villa El Salvador', 'Lima', 'Lima'),
-        (4, '70456789', 'Gabriela Maria', 'Rojas Flores', 'grojas@gmail.com', '987111225', '2003-03-18', 'F', 'Av. Industrial 321', 'Ate', 'Lima', 'Lima'),
-        (5, '70567890', 'Jose Luis', 'Castro Paredes', 'jcastro@gmail.com', '987111226', '2004-07-25', 'M', 'Jr. Comercio 654', 'La Victoria', 'Lima', 'Lima'),
-        (6, '70678901', 'Daniela Sofia', 'Huaman Leon', 'dhuaman@gmail.com', '987111227', '2003-12-05', 'F', 'Av. Principal 987', 'Cusco', 'Cusco', 'Cusco'),
-        (7, '70789012', 'Fernando Jesus', 'Quispe Mamani', 'fquispe@gmail.com', '987111228', '2004-02-14', 'M', 'Calle Real 147', 'Arequipa', 'Arequipa', 'Arequipa'),
-        (8, '70890123', 'Valeria Cristina', 'Diaz Soto', 'vdiaz@gmail.com', '987111229', '2003-09-30', 'F', 'Jr. Union 258', 'Trujillo', 'Trujillo', 'La Libertad'),
-        (9, '70901234', 'Ricardo Manuel', 'Silva Ramirez', 'rsilva@gmail.com', '987111230', '2004-06-12', 'M', 'Av. Grau 369', 'Chiclayo', 'Chiclayo', 'Lambayeque'),
-        (10, '71012345', 'Isabella Nicole', 'Torres Vega', 'itorres@gmail.com', '987111231', '2003-04-08', 'F', 'Calle Lima 741', 'Iquitos', 'Maynas', 'Loreto');
+        (1, 'DNI', '70123456', 'Carlos Andres', 'Mendoza Rios', 'cmendoza@gmail.com', '987111222', '2004-05-15', 'M', 'Jr. Las Flores 123', 5),
+        (2, 'DNI', '70234567', 'Ana Lucia', 'Fernandez Cruz', 'afernandez@gmail.com', '987111223', '2003-08-22', 'F', 'Av. Los Alamos 456', 4),
+        (3, 'DNI', '70345678', 'Miguel Angel', 'Vargas Salazar', 'mvargas@gmail.com', '987111224', '2004-11-10', 'M', 'Calle Los Pinos 789', 6),
+        (4, 'DNI', '70456789', 'Gabriela Maria', 'Rojas Flores', 'grojas@gmail.com', '987111225', '2003-03-18', 'F', 'Av. Industrial 321', 2),
+        (5, 'DNI', '70567890', 'Jose Luis', 'Castro Paredes', 'jcastro@gmail.com', '987111226', '2004-07-25', 'M', 'Jr. Comercio 654', 3),
+        (6, 'DNI', '70678901', 'Daniela Sofia', 'Huaman Leon', 'dhuaman@gmail.com', '987111227', '2003-12-05', 'F', 'Av. Principal 987', 8),
+        (7, 'DNI', '70789012', 'Fernando Jesus', 'Quispe Mamani', 'fquispe@gmail.com', '987111228', '2004-02-14', 'M', 'Calle Real 147', 7),
+        (8, 'DNI', '70890123', 'Valeria Cristina', 'Diaz Soto', 'vdiaz@gmail.com', '987111229', '2003-09-30', 'F', 'Jr. Union 258', 9),
+        (9, 'DNI', '70901234', 'Ricardo Manuel', 'Silva Ramirez', 'rsilva@gmail.com', '987111230', '2004-06-12', 'M', 'Av. Grau 369', 10),
+        (10, 'CE', '601234567890', 'Isabella Nicole', 'Torres Vega', 'itorres@gmail.com', '987111231', '2003-04-08', 'F', 'Calle Lima 741', 11);
     SET IDENTITY_INSERT core.Estudiantes OFF;
     PRINT 'OK: 10 estudiantes insertados.';
 END
@@ -231,7 +283,7 @@ ELSE
 GO
 
 -- =============================================
--- 10. MATRICULAS (10)
+-- 12. MATRICULAS (10)
 -- Todas corresponden al periodo 2026-I (PeriodoId=3), campana CAMP-2026-1
 -- (CampaniaId=3) y dentro de la ventana de matricula del periodo.
 -- =============================================
@@ -258,7 +310,7 @@ ELSE
 GO
 
 -- =============================================
--- 11. COMISIONES (10)
+-- 13. COMISIONES (10)
 -- Calculadas con el 12% de la campana vigente CAMP-2026-1.
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM sales.Comisiones WHERE MatriculaId = 1)
@@ -284,7 +336,7 @@ ELSE
 GO
 
 -- =============================================
--- 12. ROLES DE SEGURIDAD (5)
+-- 14. ROLES DE SEGURIDAD (5)
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM security.Roles WHERE NombreRol = 'Administrador')
 BEGIN
@@ -304,7 +356,7 @@ ELSE
 GO
 
 -- =============================================
--- 13. USUARIOS DEL SISTEMA (5)
+-- 15. USUARIOS DEL SISTEMA (5)
 -- NOTA: los hashes son de ejemplo; el Sprint 2 implementara
 -- el hash real de contrasenas (bcrypt/HASHBYTES + salt).
 -- =============================================
@@ -326,7 +378,7 @@ ELSE
 GO
 
 -- =============================================
--- 14. ASIGNACIONES CURSO-PROFESOR (10)
+-- 16. ASIGNACIONES CURSO-PROFESOR (10)
 -- Periodo 2026-I en las sedes correspondientes.
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM academic.CursoProfesor WHERE CursoProfesorId = 1)
@@ -361,21 +413,23 @@ PRINT '============================================';
 GO
 
 SELECT
-    'core.Sedes'               AS Tabla, COUNT(*) AS Registros FROM core.Sedes
-UNION ALL SELECT 'core.Carreras',             COUNT(*) FROM core.Carreras
-UNION ALL SELECT 'core.PeriodosAcademicos',   COUNT(*) FROM core.PeriodosAcademicos
-UNION ALL SELECT 'core.Estudiantes',          COUNT(*) FROM core.Estudiantes
-UNION ALL SELECT 'core.Matriculas',           COUNT(*) FROM core.Matriculas
-UNION ALL SELECT 'academic.Profesores',       COUNT(*) FROM academic.Profesores
-UNION ALL SELECT 'academic.Cursos',           COUNT(*) FROM academic.Cursos
-UNION ALL SELECT 'academic.CarreraCursos',    COUNT(*) FROM academic.CarreraCursos
-UNION ALL SELECT 'academic.CursoProfesor',    COUNT(*) FROM academic.CursoProfesor
-UNION ALL SELECT 'sales.Promotores',          COUNT(*) FROM sales.Promotores
-UNION ALL SELECT 'sales.CampaniasAdmision',   COUNT(*) FROM sales.CampaniasAdmision
-UNION ALL SELECT 'sales.Comisiones',          COUNT(*) FROM sales.Comisiones
-UNION ALL SELECT 'security.Roles',            COUNT(*) FROM security.Roles
-UNION ALL SELECT 'security.Usuarios',         COUNT(*) FROM security.Usuarios
-UNION ALL SELECT 'audit.AuditLog',            COUNT(*) FROM audit.AuditLog
+    'core.Ubigeos'             AS Tabla, COUNT(*) AS Registros FROM core.Ubigeos
+UNION ALL SELECT 'core.Sedes',              COUNT(*) FROM core.Sedes
+UNION ALL SELECT 'core.Carreras',           COUNT(*) FROM core.Carreras
+UNION ALL SELECT 'core.PeriodosAcademicos', COUNT(*) FROM core.PeriodosAcademicos
+UNION ALL SELECT 'core.Estudiantes',        COUNT(*) FROM core.Estudiantes
+UNION ALL SELECT 'core.Matriculas',         COUNT(*) FROM core.Matriculas
+UNION ALL SELECT 'academic.Especialidades', COUNT(*) FROM academic.Especialidades
+UNION ALL SELECT 'academic.Profesores',     COUNT(*) FROM academic.Profesores
+UNION ALL SELECT 'academic.Cursos',         COUNT(*) FROM academic.Cursos
+UNION ALL SELECT 'academic.CarreraCursos',  COUNT(*) FROM academic.CarreraCursos
+UNION ALL SELECT 'academic.CursoProfesor',  COUNT(*) FROM academic.CursoProfesor
+UNION ALL SELECT 'sales.Promotores',        COUNT(*) FROM sales.Promotores
+UNION ALL SELECT 'sales.CampaniasAdmision', COUNT(*) FROM sales.CampaniasAdmision
+UNION ALL SELECT 'sales.Comisiones',        COUNT(*) FROM sales.Comisiones
+UNION ALL SELECT 'security.Roles',          COUNT(*) FROM security.Roles
+UNION ALL SELECT 'security.Usuarios',       COUNT(*) FROM security.Usuarios
+UNION ALL SELECT 'audit.AuditLog',          COUNT(*) FROM audit.AuditLog
 ORDER BY Tabla;
 GO
 

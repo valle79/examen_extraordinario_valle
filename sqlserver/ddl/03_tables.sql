@@ -2,7 +2,7 @@
 -- Matricula Cloud 360 Enterprise
 -- 03_tables.sql | Creacion de tablas e indices
 -- =============================================
--- Descripcion: Define las 15 entidades del sistema organizadas
+-- Descripcion: Define las 17 entidades del sistema organizadas
 -- por esquema, con sus restricciones (PK, FK, UK, CK), campos de
 -- auditoria (CreatedAt/UpdatedAt/DeletedAt) e indices de rendimiento.
 --
@@ -27,8 +27,32 @@ GO
 -- ESQUEMA: core
 -- =============================================
 
+-- Tabla: core.Ubigeos
+-- Tabla de ayuda con el codigo oficial UBIGEO de RENIEC (6 digitos).
+-- Normaliza las direcciones (departamento/provincia/distrito).
+IF OBJECT_ID(N'core.Ubigeos', N'U') IS NULL
+BEGIN
+    CREATE TABLE core.Ubigeos (
+        UbigeoId INT IDENTITY(1,1) NOT NULL,
+        CodigoUbigeo CHAR(6) NOT NULL,
+        Departamento NVARCHAR(50) NOT NULL,
+        Provincia NVARCHAR(50) NOT NULL,
+        Distrito NVARCHAR(50) NOT NULL,
+        Activo BIT NOT NULL DEFAULT 1,
+        CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+        UpdatedAt DATETIME NULL,
+        CONSTRAINT PK_Ubigeos PRIMARY KEY (UbigeoId),
+        CONSTRAINT UK_Ubigeos_Codigo UNIQUE (CodigoUbigeo),
+        CONSTRAINT CK_Ubigeos_Codigo CHECK (LEN(CodigoUbigeo) = 6 AND CodigoUbigeo NOT LIKE '%[^0-9]%')
+    );
+    PRINT 'OK: Tabla core.Ubigeos creada.';
+END
+ELSE
+    PRINT 'OK: core.Ubigeos ya existe.';
+GO
+
 -- Tabla: core.Sedes
--- Sedes fisicas del instituto
+-- Sedes fisicas del instituto. Ciudad/Departamento via UbigeoId.
 IF OBJECT_ID(N'core.Sedes', N'U') IS NULL
 BEGIN
     CREATE TABLE core.Sedes (
@@ -36,8 +60,7 @@ BEGIN
         CodigoSede VARCHAR(10) NOT NULL,
         NombreSede NVARCHAR(100) NOT NULL,
         Direccion NVARCHAR(200) NOT NULL,
-        Ciudad NVARCHAR(50) NOT NULL,
-        Departamento NVARCHAR(50) NOT NULL,
+        UbigeoId INT NOT NULL,
         Telefono VARCHAR(15) NULL,
         Email VARCHAR(100) NULL,
         Activo BIT NOT NULL DEFAULT 1,
@@ -45,6 +68,8 @@ BEGIN
         UpdatedAt DATETIME NULL,
         DeletedAt DATETIME NULL,
         CONSTRAINT PK_Sedes PRIMARY KEY (SedeId),
+        CONSTRAINT FK_Sedes_Ubigeo FOREIGN KEY (UbigeoId)
+            REFERENCES core.Ubigeos(UbigeoId),
         CONSTRAINT UK_Sedes_Codigo UNIQUE (CodigoSede),
         CONSTRAINT CK_Sedes_Email CHECK (Email LIKE '%@%')
     );
@@ -82,34 +107,39 @@ ELSE
 GO
 
 -- Tabla: core.Estudiantes
--- Estudiantes registrados. DNI y Email unicos (RN-01).
--- Soporta borrado logico con DeletedAt (RN-10).
+-- Estudiantes registrados. Documento (DNI o Carnet de Extranjeria) y
+-- Email unicos (RN-01). Soporta borrado logico con DeletedAt (RN-10).
 IF OBJECT_ID(N'core.Estudiantes', N'U') IS NULL
 BEGIN
     CREATE TABLE core.Estudiantes (
         EstudianteId INT IDENTITY(1,1) NOT NULL,
-        DNI VARCHAR(8) NOT NULL,
+        TipoDocumento CHAR(3) NOT NULL DEFAULT 'DNI',
+        NumeroDocumento VARCHAR(15) NOT NULL,
         Nombres NVARCHAR(100) NOT NULL,
         Apellidos NVARCHAR(100) NOT NULL,
         Email VARCHAR(100) NOT NULL,
-        Telefono VARCHAR(15) NULL,
-        Celular VARCHAR(15) NULL,
+        Celular CHAR(9) NULL,
         FechaNacimiento DATE NOT NULL,
         Genero CHAR(1) NOT NULL,
         Direccion NVARCHAR(200) NULL,
-        Distrito NVARCHAR(50) NULL,
-        Provincia NVARCHAR(50) NULL,
-        Departamento NVARCHAR(50) NULL,
+        UbigeoId INT NULL,
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
         UpdatedAt DATETIME NULL,
         DeletedAt DATETIME NULL,
         CONSTRAINT PK_Estudiantes PRIMARY KEY (EstudianteId),
-        CONSTRAINT UK_Estudiantes_DNI UNIQUE (DNI),
+        CONSTRAINT FK_Estudiantes_Ubigeo FOREIGN KEY (UbigeoId)
+            REFERENCES core.Ubigeos(UbigeoId),
+        CONSTRAINT UK_Estudiantes_Documento UNIQUE (TipoDocumento, NumeroDocumento),
         CONSTRAINT UK_Estudiantes_Email UNIQUE (Email),
-        CONSTRAINT CK_Estudiantes_DNI CHECK (LEN(DNI) = 8 AND DNI NOT LIKE '%[^0-9]%'),
+        CONSTRAINT CK_Estudiantes_Documento CHECK (
+            (TipoDocumento = 'DNI' AND LEN(NumeroDocumento) = 8 AND NumeroDocumento NOT LIKE '%[^0-9]%')
+            OR
+            (TipoDocumento = 'CE' AND LEN(NumeroDocumento) BETWEEN 1 AND 15 AND NumeroDocumento NOT LIKE '%[^0-9A-Za-z]%')
+        ),
         CONSTRAINT CK_Estudiantes_Email CHECK (Email LIKE '%@%'),
         CONSTRAINT CK_Estudiantes_Genero CHECK (Genero IN ('M','F','O')),
+        CONSTRAINT CK_Estudiantes_Celular CHECK (Celular IS NULL OR Celular LIKE '9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
         CONSTRAINT CK_Estudiantes_FechaNacimiento CHECK (FechaNacimiento < GETDATE())
     );
     PRINT 'OK: Tabla core.Estudiantes creada.';
@@ -151,29 +181,57 @@ GO
 -- ESQUEMA: academic
 -- =============================================
 
+-- Tabla: academic.Especialidades
+-- Tabla de ayuda: catalogo de especialidades de los profesores.
+IF OBJECT_ID(N'academic.Especialidades', N'U') IS NULL
+BEGIN
+    CREATE TABLE academic.Especialidades (
+        EspecialidadId INT IDENTITY(1,1) NOT NULL,
+        NombreEspecialidad NVARCHAR(100) NOT NULL,
+        Descripcion NVARCHAR(300) NULL,
+        Activo BIT NOT NULL DEFAULT 1,
+        CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+        UpdatedAt DATETIME NULL,
+        CONSTRAINT PK_Especialidades PRIMARY KEY (EspecialidadId),
+        CONSTRAINT UK_Especialidades_Nombre UNIQUE (NombreEspecialidad)
+    );
+    PRINT 'OK: Tabla academic.Especialidades creada.';
+END
+ELSE
+    PRINT 'OK: academic.Especialidades ya existe.';
+GO
+
 -- Tabla: academic.Profesores
--- Docentes del instituto
+-- Docentes del instituto. La especialidad se referencia desde el
+-- catalogo academic.Especialidades.
 IF OBJECT_ID(N'academic.Profesores', N'U') IS NULL
 BEGIN
     CREATE TABLE academic.Profesores (
         ProfesorId INT IDENTITY(1,1) NOT NULL,
-        DNI VARCHAR(8) NOT NULL,
+        TipoDocumento CHAR(3) NOT NULL DEFAULT 'DNI',
+        NumeroDocumento VARCHAR(15) NOT NULL,
         Nombres NVARCHAR(100) NOT NULL,
         Apellidos NVARCHAR(100) NOT NULL,
         Email VARCHAR(100) NOT NULL,
-        Telefono VARCHAR(15) NULL,
-        Celular VARCHAR(15) NULL,
-        Especialidad NVARCHAR(100) NULL,
+        Celular CHAR(9) NULL,
+        EspecialidadId INT NULL,
         GradoAcademico NVARCHAR(50) NULL,
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
         UpdatedAt DATETIME NULL,
         DeletedAt DATETIME NULL,
         CONSTRAINT PK_Profesores PRIMARY KEY (ProfesorId),
-        CONSTRAINT UK_Profesores_DNI UNIQUE (DNI),
+        CONSTRAINT FK_Profesores_Especialidad FOREIGN KEY (EspecialidadId)
+            REFERENCES academic.Especialidades(EspecialidadId),
+        CONSTRAINT UK_Profesores_Documento UNIQUE (TipoDocumento, NumeroDocumento),
         CONSTRAINT UK_Profesores_Email UNIQUE (Email),
-        CONSTRAINT CK_Profesores_DNI CHECK (LEN(DNI) = 8 AND DNI NOT LIKE '%[^0-9]%'),
-        CONSTRAINT CK_Profesores_Email CHECK (Email LIKE '%@%')
+        CONSTRAINT CK_Profesores_Documento CHECK (
+            (TipoDocumento = 'DNI' AND LEN(NumeroDocumento) = 8 AND NumeroDocumento NOT LIKE '%[^0-9]%')
+            OR
+            (TipoDocumento = 'CE' AND LEN(NumeroDocumento) BETWEEN 1 AND 15 AND NumeroDocumento NOT LIKE '%[^0-9A-Za-z]%')
+        ),
+        CONSTRAINT CK_Profesores_Email CHECK (Email LIKE '%@%'),
+        CONSTRAINT CK_Profesores_Celular CHECK (Celular IS NULL OR Celular LIKE '9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
     );
     PRINT 'OK: Tabla academic.Profesores creada.';
 END
@@ -218,7 +276,6 @@ BEGIN
         CarreraId INT NOT NULL,
         CursoId INT NOT NULL,
         Semestre INT NOT NULL,
-        EsObligatorio BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
         CONSTRAINT PK_CarreraCursos PRIMARY KEY (CarreraCursoId),
         CONSTRAINT FK_CarreraCursos_Carrera FOREIGN KEY (CarreraId)
@@ -245,12 +302,12 @@ BEGIN
     CREATE TABLE sales.Promotores (
         PromotorId INT IDENTITY(1,1) NOT NULL,
         CodigoPromotor VARCHAR(10) NOT NULL,
-        DNI VARCHAR(8) NOT NULL,
+        TipoDocumento CHAR(3) NOT NULL DEFAULT 'DNI',
+        NumeroDocumento VARCHAR(15) NOT NULL,
         Nombres NVARCHAR(100) NOT NULL,
         Apellidos NVARCHAR(100) NOT NULL,
         Email VARCHAR(100) NOT NULL,
-        Telefono VARCHAR(15) NULL,
-        Celular VARCHAR(15) NULL,
+        Celular CHAR(9) NULL,
         SedeId INT NOT NULL,
         PorcentajeComision DECIMAL(5,2) NOT NULL DEFAULT 5.00,
         Activo BIT NOT NULL DEFAULT 1,
@@ -261,10 +318,15 @@ BEGIN
         CONSTRAINT FK_Promotores_Sede FOREIGN KEY (SedeId)
             REFERENCES core.Sedes(SedeId),
         CONSTRAINT UK_Promotores_Codigo UNIQUE (CodigoPromotor),
-        CONSTRAINT UK_Promotores_DNI UNIQUE (DNI),
+        CONSTRAINT UK_Promotores_Documento UNIQUE (TipoDocumento, NumeroDocumento),
         CONSTRAINT UK_Promotores_Email UNIQUE (Email),
-        CONSTRAINT CK_Promotores_DNI CHECK (LEN(DNI) = 8 AND DNI NOT LIKE '%[^0-9]%'),
+        CONSTRAINT CK_Promotores_Documento CHECK (
+            (TipoDocumento = 'DNI' AND LEN(NumeroDocumento) = 8 AND NumeroDocumento NOT LIKE '%[^0-9]%')
+            OR
+            (TipoDocumento = 'CE' AND LEN(NumeroDocumento) BETWEEN 1 AND 15 AND NumeroDocumento NOT LIKE '%[^0-9A-Za-z]%')
+        ),
         CONSTRAINT CK_Promotores_Email CHECK (Email LIKE '%@%'),
+        CONSTRAINT CK_Promotores_Celular CHECK (Celular IS NULL OR Celular LIKE '9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
         CONSTRAINT CK_Promotores_Comision CHECK (PorcentajeComision >= 0 AND PorcentajeComision <= 100)
     );
     PRINT 'OK: Tabla sales.Promotores creada.';
@@ -664,17 +726,17 @@ PRINT '============================================';
 PRINT 'RESUMEN DE OBJETOS CREADOS:';
 PRINT '============================================';
 PRINT '  Esquema [core]     : Sedes, Carreras, Estudiantes,';
-PRINT '                       PeriodosAcademicos, Matriculas';
+PRINT '                       PeriodosAcademicos, Matriculas, Ubigeos';
 PRINT '  Esquema [academic] : Profesores, Cursos, CarreraCursos,';
-PRINT '                       CursoProfesor';
+PRINT '                       CursoProfesor, Especialidades';
 PRINT '  Esquema [sales]    : Promotores, CampaniasAdmision, Comisiones';
 PRINT '  Esquema [security] : Roles, Usuarios';
 PRINT '  Esquema [audit]    : AuditLog';
 PRINT '--------------------------------------------';
-PRINT '  Total tablas      : 15';
-PRINT '  Foreign Keys      : 18';
-PRINT '  Unique Constraints: 20';
-PRINT '  Check Constraints : 26';
+PRINT '  Total tablas      : 17';
+PRINT '  Foreign Keys      : 21';
+PRINT '  Unique Constraints: 22';
+PRINT '  Check Constraints : 30';
 PRINT '  Indices no agrup. : 14';
 PRINT '============================================';
 GO

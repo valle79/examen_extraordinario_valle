@@ -5,10 +5,10 @@
 -- Descripcion: Verifica que la instalacion este completa y correcta:
 --   - Base de datos creada
 --   - Esquemas presentes
---   - 15 tablas creadas
---   - 18 Foreign Keys, 20 Unique, 26 Check
+--   - 17 tablas creadas
+--   - 21 Foreign Keys, 22 Unique, 30 Check
 --   - 14 indices no agrupados de optimizacion
---   - Datos iniciales cargados (112 registros)
+--   - Datos iniciales cargados (133 registros)
 --   - Integridad referencial sin huerfanos
 --
 -- Uso: docker compose exec sqlserver /opt/mssql-tools18/bin/sqlcmd
@@ -80,10 +80,10 @@ PRINT '';
 PRINT '2. ESQUEMAS';
 PRINT '   ----------------------------------------------';
 
-DECLARE @EsquemasRequeridos TABLE (NombreEsquema VARCHAR(50));
+DECLARE @EsquemasRequeridos TABLE (NombreEsquema VARCHAR(50) COLLATE DATABASE_DEFAULT);
 INSERT INTO @EsquemasRequeridos VALUES ('core'), ('academic'), ('sales'), ('security'), ('audit'), ('utils');
 
-DECLARE @EsquemasFaltantes TABLE (NombreEsquema VARCHAR(50));
+DECLARE @EsquemasFaltantes TABLE (NombreEsquema VARCHAR(50) COLLATE DATABASE_DEFAULT);
 INSERT INTO @EsquemasFaltantes
 SELECT NombreEsquema FROM @EsquemasRequeridos
 WHERE NombreEsquema NOT IN (SELECT name FROM sys.schemas);
@@ -102,22 +102,23 @@ END
 PRINT '';
 
 -- ==========================================================
--- 3. TABLAS (15)
+-- 3. TABLAS (17)
 -- ==========================================================
 PRINT '3. TABLAS';
 PRINT '   ----------------------------------------------';
 
-DECLARE @TablasRequeridas TABLE (Esquema VARCHAR(50), Tabla VARCHAR(100));
+DECLARE @TablasRequeridas TABLE (Esquema VARCHAR(50) COLLATE DATABASE_DEFAULT, Tabla VARCHAR(100) COLLATE DATABASE_DEFAULT);
 INSERT INTO @TablasRequeridas VALUES
     ('core', 'Sedes'), ('core', 'Carreras'), ('core', 'Estudiantes'),
-    ('core', 'PeriodosAcademicos'), ('core', 'Matriculas'),
+    ('core', 'PeriodosAcademicos'), ('core', 'Matriculas'), ('core', 'Ubigeos'),
     ('academic', 'Profesores'), ('academic', 'Cursos'),
     ('academic', 'CarreraCursos'), ('academic', 'CursoProfesor'),
+    ('academic', 'Especialidades'),
     ('sales', 'Promotores'), ('sales', 'CampaniasAdmision'), ('sales', 'Comisiones'),
     ('security', 'Roles'), ('security', 'Usuarios'),
     ('audit', 'AuditLog');
 
-DECLARE @TablasFaltantes TABLE (Esquema VARCHAR(50), Tabla VARCHAR(100));
+DECLARE @TablasFaltantes TABLE (Esquema VARCHAR(50) COLLATE DATABASE_DEFAULT, Tabla VARCHAR(100) COLLATE DATABASE_DEFAULT);
 INSERT INTO @TablasFaltantes
 SELECT r.Esquema, r.Tabla
 FROM @TablasRequeridas r
@@ -129,7 +130,7 @@ WHERE NOT EXISTS (
 );
 
 IF NOT EXISTS (SELECT 1 FROM @TablasFaltantes)
-    PRINT '   [OK] Las 15 tablas existen';
+    PRINT '   [OK] Las 17 tablas existen';
 ELSE
 BEGIN
     PRINT '   [ERROR] Tablas faltantes:';
@@ -140,7 +141,7 @@ END
 PRINT '';
 
 -- ==========================================================
--- 4. FOREIGN KEYS (18)
+-- 4. FOREIGN KEYS (21)
 -- ==========================================================
 PRINT '4. FOREIGN KEYS';
 PRINT '   ----------------------------------------------';
@@ -152,18 +153,18 @@ INNER JOIN sys.tables t ON fk.parent_object_id = t.object_id
 INNER JOIN sys.schemas s ON t.schema_id = s.schema_id
 WHERE s.name IN ('core', 'academic', 'sales', 'security', 'audit');
 
-IF @TotalFKs = 18
-    PRINT '   [OK] Foreign Keys: ' + CAST(@TotalFKs AS VARCHAR) + ' (esperado: 18)';
+IF @TotalFKs = 21
+    PRINT '   [OK] Foreign Keys: ' + CAST(@TotalFKs AS VARCHAR) + ' (esperado: 21)';
 ELSE
 BEGIN
-    PRINT '   [ERROR] Foreign Keys: ' + CAST(@TotalFKs AS VARCHAR) + ' (esperado: 18)';
+    PRINT '   [ERROR] Foreign Keys: ' + CAST(@TotalFKs AS VARCHAR) + ' (esperado: 21)';
     SET @TotalErrores = @TotalErrores + 1;
 END
 
 PRINT '';
 
 -- ==========================================================
--- 5. UNIQUE CONSTRAINTS (20)
+-- 5. UNIQUE CONSTRAINTS (22)
 -- ==========================================================
 PRINT '5. UNIQUE CONSTRAINTS';
 PRINT '   ----------------------------------------------';
@@ -177,18 +178,18 @@ WHERE i.is_unique = 1
     AND i.is_primary_key = 0
     AND s.name IN ('core', 'academic', 'sales', 'security', 'audit');
 
-IF @TotalUKs = 20
-    PRINT '   [OK] Unique Constraints: ' + CAST(@TotalUKs AS VARCHAR) + ' (esperado: 20)';
+IF @TotalUKs = 22
+    PRINT '   [OK] Unique Constraints: ' + CAST(@TotalUKs AS VARCHAR) + ' (esperado: 22)';
 ELSE
 BEGIN
-    PRINT '   [AVISO] Unique Constraints: ' + CAST(@TotalUKs AS VARCHAR) + ' (esperado: 20)';
+    PRINT '   [AVISO] Unique Constraints: ' + CAST(@TotalUKs AS VARCHAR) + ' (esperado: 22)';
     SET @TotalWarnings = @TotalWarnings + 1;
 END
 
 PRINT '';
 
 -- ==========================================================
--- 6. CHECK CONSTRAINTS (26)
+-- 6. CHECK CONSTRAINTS (30)
 -- ==========================================================
 PRINT '6. CHECK CONSTRAINTS';
 PRINT '   ----------------------------------------------';
@@ -200,11 +201,11 @@ INNER JOIN sys.tables t ON cc.parent_object_id = t.object_id
 INNER JOIN sys.schemas s ON t.schema_id = s.schema_id
 WHERE s.name IN ('core', 'academic', 'sales', 'security', 'audit');
 
-IF @TotalCKs = 26
-    PRINT '   [OK] Check Constraints: ' + CAST(@TotalCKs AS VARCHAR) + ' (esperado: 26)';
+IF @TotalCKs = 30
+    PRINT '   [OK] Check Constraints: ' + CAST(@TotalCKs AS VARCHAR) + ' (esperado: 30)';
 ELSE
 BEGIN
-    PRINT '   [AVISO] Check Constraints: ' + CAST(@TotalCKs AS VARCHAR) + ' (esperado: 26)';
+    PRINT '   [AVISO] Check Constraints: ' + CAST(@TotalCKs AS VARCHAR) + ' (esperado: 30)';
     SET @TotalWarnings = @TotalWarnings + 1;
 END
 
@@ -250,11 +251,13 @@ DECLARE @Resultados TABLE (
 );
 
 INSERT INTO @Resultados
-SELECT 'core.Sedes', COUNT(*), 5, CASE WHEN COUNT(*) = 5 THEN '[OK]' ELSE '[ERR]' END FROM core.Sedes
+SELECT 'core.Ubigeos', COUNT(*), 11, CASE WHEN COUNT(*) = 11 THEN '[OK]' ELSE '[ERR]' END FROM core.Ubigeos
+UNION ALL SELECT 'core.Sedes', COUNT(*), 5, CASE WHEN COUNT(*) = 5 THEN '[OK]' ELSE '[ERR]' END FROM core.Sedes
 UNION ALL SELECT 'core.Carreras', COUNT(*), 7, CASE WHEN COUNT(*) = 7 THEN '[OK]' ELSE '[ERR]' END FROM core.Carreras
 UNION ALL SELECT 'core.Estudiantes', COUNT(*), 10, CASE WHEN COUNT(*) = 10 THEN '[OK]' ELSE '[ERR]' END FROM core.Estudiantes
 UNION ALL SELECT 'core.PeriodosAcademicos', COUNT(*), 4, CASE WHEN COUNT(*) = 4 THEN '[OK]' ELSE '[ERR]' END FROM core.PeriodosAcademicos
 UNION ALL SELECT 'core.Matriculas', COUNT(*), 10, CASE WHEN COUNT(*) = 10 THEN '[OK]' ELSE '[ERR]' END FROM core.Matriculas
+UNION ALL SELECT 'academic.Especialidades', COUNT(*), 10, CASE WHEN COUNT(*) = 10 THEN '[OK]' ELSE '[ERR]' END FROM academic.Especialidades
 UNION ALL SELECT 'academic.Profesores', COUNT(*), 10, CASE WHEN COUNT(*) = 10 THEN '[OK]' ELSE '[ERR]' END FROM academic.Profesores
 UNION ALL SELECT 'academic.Cursos', COUNT(*), 10, CASE WHEN COUNT(*) = 10 THEN '[OK]' ELSE '[ERR]' END FROM academic.Cursos
 UNION ALL SELECT 'academic.CarreraCursos', COUNT(*), 16, CASE WHEN COUNT(*) = 16 THEN '[OK]' ELSE '[ERR]' END FROM academic.CarreraCursos
@@ -270,7 +273,7 @@ SELECT @ErroresDatos = COUNT(*) FROM @Resultados WHERE Estado = '[ERR]';
 
 IF @ErroresDatos = 0
 BEGIN
-    PRINT '   [OK] Las 14 tablas tienen la cantidad exacta de registros (112 total)';
+    PRINT '   [OK] Las 16 tablas tienen la cantidad exacta de registros (133 total)';
 END
 ELSE
 BEGIN
@@ -326,10 +329,10 @@ PRINT '';
 PRINT '10. REGLAS DE NEGOCIO';
 PRINT '    ----------------------------------------------';
 
-DECLARE @DuplicadosDNI INT, @DuplicadosEmail INT, @DuplicadosMatricula INT;
+DECLARE @DuplicadosDocumento INT, @DuplicadosEmail INT, @DuplicadosMatricula INT;
 
-SELECT @DuplicadosDNI = COUNT(*) FROM (
-    SELECT DNI FROM core.Estudiantes GROUP BY DNI HAVING COUNT(*) > 1
+SELECT @DuplicadosDocumento = COUNT(*) FROM (
+    SELECT TipoDocumento, NumeroDocumento FROM core.Estudiantes GROUP BY TipoDocumento, NumeroDocumento HAVING COUNT(*) > 1
 ) d;
 
 SELECT @DuplicadosEmail = COUNT(*) FROM (
@@ -343,8 +346,8 @@ SELECT @DuplicadosMatricula = COUNT(*) FROM (
     HAVING COUNT(*) > 1
 ) d;
 
-IF @DuplicadosDNI = 0 AND @DuplicadosEmail = 0
-    PRINT '   [OK] Sin estudiantes duplicados (DNI o Email unicos)';
+IF @DuplicadosDocumento = 0 AND @DuplicadosEmail = 0
+    PRINT '   [OK] Sin estudiantes duplicados (DNI/CE o Email unicos)';
 ELSE
 BEGIN
     PRINT '   [ERROR] Estudiantes duplicados encontrados';
