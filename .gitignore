@@ -1,0 +1,42 @@
+# =============================================
+# Matricula Cloud 360 Enterprise
+# .gitignore
+# =============================================
+
+# Variables de entorno (nunca versionar contrasenas)
+.env
+*.env.local
+!docker/.env.example
+
+# Datos del contenedor (persistencia local, se regeneran con docker compose up)
+docker/volumes/data/*
+docker/volumes/log/*
+docker/volumes/backup/*
+!docker/volumes/data/.gitkeep
+!docker/volumes/log/.gitkeep
+!docker/volumes/backup/.gitkeep
+
+# Archivos de base de datos
+*.mdf
+*.ldf
+*.bak
+*.trn
+
+# Logs
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporales
+*.tmp
+*.temp

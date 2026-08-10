@@ -1,0 +1,103 @@
+# ============================================================
+# Matricula Cloud 360 Enterprise
+# docker-compose.yml
+# ============================================================
+# Implementa SQL Server 2025 Developer Edition mediante Docker.
+#
+# La base de datos se crea AUTOMATICAMENTE al ejecutar:
+#     docker compose up -d
+#
+# Flujo de arranque:
+#   1. Se inicia sqlservr en segundo plano.
+#   2. wait-for-sql.sh espera a que SQL Server responda.
+#   3. wait-for-sql.sh ejecuta init.sql, que orquesta los scripts
+#      DDL/DML montados en /sqlserver (todos idempotentes).
+#   4. El contenedor queda operativo y monitoreado por healthcheck.
+#
+# Uso (desde esta carpeta):
+#     docker compose up -d
+#     docker compose ps
+#     docker compose logs -f sqlserver
+# ============================================================
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: ${CONTAINER_NAME:-sqlserver_matricula_cloud}
+    hostname: sqlserver
+
+    # Se ejecuta como root para que SQL Server pueda escribir en los
+    # volumenes bind-mount (docker/volumes/*) sin problemas de permisos.
+    user: "0:0"
+
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${SA_PASSWORD}
+      - MSSQL_PID=${MSSQL_PID:-Developer}
+      - MSSQL_COLLATION=Modern_Spanish_CI_AS
+      - TZ=${TZ:-America/Lima}
+
+    ports:
+      - "${SQL_SERVER_PORT:-1433}:1433"
+
+    volumes:
+      # Scripts de inicializacion (init.sql y wait-for-sql.sh)
+      - ./init:/docker-entrypoint-initdb.d
+      # Scripts SQL del proyecto (ddl, dml, utils)
+      - ../sqlserver:/sqlserver
+      # ----------------------------------------------------------
+      # Persistencia de datos mediante VOLUMENES NOMBRADOS de Docker.
+      # Se usan volumenes nombrados (y no bind mounts a carpetas de
+      # Windows) porque SQL Server requiere operaciones de archivo que
+      # el sistema de archivos compartido de Docker Desktop no soporta
+      # de forma fiable (error 31 / tempdb). Los volumenes nombrados
+      # viven en el disco virtual de Docker y son portables.
+      #
+      # Nombre de los volumenes: matricula_cloud_data / _log / _backup
+      # Para inspeccionarlos: docker volume inspect matricula_cloud_data
+      # Para extraer un respaldo: docker cp sqlserver_matricula_cloud:/var/opt/mssql/backup/archivo.bak ./docker/volumes/backup/
+      # ----------------------------------------------------------
+      - mssql_data:/var/opt/mssql/data
+      - mssql_log:/var/opt/mssql/log
+      - mssql_backup:/var/opt/mssql/backup
+
+    networks:
+      - matricula_network
+
+    restart: unless-stopped
+
+    # ----------------------------------------------------------
+    # Inicio personalizado:
+    # La imagen oficial de SQL Server NO ejecuta scripts al arrancar
+    # (a diferencia de MySQL/Postgres). wait-for-sql.sh (montado en
+    # /docker-entrypoint-initdb.d) actua como entrypoint: inicia
+    # sqlservr, espera a que este listo y ejecuta init.sql para
+    # crear la base de datos automaticamente.
+    # ----------------------------------------------------------
+    entrypoint: ["/bin/bash", "/docker-entrypoint-initdb.d/wait-for-sql.sh"]
+
+    # ----------------------------------------------------------
+    # Healthcheck:
+    # SQL Server 2025 instala las herramientas en /opt/mssql-tools18.
+    # Se usa -C para confiar en el certificado autofirmado
+    # (SQL Server 2022+ fuerza cifrado en las conexiones).
+    # ----------------------------------------------------------
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P "$${SA_PASSWORD}" -C -Q "SELECT 1" -b
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+
+networks:
+  matricula_network:
+    driver: bridge
+    name: matricula_cloud_network
+
+volumes:
+  mssql_data:
+    name: matricula_cloud_data
+  mssql_log:
+    name: matricula_cloud_log
+  mssql_backup:
+    name: matricula_cloud_backup
