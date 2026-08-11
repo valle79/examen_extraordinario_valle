@@ -4,8 +4,7 @@
 # =============================================
 
 # Variables de entorno (nunca versionar contrasenas)
-.env
-*.env.local
+
 !docker/.env.example
 
 # Datos del contenedor (persistencia local, se regeneran con docker compose up)
