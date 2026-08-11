@@ -195,7 +195,7 @@ Las contraseñas se almacenan con hash SHA2-256 y todas las operaciones crítica
 
 ## 👥 Equipo
 
-- **Ingeniero de Base de Datos**: [Tu Nombre]
+- **Ingeniero de Base de Datos**: Luis Alberto Valle Coronado
 - **Cliente**: Instituto Superior EduFuturo
 
 ## 📄 Licencia
@@ -205,8 +205,8 @@ Este proyecto es de uso educativo para el Instituto Superior EduFuturo.
 ## 📞 Soporte
 
 Para consultas o problemas:
-- Email: [tu-email]
-- Repositorio: [url-del-repositorio]
+- Email: luis.valle@vallegrande.edu.pe
+- Repositorio: https://github.com/valle79/
 
 ---
 
