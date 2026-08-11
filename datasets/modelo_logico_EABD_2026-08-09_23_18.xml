@@ -1,0 +1,2137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DatabaseLogicalModel VersionId="1.0">
+    <Description></Description>
+    <Counter Value="1008"/>
+    <Properties>
+        <Property>
+            <Name>pdf-printer-paper-size</Name>
+            <Value>A4</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-top</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-bottom</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-left</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-right</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-page-orientation</Name>
+            <Value>landscape</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-show-pages</Name>
+            <Value>false</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-include-footer</Name>
+            <Value>true</Value>
+        </Property>
+        <Property>
+            <Name>reference-notation</Name>
+            <Value>crows-foot</Value>
+        </Property>
+        <Property>
+            <Name>show-only-pk-fk</Name>
+            <Value>false</Value>
+        </Property>
+        <Property>
+            <Name>pages-line-color</Name>
+            <Value>#CC0000</Value>
+        </Property>
+        <Property>
+            <Name>show-grid</Name>
+            <Value>false</Value>
+        </Property>
+        <Property>
+            <Name>grid-color</Name>
+            <Value>#D9D9D9</Value>
+        </Property>
+        <Property>
+            <Name>grid-style</Name>
+            <Value>solid</Value>
+        </Property>
+        <Property>
+            <Name>grid-spacing</Name>
+            <Value>2</Value>
+        </Property>
+        <Property>
+            <Name>grid-spacing-units</Name>
+            <Value>cm</Value>
+        </Property>
+        <Property>
+            <Name>grid-subdivisions</Name>
+            <Value>1</Value>
+        </Property>
+    </Properties>
+    <Entities>
+        <Entity Id="e1">
+            <Name>Estudiantes</Name>
+            <Description>Información de estudiantes registrados en el instituto</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Estudiantes</Name>
+                <Attributes>
+                    <Attribute>a1</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a1">
+                    <Name>EstudianteId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único del estudiante</Comment>
+                </Attribute>
+                <Attribute Id="a2">
+                    <Name>TipoDocumento</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Tipo de documento (DNI o CE)</Comment>
+                </Attribute>
+                <Attribute Id="a3">
+                    <Name>Nombres</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombres del estudiante</Comment>
+                </Attribute>
+                <Attribute Id="a4">
+                    <Name>Apellidos</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Apellidos del estudiante</Comment>
+                </Attribute>
+                <Attribute Id="a5">
+                    <Name>Email</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Correo electrónico del estudiante</Comment>
+                </Attribute>
+                <Attribute Id="a6">
+                    <Name>NumeroDocumento</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Número de documento (8 dígitos si DNI, 1-15 alfanuméricos si CE)</Comment>
+                </Attribute>
+                <Attribute Id="a7">
+                    <Name>Celular</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Teléfono celular del estudiante</Comment>
+                </Attribute>
+                <Attribute Id="a8">
+                    <Name>FechaNacimiento</Name>
+                    <Datatype>date</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Fecha de nacimiento del estudiante</Comment>
+                </Attribute>
+                <Attribute Id="a9">
+                    <Name>Genero</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Género del estudiante (M, F, O)</Comment>
+                </Attribute>
+                <Attribute Id="a10">
+                    <Name>Direccion</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Dirección de domicilio</Comment>
+                </Attribute>
+                <Attribute Id="a11">
+                    <Name>UbigeoId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Ubigeo de residencia (referencia a la tabla Ubigeos)</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e2">
+            <Name>Carreras</Name>
+            <Description>Carreras profesionales ofrecidas por el instituto</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Carreras</Name>
+                <Attributes>
+                    <Attribute>a14</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a14">
+                    <Name>CarreraId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único de la carrera</Comment>
+                </Attribute>
+                <Attribute Id="a15">
+                    <Name>CodigoCarrera</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Código interno de la carrera</Comment>
+                </Attribute>
+                <Attribute Id="a16">
+                    <Name>NombreCarrera</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombre de la carrera profesional</Comment>
+                </Attribute>
+                <Attribute Id="a17">
+                    <Name>Descripcion</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Descripción de la carrera</Comment>
+                </Attribute>
+                <Attribute Id="a18">
+                    <Name>DuracionSemestres</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Duración en semestres académicos</Comment>
+                </Attribute>
+                <Attribute Id="a19">
+                    <Name>CostoMatricula</Name>
+                    <Datatype>decimal</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Costo de matrícula de la carrera</Comment>
+                </Attribute>
+                <Attribute Id="a20">
+                    <Name>CostoPensionMensual</Name>
+                    <Datatype>decimal</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Costo de pensión mensual de la carrera</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e3">
+            <Name>Cursos</Name>
+            <Description>Cursos o asignaturas dictadas en el instituto</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Cursos</Name>
+                <Attributes>
+                    <Attribute>a21</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a21">
+                    <Name>CursoId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único del curso</Comment>
+                </Attribute>
+                <Attribute Id="a22">
+                    <Name>CodigoCurso</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Código interno del curso</Comment>
+                </Attribute>
+                <Attribute Id="a23">
+                    <Name>NombreCurso</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombre del curso</Comment>
+                </Attribute>
+                <Attribute Id="a24">
+                    <Name>Descripcion</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Descripción del curso</Comment>
+                </Attribute>
+                <Attribute Id="a25">
+                    <Name>Creditos</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Número de créditos del curso</Comment>
+                </Attribute>
+                <Attribute Id="a26">
+                    <Name>HorasTeoria</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Horas de teoría por semana</Comment>
+                </Attribute>
+                <Attribute Id="a27">
+                    <Name>HorasPractica</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Horas de práctica por semana</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e4">
+            <Name>PeriodosAcademicos</Name>
+            <Description>Periodos académicos (ciclos/semestres) del instituto</Description>
+            <PrimaryIdentifier>
+                <Name>PK_PeriodosAcademicos</Name>
+                <Attributes>
+                    <Attribute>a28</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a28">
+                    <Name>PeriodoId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único del periodo académico</Comment>
+                </Attribute>
+                <Attribute Id="a29">
+                    <Name>CodigoPeriodo</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Código interno del periodo</Comment>
+                </Attribute>
+                <Attribute Id="a30">
+                    <Name>NombrePeriodo</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombre del periodo académico</Comment>
+                </Attribute>
+                <Attribute Id="a31">
+                    <Name>Anio</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Año del periodo académico</Comment>
+                </Attribute>
+                <Attribute Id="a32">
+                    <Name>Semestre</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Semestre del periodo (1 o 2)</Comment>
+                </Attribute>
+                <Attribute Id="a33">
+                    <Name>FechaInicio</Name>
+                    <Datatype>date</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Fecha de inicio del periodo</Comment>
+                </Attribute>
+                <Attribute Id="a34">
+                    <Name>FechaFin</Name>
+                    <Datatype>date</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Fecha de fin del periodo</Comment>
+                </Attribute>
+                <Attribute Id="a35">
+                    <Name>FechaInicioMatriculas</Name>
+                    <Datatype>date</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Inicio del rango de matrículas</Comment>
+                </Attribute>
+                <Attribute Id="a36">
+                    <Name>FechaFinMatriculas</Name>
+                    <Datatype>date</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Fin del rango de matrículas</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e5">
+            <Name>Profesores</Name>
+            <Description>Docentes del instituto</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Profesores</Name>
+                <Attributes>
+                    <Attribute>a37</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a37">
+                    <Name>ProfesorId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único del profesor</Comment>
+                </Attribute>
+                <Attribute Id="a38">
+                    <Name>TipoDocumento</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Tipo de documento (DNI o CE)</Comment>
+                </Attribute>
+                <Attribute Id="a39">
+                    <Name>Nombres</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombres del profesor</Comment>
+                </Attribute>
+                <Attribute Id="a40">
+                    <Name>Apellidos</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Apellidos del profesor</Comment>
+                </Attribute>
+                <Attribute Id="a41">
+                    <Name>Email</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Correo electrónico del profesor</Comment>
+                </Attribute>
+                <Attribute Id="a42">
+                    <Name>NumeroDocumento</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Número de documento (8 dígitos si DNI, 1-15 alfanuméricos si CE)</Comment>
+                </Attribute>
+                <Attribute Id="a43">
+                    <Name>Celular</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Teléfono celular del profesor</Comment>
+                </Attribute>
+                <Attribute Id="a44">
+                    <Name>EspecialidadId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Especialidad del docente (referencia a la tabla Especialidades)</Comment>
+                </Attribute>
+                <Attribute Id="a45">
+                    <Name>GradoAcademico</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Grado académico del docente</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e6">
+            <Name>CursoProfesor</Name>
+            <Description>Asignación de profesores a cursos por periodo y sede</Description>
+            <PrimaryIdentifier>
+                <Name>PK_CursoProfesor</Name>
+                <Attributes>
+                    <Attribute>a46</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a46">
+                    <Name>CursoProfesorId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único de la asignación</Comment>
+                </Attribute>
+                <Attribute Id="a47">
+                    <Name>CursoId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Curso asignado</Comment>
+                </Attribute>
+                <Attribute Id="a48">
+                    <Name>ProfesorId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Profesor asignado</Comment>
+                </Attribute>
+                <Attribute Id="a49">
+                    <Name>PeriodoId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Periodo académico de la asignación</Comment>
+                </Attribute>
+                <Attribute Id="a50">
+                    <Name>SedeId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Sede donde se dicta el curso</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e7">
+            <Name>Sedes</Name>
+            <Description>Sedes físicas del instituto</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Sedes</Name>
+                <Attributes>
+                    <Attribute>a51</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a51">
+                    <Name>SedeId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único de la sede</Comment>
+                </Attribute>
+                <Attribute Id="a52">
+                    <Name>CodigoSede</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Código interno de la sede</Comment>
+                </Attribute>
+                <Attribute Id="a53">
+                    <Name>NombreSede</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombre de la sede</Comment>
+                </Attribute>
+                <Attribute Id="a54">
+                    <Name>Direccion</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Dirección de la sede</Comment>
+                </Attribute>
+                <Attribute Id="a55">
+                    <Name>UbigeoId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Ubigeo de la sede (referencia a la tabla Ubigeos)</Comment>
+                </Attribute>
+                <Attribute Id="a57">
+                    <Name>Telefono</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Teléfono de contacto de la sede</Comment>
+                </Attribute>
+                <Attribute Id="a58">
+                    <Name>Email</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Correo electrónico de contacto de la sede</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e8">
+            <Name>Promotores</Name>
+            <Description>Vendedores/promotores encargados de captar estudiantes</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Promotores</Name>
+                <Attributes>
+                    <Attribute>a59</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a59">
+                    <Name>PromotorId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único del promotor</Comment>
+                </Attribute>
+                <Attribute Id="a60">
+                    <Name>CodigoPromotor</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Código interno del promotor</Comment>
+                </Attribute>
+                <Attribute Id="a61">
+                    <Name>TipoDocumento</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Tipo de documento (DNI o CE)</Comment>
+                </Attribute>
+                <Attribute Id="a62">
+                    <Name>Nombres</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombres del promotor</Comment>
+                </Attribute>
+                <Attribute Id="a63">
+                    <Name>Apellidos</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Apellidos del promotor</Comment>
+                </Attribute>
+                <Attribute Id="a64">
+                    <Name>Email</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Correo electrónico del promotor</Comment>
+                </Attribute>
+                <Attribute Id="a65">
+                    <Name>NumeroDocumento</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Número de documento (8 dígitos si DNI, 1-15 alfanuméricos si CE)</Comment>
+                </Attribute>
+                <Attribute Id="a66">
+                    <Name>Celular</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Teléfono celular del promotor</Comment>
+                </Attribute>
+                <Attribute Id="a67">
+                    <Name>SedeId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Sede a la que pertenece el promotor</Comment>
+                </Attribute>
+                <Attribute Id="a68">
+                    <Name>PorcentajeComision</Name>
+                    <Datatype>decimal</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Porcentaje de comisión del promotor</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e9">
+            <Name>CampaniasAdmision</Name>
+            <Description>Campañas de admisión con sus configuraciones de comisión</Description>
+            <PrimaryIdentifier>
+                <Name>PK_CampaniasAdmision</Name>
+                <Attributes>
+                    <Attribute>a69</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a69">
+                    <Name>CampaniaId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único de la campaña</Comment>
+                </Attribute>
+                <Attribute Id="a70">
+                    <Name>CodigoCampania</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Código interno de la campaña</Comment>
+                </Attribute>
+                <Attribute Id="a71">
+                    <Name>NombreCampania</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombre de la campaña de admisión</Comment>
+                </Attribute>
+                <Attribute Id="a72">
+                    <Name>Descripcion</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Descripción de la campaña</Comment>
+                </Attribute>
+                <Attribute Id="a124">
+                    <Name>PeriodoId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Periodo académico de la campaña</Comment>
+                </Attribute>
+                <Attribute Id="a73">
+                    <Name>FechaInicio</Name>
+                    <Datatype>date</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Fecha de inicio de la campaña</Comment>
+                </Attribute>
+                <Attribute Id="a74">
+                    <Name>FechaFin</Name>
+                    <Datatype>date</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Fecha de fin de la campaña</Comment>
+                </Attribute>
+                <Attribute Id="a75">
+                    <Name>PorcentajeComisionBase</Name>
+                    <Datatype>decimal</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Porcentaje de comisión base de la campaña</Comment>
+                </Attribute>
+                <Attribute Id="a76">
+                    <Name>BonoPorMeta</Name>
+                    <Datatype>decimal</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Bono por cumplimiento de meta</Comment>
+                </Attribute>
+                <Attribute Id="a77">
+                    <Name>MetaMatriculas</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Meta de matrículas de la campaña</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e10">
+            <Name>Matriculas</Name>
+            <Description>Registro de matrículas de estudiantes</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Matriculas</Name>
+                <Attributes>
+                    <Attribute>a78</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a78">
+                    <Name>MatriculaId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único de la matrícula</Comment>
+                </Attribute>
+                <Attribute Id="a79">
+                    <Name>CodigoMatricula</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Código interno de la matrícula</Comment>
+                </Attribute>
+                <Attribute Id="a80">
+                    <Name>EstudianteId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Estudiante que se matricula</Comment>
+                </Attribute>
+                <Attribute Id="a81">
+                    <Name>CarreraId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Carrera a la que se matricula</Comment>
+                </Attribute>
+                <Attribute Id="a82">
+                    <Name>PeriodoId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Periodo académico de la matrícula</Comment>
+                </Attribute>
+                <Attribute Id="a83">
+                    <Name>SedeId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Sede donde se realiza la matrícula</Comment>
+                </Attribute>
+                <Attribute Id="a84">
+                    <Name>PromotorId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Promotor que captó al estudiante</Comment>
+                </Attribute>
+                <Attribute Id="a85">
+                    <Name>CampaniaId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Campaña de admisión asociada</Comment>
+                </Attribute>
+                <Attribute Id="a86">
+                    <Name>FechaMatricula</Name>
+                    <Datatype>datetime</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Fecha en que se registró la matrícula</Comment>
+                </Attribute>
+                <Attribute Id="a87">
+                    <Name>MontoMatricula</Name>
+                    <Datatype>decimal</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Monto pagado por la matrícula</Comment>
+                </Attribute>
+                <Attribute Id="a88">
+                    <Name>EstadoMatricula</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Estado de la matrícula (Activa, Retirada, Suspendida, Culminada)</Comment>
+                </Attribute>
+                <Attribute Id="a89">
+                    <Name>Observaciones</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Observaciones de la matrícula</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e11">
+            <Name>Comisiones</Name>
+            <Description>Comisiones generadas por los promotores por matrículas</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Comisiones</Name>
+                <Attributes>
+                    <Attribute>a90</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a90">
+                    <Name>ComisionId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único de la comisión</Comment>
+                </Attribute>
+                <Attribute Id="a91">
+                    <Name>PromotorId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Promotor beneficiario de la comisión</Comment>
+                </Attribute>
+                <Attribute Id="a92">
+                    <Name>MatriculaId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Matrícula que genera la comisión</Comment>
+                </Attribute>
+                <Attribute Id="a93">
+                    <Name>CampaniaId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Campaña asociada a la comisión</Comment>
+                </Attribute>
+                <Attribute Id="a94">
+                    <Name>MontoBase</Name>
+                    <Datatype>decimal</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Monto base para el cálculo de la comisión</Comment>
+                </Attribute>
+                <Attribute Id="a95">
+                    <Name>PorcentajeComision</Name>
+                    <Datatype>decimal</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Porcentaje aplicado para la comisión</Comment>
+                </Attribute>
+                <Attribute Id="a96">
+                    <Name>MontoComision</Name>
+                    <Datatype>decimal</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Monto de la comisión calculada</Comment>
+                </Attribute>
+                <Attribute Id="a97">
+                    <Name>Bonificacion</Name>
+                    <Datatype>decimal</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Bonificación adicional sobre la comisión</Comment>
+                </Attribute>
+                <Attribute Id="a98">
+                    <Name>MontoTotal</Name>
+                    <Datatype>decimal</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Monto total de la comisión (comisión + bonificación)</Comment>
+                </Attribute>
+                <Attribute Id="a99">
+                    <Name>EstadoPago</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Estado de pago (Pendiente, Pagada, Anulada)</Comment>
+                </Attribute>
+                <Attribute Id="a100">
+                    <Name>FechaPago</Name>
+                    <Datatype>date</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Fecha en que se pagó la comisión</Comment>
+                </Attribute>
+                <Attribute Id="a101">
+                    <Name>Observaciones</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Observaciones de la comisión</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e12">
+            <Name>CarreraCursos</Name>
+            <Description>Relación entre carreras y cursos (malla curricular)</Description>
+            <PrimaryIdentifier>
+                <Name>PK_CarreraCursos</Name>
+                <Attributes>
+                    <Attribute>a102</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a102">
+                    <Name>CarreraCursoId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único de la relación carrera-curso</Comment>
+                </Attribute>
+                <Attribute Id="a103">
+                    <Name>CarreraId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Carrera de la relación</Comment>
+                </Attribute>
+                <Attribute Id="a104">
+                    <Name>CursoId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Curso de la relación</Comment>
+                </Attribute>
+                <Attribute Id="a105">
+                    <Name>Semestre</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Semestre en el que se dicta el curso</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e13">
+            <Name>Roles</Name>
+            <Description>Roles del sistema</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Roles</Name>
+                <Attributes>
+                    <Attribute>a106</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a106">
+                    <Name>RolId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único del rol</Comment>
+                </Attribute>
+                <Attribute Id="a107">
+                    <Name>NombreRol</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombre del rol</Comment>
+                </Attribute>
+                <Attribute Id="a108">
+                    <Name>Descripcion</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Descripción del rol</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e14">
+            <Name>Usuarios</Name>
+            <Description>Usuarios del sistema</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Usuarios</Name>
+                <Attributes>
+                    <Attribute>a109</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a109">
+                    <Name>UsuarioId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único del usuario</Comment>
+                </Attribute>
+                <Attribute Id="a110">
+                    <Name>Username</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombre de usuario para el acceso</Comment>
+                </Attribute>
+                <Attribute Id="a111">
+                    <Name>PasswordHash</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Hash de la contraseña del usuario</Comment>
+                </Attribute>
+                <Attribute Id="a112">
+                    <Name>Email</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Correo electrónico del usuario</Comment>
+                </Attribute>
+                <Attribute Id="a113">
+                    <Name>NombresCompletos</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombres completos del usuario</Comment>
+                </Attribute>
+                <Attribute Id="a114">
+                    <Name>RolId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Rol asignado al usuario</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e15">
+            <Name>AuditLog</Name>
+            <Description>Registro de auditoría de operaciones críticas</Description>
+            <PrimaryIdentifier>
+                <Name>PK_AuditLog</Name>
+                <Attributes>
+                    <Attribute>a115</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a115">
+                    <Name>AuditId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único del registro de auditoría</Comment>
+                </Attribute>
+                <Attribute Id="a116">
+                    <Name>TableName</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Tabla sobre la que se realizó la operación</Comment>
+                </Attribute>
+                <Attribute Id="a117">
+                    <Name>Operation</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Tipo de operación (INSERT, UPDATE, DELETE)</Comment>
+                </Attribute>
+                <Attribute Id="a118">
+                    <Name>RecordId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador del registro afectado</Comment>
+                </Attribute>
+                <Attribute Id="a119">
+                    <Name>Usuario</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Usuario que ejecutó la operación</Comment>
+                </Attribute>
+                <Attribute Id="a120">
+                    <Name>FechaOperacion</Name>
+                    <Datatype>datetime</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Fecha y hora de la operación</Comment>
+                </Attribute>
+                <Attribute Id="a121">
+                    <Name>ValoresAnteriores</Name>
+                    <Datatype>text</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Valores del registro antes de la operación</Comment>
+                </Attribute>
+                <Attribute Id="a122">
+                    <Name>ValoresNuevos</Name>
+                    <Datatype>text</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Valores del registro después de la operación</Comment>
+                </Attribute>
+                <Attribute Id="a123">
+                    <Name>DireccionIP</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Dirección IP desde la que se ejecutó la operación</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e16">
+            <Name>Ubigeos</Name>
+            <Description>Maestro de ubigeos (departamento, provincia, distrito)</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Ubigeos</Name>
+                <Attributes>
+                    <Attribute>a125</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a125">
+                    <Name>UbigeoId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único del ubigeo</Comment>
+                </Attribute>
+                <Attribute Id="a126">
+                    <Name>CodigoUbigeo</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Código de ubigeo de RENIEC (6 dígitos)</Comment>
+                </Attribute>
+                <Attribute Id="a127">
+                    <Name>Departamento</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Departamento del ubigeo</Comment>
+                </Attribute>
+                <Attribute Id="a128">
+                    <Name>Provincia</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Provincia del ubigeo</Comment>
+                </Attribute>
+                <Attribute Id="a129">
+                    <Name>Distrito</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Distrito del ubigeo</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="e17">
+            <Name>Especialidades</Name>
+            <Description>Especialidades académicas de los profesores</Description>
+            <PrimaryIdentifier>
+                <Name>PK_Especialidades</Name>
+                <Attributes>
+                    <Attribute>a130</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="a130">
+                    <Name>EspecialidadId</Name>
+                    <Datatype>integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Identificador único de la especialidad</Comment>
+                </Attribute>
+                <Attribute Id="a131">
+                    <Name>NombreEspecialidad</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Nombre de la especialidad</Comment>
+                </Attribute>
+                <Attribute Id="a132">
+                    <Name>Descripcion</Name>
+                    <Datatype>string</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment>Descripción de la especialidad</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType></DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+    </Entities>
+    <Associations/>
+    <Inheritances/>
+    <EntityRelationships>
+        <EntityRelationship Id="r1">
+            <Name>FK_Matricula_Estudiante</Name>
+            <Comment>Una matrícula pertenece a un estudiante</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e1</Entity_1>
+            <Entity_2>e10</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r2">
+            <Name>FK_Matricula_Carrera</Name>
+            <Comment>Una matrícula corresponde a una carrera</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e2</Entity_1>
+            <Entity_2>e10</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r5">
+            <Name>FK_Matricula_Promotor</Name>
+            <Comment>Una matrícula es captada por un promotor</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e8</Entity_1>
+            <Entity_2>e10</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r6">
+            <Name>FK_Matricula_Campania</Name>
+            <Comment>Una matrícula puede estar asociada a una campaña de admisión</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e9</Entity_1>
+            <Entity_2>e10</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>false</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r8">
+            <Name>FK_Comision_Promotor</Name>
+            <Comment>Una comisión pertenece a un promotor</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e8</Entity_1>
+            <Entity_2>e11</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r9">
+            <Name>FK_Comision_Matricula</Name>
+            <Comment>Una comisión se genera a partir de una matrícula</Comment>
+            <Cardinality>0..1</Cardinality>
+            <Entity_1>e10</Entity_1>
+            <Entity_2>e11</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r10">
+            <Name>FK_Comision_Campania</Name>
+            <Comment>Una comisión puede estar asociada a una campaña</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e9</Entity_1>
+            <Entity_2>e11</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>false</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r11">
+            <Name>FK_CursoProfesor_Curso</Name>
+            <Comment>Una asignación corresponde a un curso</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e3</Entity_1>
+            <Entity_2>e6</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r12">
+            <Name>FK_CursoProfesor_Profesor</Name>
+            <Comment>Una asignación corresponde a un profesor</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e5</Entity_1>
+            <Entity_2>e6</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r13">
+            <Name>FK_CursoProfesor_Periodo</Name>
+            <Comment>Una asignación corresponde a un periodo académico</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e4</Entity_1>
+            <Entity_2>e6</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r14">
+            <Name>FK_CursoProfesor_Sede</Name>
+            <Comment>Una asignación se realiza en una sede</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e7</Entity_1>
+            <Entity_2>e6</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r15">
+            <Name>FK_CarreraCurso_Carrera</Name>
+            <Comment>Una relación carrera-curso corresponde a una carrera</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e2</Entity_1>
+            <Entity_2>e12</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r16">
+            <Name>FK_CarreraCurso_Curso</Name>
+            <Comment>Una relación carrera-curso corresponde a un curso</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e3</Entity_1>
+            <Entity_2>e12</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r17">
+            <Name>FK_Usuario_Rol</Name>
+            <Comment>Un usuario tiene un rol asignado</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e13</Entity_1>
+            <Entity_2>e14</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="reference_1000">
+            <Name>Matriculas_Sedes</Name>
+            <Comment></Comment>
+            <Cardinality>1..*</Cardinality>
+            <Entity_1>e7</Entity_1>
+            <Entity_2>e10</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>true</Entity_1_Mandatory>
+            <Entity_2_Mandatory>false</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="reference_1006">
+            <Name>Matriculas_PeriodosAcademicos</Name>
+            <Comment></Comment>
+            <Cardinality>1..*</Cardinality>
+            <Entity_1>e4</Entity_1>
+            <Entity_2>e10</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>true</Entity_1_Mandatory>
+            <Entity_2_Mandatory>false</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r18">
+            <Name>FK_Sedes_Ubigeo</Name>
+            <Comment>Una sede pertenece a un ubigeo</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e16</Entity_1>
+            <Entity_2>e7</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r19">
+            <Name>FK_Estudiantes_Ubigeo</Name>
+            <Comment>Un estudiante pertenece a un ubigeo</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e16</Entity_1>
+            <Entity_2>e1</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r20">
+            <Name>FK_Profesores_Especialidad</Name>
+            <Comment>Un profesor tiene una especialidad</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e17</Entity_1>
+            <Entity_2>e5</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="r21">
+            <Name>FK_CampaniasAdmision_Periodo</Name>
+            <Comment>Una campaña de admisión pertenece a un periodo académico</Comment>
+            <Cardinality>0..*</Cardinality>
+            <Entity_1>e4</Entity_1>
+            <Entity_2>e9</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>false</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+    </EntityRelationships>
+    <AssociationRelationships/>
+    <Notes/>
+    <Areas/>
+    <EntityDisplays>
+        <EntityDisplay Id="ed1">
+            <X>1410.5</X>
+            <Y>831.5</Y>
+            <Width>240.0</Width>
+            <Height>280.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#D9EAD3</FillColor>
+            <Entity>e1</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed2">
+            <X>1914.5</X>
+            <Y>500.5</Y>
+            <Width>240.0</Width>
+            <Height>200.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#D9EAD3</FillColor>
+            <Entity>e2</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed3">
+            <X>999.5</X>
+            <Y>559.5</Y>
+            <Width>240.0</Width>
+            <Height>200.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#D9EAD3</FillColor>
+            <Entity>e3</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed4">
+            <X>642.5</X>
+            <Y>1750.5</Y>
+            <Width>240.0</Width>
+            <Height>230.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#D9EAD3</FillColor>
+            <Entity>e4</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed5">
+            <X>1019.5</X>
+            <Y>1066.5</Y>
+            <Width>240.0</Width>
+            <Height>230.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#CFE2F3</FillColor>
+            <Entity>e5</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed6">
+            <X>893.5</X>
+            <Y>1429.5</Y>
+            <Width>240.0</Width>
+            <Height>160.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#CFE2F3</FillColor>
+            <Entity>e6</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed7">
+            <X>1243.5</X>
+            <Y>1656.5</Y>
+            <Width>240.0</Width>
+            <Height>200.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FCE5CD</FillColor>
+            <Entity>e7</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed8">
+            <X>1238.5</X>
+            <Y>2042.5</Y>
+            <Width>240.0</Width>
+            <Height>230.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FCE5CD</FillColor>
+            <Entity>e8</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed9">
+            <X>2045.5</X>
+            <Y>1888.5</Y>
+            <Width>240.0</Width>
+            <Height>230.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FCE5CD</FillColor>
+            <Entity>e9</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed10">
+            <X>2338.5</X>
+            <Y>1166.5</Y>
+            <Width>260.0</Width>
+            <Height>260.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#D9EAD3</FillColor>
+            <Entity>e10</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed11">
+            <X>1214.5</X>
+            <Y>2400.5</Y>
+            <Width>260.0</Width>
+            <Height>260.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FCE5CD</FillColor>
+            <Entity>e11</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed12">
+            <X>1452.5</X>
+            <Y>566.5</Y>
+            <Width>240.0</Width>
+            <Height>150.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#CFE2F3</FillColor>
+            <Entity>e12</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed13">
+            <X>3161.5</X>
+            <Y>1099.5</Y>
+            <Width>200.0</Width>
+            <Height>130.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#EAD1DC</FillColor>
+            <Entity>e13</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed14">
+            <X>3149.5</X>
+            <Y>1347.5</Y>
+            <Width>220.0</Width>
+            <Height>180.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#EAD1DC</FillColor>
+            <Entity>e14</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed15">
+            <X>3130.5</X>
+            <Y>1606.5</Y>
+            <Width>240.0</Width>
+            <Height>230.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFF2CC</FillColor>
+            <Entity>e15</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed16">
+            <X>900.5</X>
+            <Y>1960.5</Y>
+            <Width>240.0</Width>
+            <Height>170.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FCE5CD</FillColor>
+            <Entity>e16</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="ed17">
+            <X>1359.5</X>
+            <Y>1050.5</Y>
+            <Width>240.0</Width>
+            <Height>150.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#CFE2F3</FillColor>
+            <Entity>e17</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+    </EntityDisplays>
+    <AssociationDisplays/>
+    <InheritanceDisplays/>
+    <EntityRelationshipsDisplays>
+        <EntityRelationshipDisplay Id="erd1">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>1610.5</X>
+                    <Y>1031.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1732.5</X>
+                    <Y>1031.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1882.5</X>
+                    <Y>1266.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2368.5</X>
+                    <Y>1266.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed1</Entity_1_Display>
+            <Entity_2_Display>ed10</Entity_2_Display>
+            <Reference>r1</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd2">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>2034.5</X>
+                    <Y>700.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2060.5</X>
+                    <Y>700.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2060.5</X>
+                    <Y>1216.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2458.5</X>
+                    <Y>1216.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed2</Entity_1_Display>
+            <Entity_2_Display>ed10</Entity_2_Display>
+            <Reference>r2</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd5">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>1378.5</X>
+                    <Y>2110.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1710.5</X>
+                    <Y>2110.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1710.5</X>
+                    <Y>1366.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2338.5</X>
+                    <Y>1366.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed8</Entity_1_Display>
+            <Entity_2_Display>ed10</Entity_2_Display>
+            <Reference>r5</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd6">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>2165.5</X>
+                    <Y>2006.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2422.5</X>
+                    <Y>2006.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2422.5</X>
+                    <Y>1401.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2598.5</X>
+                    <Y>1401.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed9</Entity_1_Display>
+            <Entity_2_Display>ed10</Entity_2_Display>
+            <Reference>r6</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd8">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>1438.5</X>
+                    <Y>2272.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1324.5</X>
+                    <Y>2272.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1324.5</X>
+                    <Y>2660.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1234.5</X>
+                    <Y>2660.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed8</Entity_1_Display>
+            <Entity_2_Display>ed11</Entity_2_Display>
+            <Reference>r8</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd9">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>2518.5</X>
+                    <Y>1336.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2730.5</X>
+                    <Y>1336.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2730.5</X>
+                    <Y>2528.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1214.5</X>
+                    <Y>2528.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed10</Entity_1_Display>
+            <Entity_2_Display>ed11</Entity_2_Display>
+            <Reference>r9</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd10">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>2165.5</X>
+                    <Y>2012.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1978.5</X>
+                    <Y>2012.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1978.5</X>
+                    <Y>2612.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1474.5</X>
+                    <Y>2612.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed9</Entity_1_Display>
+            <Entity_2_Display>ed11</Entity_2_Display>
+            <Reference>r10</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd11">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>1119.5</X>
+                    <Y>639.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>688.5</X>
+                    <Y>639.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>688.5</X>
+                    <Y>1524.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1013.5</X>
+                    <Y>1524.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed3</Entity_1_Display>
+            <Entity_2_Display>ed6</Entity_2_Display>
+            <Reference>r11</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd12">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>1139.5</X>
+                    <Y>1271.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1084.5</X>
+                    <Y>1271.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1084.5</X>
+                    <Y>1469.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>893.5</X>
+                    <Y>1469.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed5</Entity_1_Display>
+            <Entity_2_Display>ed6</Entity_2_Display>
+            <Reference>r12</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd13">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>762.5</X>
+                    <Y>1955.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>780.5</X>
+                    <Y>1955.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>780.5</X>
+                    <Y>1473.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1053.5</X>
+                    <Y>1473.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed4</Entity_1_Display>
+            <Entity_2_Display>ed6</Entity_2_Display>
+            <Reference>r13</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd14">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>1363.5</X>
+                    <Y>1831.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1007.5</X>
+                    <Y>1831.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1007.5</X>
+                    <Y>1449.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1053.5</X>
+                    <Y>1449.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed7</Entity_1_Display>
+            <Entity_2_Display>ed6</Entity_2_Display>
+            <Reference>r14</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd15">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>2034.5</X>
+                    <Y>654.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1554.5</X>
+                    <Y>654.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1554.5</X>
+                    <Y>666.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1452.5</X>
+                    <Y>666.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed2</Entity_1_Display>
+            <Entity_2_Display>ed12</Entity_2_Display>
+            <Reference>r15</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd16">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>1119.5</X>
+                    <Y>637.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1308.5</X>
+                    <Y>637.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1308.5</X>
+                    <Y>636.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1572.5</X>
+                    <Y>636.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed3</Entity_1_Display>
+            <Entity_2_Display>ed12</Entity_2_Display>
+            <Reference>r16</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd17">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>3261.5</X>
+                    <Y>1229.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>3262.5</X>
+                    <Y>1229.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>3262.5</X>
+                    <Y>1377.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>3249.5</X>
+                    <Y>1377.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed13</Entity_1_Display>
+            <Entity_2_Display>ed14</Entity_2_Display>
+            <Reference>r17</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="referenceDisplay_1001">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>1463.5</X>
+                    <Y>1681.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1840.5</X>
+                    <Y>1681.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1840.5</X>
+                    <Y>1322.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2481.5</X>
+                    <Y>1322.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed7</Entity_1_Display>
+            <Entity_2_Display>ed10</Entity_2_Display>
+            <Reference>reference_1000</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="referenceDisplay_1007">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>802.5</X>
+                    <Y>1902.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1623.5</X>
+                    <Y>1902.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1623.5</X>
+                    <Y>1401.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2444.5</X>
+                    <Y>1401.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed4</Entity_1_Display>
+            <Entity_2_Display>ed10</Entity_2_Display>
+            <Reference>reference_1006</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd18">
+            <Color>#000000</Color>
+            <Type>Vertical_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>1020.5</X>
+                    <Y>2130.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1020.5</X>
+                    <Y>1856.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1243.5</X>
+                    <Y>1856.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1243.5</X>
+                    <Y>1706.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed16</Entity_1_Display>
+            <Entity_2_Display>ed7</Entity_2_Display>
+            <Reference>r18</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd19">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>1041.5</X>
+                    <Y>2044.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1804.5</X>
+                    <Y>2044.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1804.5</X>
+                    <Y>1001.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1410.5</X>
+                    <Y>1001.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed16</Entity_1_Display>
+            <Entity_2_Display>ed1</Entity_2_Display>
+            <Reference>r19</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd20">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>1479.5</X>
+                    <Y>1185.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1259.5</X>
+                    <Y>1185.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1259.5</X>
+                    <Y>1126.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1059.5</X>
+                    <Y>1126.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed17</Entity_1_Display>
+            <Entity_2_Display>ed5</Entity_2_Display>
+            <Reference>r20</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="erd21">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>782.5</X>
+                    <Y>1902.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1736.5</X>
+                    <Y>1902.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>1736.5</X>
+                    <Y>1911.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>2265.5</X>
+                    <Y>1911.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>ed4</Entity_1_Display>
+            <Entity_2_Display>ed9</Entity_2_Display>
+            <Reference>r21</Reference>
+        </EntityRelationshipDisplay>
+    </EntityRelationshipsDisplays>
+    <AssociationRelationshipsDisplays/>
+    <NoteDisplays/>
+    <AreaDisplays/>
+</DatabaseLogicalModel>

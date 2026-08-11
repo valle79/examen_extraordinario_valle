@@ -3,8 +3,13 @@
 -- 03_tables.sql | Creacion de tablas e indices
 -- =============================================
 -- Descripcion: Define las 17 entidades del sistema organizadas
--- por esquema, con sus restricciones (PK, FK, UK, CK), campos de
--- auditoria (CreatedAt/UpdatedAt/DeletedAt) e indices de rendimiento.
+-- por esquema, con sus columnas, tipos, defaults y campos de
+-- auditoria (CreatedAt/UpdatedAt/DeletedAt).
+--
+-- Las restricciones de integridad (PK, FK, UK, CK) se aplican en
+-- el script 04_constraints.sql, tal como exige el estandar del
+-- proyecto. Los indices de rendimiento se crean al final de este
+-- script.
 --
 -- IDEMPOTENTE: cada objeto se crea solo si no existe.
 -- Puede ejecutarse multiples veces sin errores.
@@ -40,10 +45,7 @@ BEGIN
         Distrito NVARCHAR(50) NOT NULL,
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-        UpdatedAt DATETIME NULL,
-        CONSTRAINT PK_Ubigeos PRIMARY KEY (UbigeoId),
-        CONSTRAINT UK_Ubigeos_Codigo UNIQUE (CodigoUbigeo),
-        CONSTRAINT CK_Ubigeos_Codigo CHECK (LEN(CodigoUbigeo) = 6 AND CodigoUbigeo NOT LIKE '%[^0-9]%')
+        UpdatedAt DATETIME NULL
     );
     PRINT 'OK: Tabla core.Ubigeos creada.';
 END
@@ -66,12 +68,7 @@ BEGIN
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
         UpdatedAt DATETIME NULL,
-        DeletedAt DATETIME NULL,
-        CONSTRAINT PK_Sedes PRIMARY KEY (SedeId),
-        CONSTRAINT FK_Sedes_Ubigeo FOREIGN KEY (UbigeoId)
-            REFERENCES core.Ubigeos(UbigeoId),
-        CONSTRAINT UK_Sedes_Codigo UNIQUE (CodigoSede),
-        CONSTRAINT CK_Sedes_Email CHECK (Email LIKE '%@%')
+        DeletedAt DATETIME NULL
     );
     PRINT 'OK: Tabla core.Sedes creada.';
 END
@@ -94,11 +91,7 @@ BEGIN
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
         UpdatedAt DATETIME NULL,
-        DeletedAt DATETIME NULL,
-        CONSTRAINT PK_Carreras PRIMARY KEY (CarreraId),
-        CONSTRAINT UK_Carreras_Codigo UNIQUE (CodigoCarrera),
-        CONSTRAINT CK_Carreras_Duracion CHECK (DuracionSemestres > 0),
-        CONSTRAINT CK_Carreras_Costos CHECK (CostoMatricula >= 0 AND CostoPensionMensual >= 0)
+        DeletedAt DATETIME NULL
     );
     PRINT 'OK: Tabla core.Carreras creada.';
 END
@@ -126,21 +119,7 @@ BEGIN
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
         UpdatedAt DATETIME NULL,
-        DeletedAt DATETIME NULL,
-        CONSTRAINT PK_Estudiantes PRIMARY KEY (EstudianteId),
-        CONSTRAINT FK_Estudiantes_Ubigeo FOREIGN KEY (UbigeoId)
-            REFERENCES core.Ubigeos(UbigeoId),
-        CONSTRAINT UK_Estudiantes_Documento UNIQUE (TipoDocumento, NumeroDocumento),
-        CONSTRAINT UK_Estudiantes_Email UNIQUE (Email),
-        CONSTRAINT CK_Estudiantes_Documento CHECK (
-            (TipoDocumento = 'DNI' AND LEN(NumeroDocumento) = 8 AND NumeroDocumento NOT LIKE '%[^0-9]%')
-            OR
-            (TipoDocumento = 'CE' AND LEN(NumeroDocumento) BETWEEN 1 AND 15 AND NumeroDocumento NOT LIKE '%[^0-9A-Za-z]%')
-        ),
-        CONSTRAINT CK_Estudiantes_Email CHECK (Email LIKE '%@%'),
-        CONSTRAINT CK_Estudiantes_Genero CHECK (Genero IN ('M','F','O')),
-        CONSTRAINT CK_Estudiantes_Celular CHECK (Celular IS NULL OR Celular LIKE '9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-        CONSTRAINT CK_Estudiantes_FechaNacimiento CHECK (FechaNacimiento < GETDATE())
+        DeletedAt DATETIME NULL
     );
     PRINT 'OK: Tabla core.Estudiantes creada.';
 END
@@ -164,12 +143,7 @@ BEGIN
         FechaFinMatriculas DATE NOT NULL,
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-        UpdatedAt DATETIME NULL,
-        CONSTRAINT PK_PeriodosAcademicos PRIMARY KEY (PeriodoId),
-        CONSTRAINT UK_PeriodosAcademicos_Codigo UNIQUE (CodigoPeriodo),
-        CONSTRAINT CK_PeriodosAcademicos_Semestre CHECK (Semestre IN (1,2)),
-        CONSTRAINT CK_PeriodosAcademicos_Fechas CHECK (FechaFin > FechaInicio),
-        CONSTRAINT CK_PeriodosAcademicos_FechasMatricula CHECK (FechaFinMatriculas > FechaInicioMatriculas)
+        UpdatedAt DATETIME NULL
     );
     PRINT 'OK: Tabla core.PeriodosAcademicos creada.';
 END
@@ -191,9 +165,7 @@ BEGIN
         Descripcion NVARCHAR(300) NULL,
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-        UpdatedAt DATETIME NULL,
-        CONSTRAINT PK_Especialidades PRIMARY KEY (EspecialidadId),
-        CONSTRAINT UK_Especialidades_Nombre UNIQUE (NombreEspecialidad)
+        UpdatedAt DATETIME NULL
     );
     PRINT 'OK: Tabla academic.Especialidades creada.';
 END
@@ -219,19 +191,7 @@ BEGIN
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
         UpdatedAt DATETIME NULL,
-        DeletedAt DATETIME NULL,
-        CONSTRAINT PK_Profesores PRIMARY KEY (ProfesorId),
-        CONSTRAINT FK_Profesores_Especialidad FOREIGN KEY (EspecialidadId)
-            REFERENCES academic.Especialidades(EspecialidadId),
-        CONSTRAINT UK_Profesores_Documento UNIQUE (TipoDocumento, NumeroDocumento),
-        CONSTRAINT UK_Profesores_Email UNIQUE (Email),
-        CONSTRAINT CK_Profesores_Documento CHECK (
-            (TipoDocumento = 'DNI' AND LEN(NumeroDocumento) = 8 AND NumeroDocumento NOT LIKE '%[^0-9]%')
-            OR
-            (TipoDocumento = 'CE' AND LEN(NumeroDocumento) BETWEEN 1 AND 15 AND NumeroDocumento NOT LIKE '%[^0-9A-Za-z]%')
-        ),
-        CONSTRAINT CK_Profesores_Email CHECK (Email LIKE '%@%'),
-        CONSTRAINT CK_Profesores_Celular CHECK (Celular IS NULL OR Celular LIKE '9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+        DeletedAt DATETIME NULL
     );
     PRINT 'OK: Tabla academic.Profesores creada.';
 END
@@ -254,11 +214,7 @@ BEGIN
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
         UpdatedAt DATETIME NULL,
-        DeletedAt DATETIME NULL,
-        CONSTRAINT PK_Cursos PRIMARY KEY (CursoId),
-        CONSTRAINT UK_Cursos_Codigo UNIQUE (CodigoCurso),
-        CONSTRAINT CK_Cursos_Creditos CHECK (Creditos > 0),
-        CONSTRAINT CK_Cursos_Horas CHECK (HorasTeoria >= 0 AND HorasPractica >= 0)
+        DeletedAt DATETIME NULL
     );
     PRINT 'OK: Tabla academic.Cursos creada.';
 END
@@ -276,14 +232,7 @@ BEGIN
         CarreraId INT NOT NULL,
         CursoId INT NOT NULL,
         Semestre INT NOT NULL,
-        CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-        CONSTRAINT PK_CarreraCursos PRIMARY KEY (CarreraCursoId),
-        CONSTRAINT FK_CarreraCursos_Carrera FOREIGN KEY (CarreraId)
-            REFERENCES core.Carreras(CarreraId),
-        CONSTRAINT FK_CarreraCursos_Curso FOREIGN KEY (CursoId)
-            REFERENCES academic.Cursos(CursoId),
-        CONSTRAINT UK_CarreraCursos UNIQUE (CarreraId, CursoId, Semestre),
-        CONSTRAINT CK_CarreraCursos_Semestre CHECK (Semestre > 0)
+        CreatedAt DATETIME NOT NULL DEFAULT GETDATE()
     );
     PRINT 'OK: Tabla academic.CarreraCursos creada.';
 END
@@ -313,21 +262,7 @@ BEGIN
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
         UpdatedAt DATETIME NULL,
-        DeletedAt DATETIME NULL,
-        CONSTRAINT PK_Promotores PRIMARY KEY (PromotorId),
-        CONSTRAINT FK_Promotores_Sede FOREIGN KEY (SedeId)
-            REFERENCES core.Sedes(SedeId),
-        CONSTRAINT UK_Promotores_Codigo UNIQUE (CodigoPromotor),
-        CONSTRAINT UK_Promotores_Documento UNIQUE (TipoDocumento, NumeroDocumento),
-        CONSTRAINT UK_Promotores_Email UNIQUE (Email),
-        CONSTRAINT CK_Promotores_Documento CHECK (
-            (TipoDocumento = 'DNI' AND LEN(NumeroDocumento) = 8 AND NumeroDocumento NOT LIKE '%[^0-9]%')
-            OR
-            (TipoDocumento = 'CE' AND LEN(NumeroDocumento) BETWEEN 1 AND 15 AND NumeroDocumento NOT LIKE '%[^0-9A-Za-z]%')
-        ),
-        CONSTRAINT CK_Promotores_Email CHECK (Email LIKE '%@%'),
-        CONSTRAINT CK_Promotores_Celular CHECK (Celular IS NULL OR Celular LIKE '9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-        CONSTRAINT CK_Promotores_Comision CHECK (PorcentajeComision >= 0 AND PorcentajeComision <= 100)
+        DeletedAt DATETIME NULL
     );
     PRINT 'OK: Tabla sales.Promotores creada.';
 END
@@ -353,13 +288,7 @@ BEGIN
         MetaMatriculas INT NULL,
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-        UpdatedAt DATETIME NULL,
-        CONSTRAINT PK_CampaniasAdmision PRIMARY KEY (CampaniaId),
-        CONSTRAINT FK_CampaniasAdmision_Periodo FOREIGN KEY (PeriodoId)
-            REFERENCES core.PeriodosAcademicos(PeriodoId),
-        CONSTRAINT UK_CampaniasAdmision_Codigo UNIQUE (CodigoCampania),
-        CONSTRAINT CK_CampaniasAdmision_Fechas CHECK (FechaFin > FechaInicio),
-        CONSTRAINT CK_CampaniasAdmision_Comision CHECK (PorcentajeComisionBase >= 0 AND PorcentajeComisionBase <= 100)
+        UpdatedAt DATETIME NULL
     );
     PRINT 'OK: Tabla sales.CampaniasAdmision creada.';
 END
@@ -395,24 +324,7 @@ BEGIN
         Activo BIT NOT NULL DEFAULT 1,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
         UpdatedAt DATETIME NULL,
-        DeletedAt DATETIME NULL,
-        CONSTRAINT PK_Matriculas PRIMARY KEY (MatriculaId),
-        CONSTRAINT FK_Matriculas_Estudiante FOREIGN KEY (EstudianteId)
-            REFERENCES core.Estudiantes(EstudianteId),
-        CONSTRAINT FK_Matriculas_Carrera FOREIGN KEY (CarreraId)
-            REFERENCES core.Carreras(CarreraId),
-        CONSTRAINT FK_Matriculas_Periodo FOREIGN KEY (PeriodoId)
-            REFERENCES core.PeriodosAcademicos(PeriodoId),
-        CONSTRAINT FK_Matriculas_Sede FOREIGN KEY (SedeId)
-            REFERENCES core.Sedes(SedeId),
-        CONSTRAINT FK_Matriculas_Promotor FOREIGN KEY (PromotorId)
-            REFERENCES sales.Promotores(PromotorId),
-        CONSTRAINT FK_Matriculas_Campania FOREIGN KEY (CampaniaId)
-            REFERENCES sales.CampaniasAdmision(CampaniaId),
-        CONSTRAINT UK_Matriculas_Codigo UNIQUE (CodigoMatricula),
-        CONSTRAINT UK_Matriculas_EstudiantePeriodoCarrera UNIQUE (EstudianteId, CarreraId, PeriodoId),
-        CONSTRAINT CK_Matriculas_Monto CHECK (MontoMatricula >= 0),
-        CONSTRAINT CK_Matriculas_Estado CHECK (EstadoMatricula IN ('Activa','Retirada','Suspendida','Culminada'))
+        DeletedAt DATETIME NULL
     );
     PRINT 'OK: Tabla core.Matriculas creada.';
 END
@@ -438,17 +350,7 @@ BEGIN
         EstadoPago VARCHAR(20) NOT NULL DEFAULT 'Pendiente',
         FechaPago DATE NULL,
         Observaciones NVARCHAR(500) NULL,
-        CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-        CONSTRAINT PK_Comisiones PRIMARY KEY (ComisionId),
-        CONSTRAINT FK_Comisiones_Promotor FOREIGN KEY (PromotorId)
-            REFERENCES sales.Promotores(PromotorId),
-        CONSTRAINT FK_Comisiones_Matricula FOREIGN KEY (MatriculaId)
-            REFERENCES core.Matriculas(MatriculaId),
-        CONSTRAINT FK_Comisiones_Campania FOREIGN KEY (CampaniaId)
-            REFERENCES sales.CampaniasAdmision(CampaniaId),
-        CONSTRAINT UK_Comisiones_Matricula UNIQUE (MatriculaId),
-        CONSTRAINT CK_Comisiones_Montos CHECK (MontoBase >= 0 AND MontoComision >= 0 AND MontoTotal >= 0),
-        CONSTRAINT CK_Comisiones_Estado CHECK (EstadoPago IN ('Pendiente','Pagada','Anulada'))
+        CreatedAt DATETIME NOT NULL DEFAULT GETDATE()
     );
     PRINT 'OK: Tabla sales.Comisiones creada.';
 END
@@ -473,17 +375,7 @@ BEGIN
         SedeId INT NOT NULL,
         FechaAsignacion DATE NOT NULL DEFAULT GETDATE(),
         Activo BIT NOT NULL DEFAULT 1,
-        CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-        CONSTRAINT PK_CursoProfesor PRIMARY KEY (CursoProfesorId),
-        CONSTRAINT FK_CursoProfesor_Curso FOREIGN KEY (CursoId)
-            REFERENCES academic.Cursos(CursoId),
-        CONSTRAINT FK_CursoProfesor_Profesor FOREIGN KEY (ProfesorId)
-            REFERENCES academic.Profesores(ProfesorId),
-        CONSTRAINT FK_CursoProfesor_Periodo FOREIGN KEY (PeriodoId)
-            REFERENCES core.PeriodosAcademicos(PeriodoId),
-        CONSTRAINT FK_CursoProfesor_Sede FOREIGN KEY (SedeId)
-            REFERENCES core.Sedes(SedeId),
-        CONSTRAINT UK_CursoProfesor UNIQUE (CursoId, ProfesorId, PeriodoId, SedeId)
+        CreatedAt DATETIME NOT NULL DEFAULT GETDATE()
     );
     PRINT 'OK: Tabla academic.CursoProfesor creada.';
 END
@@ -505,9 +397,7 @@ BEGIN
         NombreRol VARCHAR(50) NOT NULL,
         Descripcion NVARCHAR(200) NULL,
         Activo BIT NOT NULL DEFAULT 1,
-        CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-        CONSTRAINT PK_Roles PRIMARY KEY (RolId),
-        CONSTRAINT UK_Roles_Nombre UNIQUE (NombreRol)
+        CreatedAt DATETIME NOT NULL DEFAULT GETDATE()
     );
     PRINT 'OK: Tabla security.Roles creada.';
 END
@@ -529,13 +419,7 @@ BEGIN
         Activo BIT NOT NULL DEFAULT 1,
         UltimoAcceso DATETIME NULL,
         CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-        UpdatedAt DATETIME NULL,
-        CONSTRAINT PK_Usuarios PRIMARY KEY (UsuarioId),
-        CONSTRAINT FK_Usuarios_Rol FOREIGN KEY (RolId)
-            REFERENCES security.Roles(RolId),
-        CONSTRAINT UK_Usuarios_Username UNIQUE (Username),
-        CONSTRAINT UK_Usuarios_Email UNIQUE (Email),
-        CONSTRAINT CK_Usuarios_Email CHECK (Email LIKE '%@%')
+        UpdatedAt DATETIME NULL
     );
     PRINT 'OK: Tabla security.Usuarios creada.';
 END
@@ -562,9 +446,7 @@ BEGIN
         FechaOperacion DATETIME NOT NULL DEFAULT GETDATE(),
         ValoresAnteriores NVARCHAR(MAX) NULL,
         ValoresNuevos NVARCHAR(MAX) NULL,
-        DireccionIP VARCHAR(45) NULL,
-        CONSTRAINT PK_AuditLog PRIMARY KEY (AuditId),
-        CONSTRAINT CK_AuditLog_Operation CHECK (Operation IN ('INSERT','UPDATE','DELETE'))
+        DireccionIP VARCHAR(45) NULL
     );
     PRINT 'OK: Tabla audit.AuditLog creada.';
 END
@@ -734,9 +616,7 @@ PRINT '  Esquema [security] : Roles, Usuarios';
 PRINT '  Esquema [audit]    : AuditLog';
 PRINT '--------------------------------------------';
 PRINT '  Total tablas      : 17';
-PRINT '  Foreign Keys      : 21';
-PRINT '  Unique Constraints: 22';
-PRINT '  Check Constraints : 30';
 PRINT '  Indices no agrup. : 14';
+PRINT '  (PK/FK/UK/CK      : script 04_constraints.sql)';
 PRINT '============================================';
 GO

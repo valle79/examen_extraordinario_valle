@@ -1,0 +1,4132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DatabaseModel VersionId="2.4">
+    <Name></Name>
+    <Description></Description>
+    <DatabaseEngine>
+        <Name>sql_server</Name>
+        <Version>2025</Version>
+    </DatabaseEngine>
+    <Counters>
+        <Counter>
+            <Name>table</Name>
+            <Value>17</Value>
+            <Prefix>t</Prefix>
+        </Counter>
+        <Counter>
+            <Name>external_table</Name>
+            <Value>0</Value>
+            <Prefix>et</Prefix>
+        </Counter>
+        <Counter>
+            <Name>column</Name>
+            <Value>180</Value>
+            <Prefix>c</Prefix>
+        </Counter>
+        <Counter>
+            <Name>external_table_column</Name>
+            <Value>0</Value>
+            <Prefix>etc</Prefix>
+        </Counter>
+        <Counter>
+            <Name>index</Name>
+            <Value>14</Value>
+            <Prefix>i</Prefix>
+        </Counter>
+        <Counter>
+            <Name>reference</Name>
+            <Value>21</Value>
+            <Prefix>r</Prefix>
+        </Counter>
+        <Counter>
+            <Name>table_check</Name>
+            <Value>30</Value>
+            <Prefix>tc</Prefix>
+        </Counter>
+        <Counter>
+            <Name>alternate_key</Name>
+            <Value>22</Value>
+            <Prefix>a</Prefix>
+        </Counter>
+        <Counter>
+            <Name>sequence</Name>
+            <Value>0</Value>
+            <Prefix>s</Prefix>
+        </Counter>
+        <Counter>
+            <Name>note</Name>
+            <Value>0</Value>
+            <Prefix>n</Prefix>
+        </Counter>
+        <Counter>
+            <Name>view</Name>
+            <Value>0</Value>
+            <Prefix>v</Prefix>
+        </Counter>
+        <Counter>
+            <Name>materialized_view</Name>
+            <Value>0</Value>
+            <Prefix>mv</Prefix>
+        </Counter>
+        <Counter>
+            <Name>materialized_view_column</Name>
+            <Value>0</Value>
+            <Prefix>mvc</Prefix>
+        </Counter>
+        <Counter>
+            <Name>area</Name>
+            <Value>0</Value>
+            <Prefix>ar</Prefix>
+        </Counter>
+        <Counter>
+            <Name>text</Name>
+            <Value>0</Value>
+            <Prefix>tx</Prefix>
+        </Counter>
+        <Counter>
+            <Name>view_column</Name>
+            <Value>0</Value>
+            <Prefix>vc</Prefix>
+        </Counter>
+        <Counter>
+            <Name>tableDisplay</Name>
+            <Value>17</Value>
+            <Prefix>td</Prefix>
+        </Counter>
+        <Counter>
+            <Name>externalTableDisplay</Name>
+            <Value>0</Value>
+            <Prefix>etd</Prefix>
+        </Counter>
+        <Counter>
+            <Name>viewDisplay</Name>
+            <Value>0</Value>
+            <Prefix>vd</Prefix>
+        </Counter>
+        <Counter>
+            <Name>materializedViewDisplay</Name>
+            <Value>0</Value>
+            <Prefix>mvd</Prefix>
+        </Counter>
+        <Counter>
+            <Name>referenceDisplay</Name>
+            <Value>21</Value>
+            <Prefix>rd</Prefix>
+        </Counter>
+    </Counters>
+    <AdditionalSQLBeforeCreate></AdditionalSQLBeforeCreate>
+    <AdditionalSQLAfterCreate></AdditionalSQLAfterCreate>
+    <AdditionalSQLBeforeDrop></AdditionalSQLBeforeDrop>
+    <AdditionalSQLAfterDrop></AdditionalSQLAfterDrop>
+    <Tables>
+        <Table Id="t1">
+            <Name>Sedes</Name>
+            <Description>Sedes fÃ­sicas del instituto</Description>
+            <Columns>
+                <Column Id="c1">
+                    <Name>SedeId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico de la sede</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c2">
+                    <Name>CodigoSede</Name>
+                    <Type>varchar(10)</Type>
+                    <Description>CÃ³digo interno de la sede</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c3">
+                    <Name>NombreSede</Name>
+                    <Type>nvarchar(100)</Type>
+                    <Description>Nombre de la sede</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c4">
+                    <Name>Direccion</Name>
+                    <Type>nvarchar(200)</Type>
+                    <Description>DirecciÃ³n de la sede</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c5">
+                    <Name>UbigeoId</Name>
+                    <Type>int</Type>
+                    <Description>Ubigeo de la sede (referencia a la tabla Ubigeos)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c7">
+                    <Name>Telefono</Name>
+                    <Type>varchar(15)</Type>
+                    <Description>TelÃ©fono de contacto de la sede</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c8">
+                    <Name>Email</Name>
+                    <Type>varchar(100)</Type>
+                    <Description>Correo electrÃ³nico de contacto de la sede</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c9">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c10">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c11">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c12">
+                    <Name>DeletedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de borrado lógico del registro (NULL si está activo)</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Sedes</Name>
+                <Columns>
+                    <Column>c1</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a1">
+                    <Name>UK_Sedes_Codigo</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c2</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes/>
+            <TableChecks>
+                <TableCheck Id="tc1">
+                    <Name>CK_Sedes_Email</Name>
+                    <Description></Description>
+                    <CheckExpression>( Email LIKE '%@%' )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>core</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t2">
+            <Name>Carreras</Name>
+            <Description>Carreras profesionales ofrecidas por el instituto</Description>
+            <Columns>
+                <Column Id="c13">
+                    <Name>CarreraId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico de la carrera</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c14">
+                    <Name>CodigoCarrera</Name>
+                    <Type>varchar(10)</Type>
+                    <Description>CÃ³digo interno de la carrera</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c15">
+                    <Name>NombreCarrera</Name>
+                    <Type>nvarchar(150)</Type>
+                    <Description>Nombre de la carrera profesional</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c16">
+                    <Name>Descripcion</Name>
+                    <Type>nvarchar(500)</Type>
+                    <Description>DescripciÃ³n de la carrera</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c17">
+                    <Name>DuracionSemestres</Name>
+                    <Type>int</Type>
+                    <Description>DuraciÃ³n en semestres acadÃ©micos</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c18">
+                    <Name>CostoMatricula</Name>
+                    <Type>decimal(10,2)</Type>
+                    <Description>Costo de matrÃ­cula de la carrera</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c19">
+                    <Name>CostoPensionMensual</Name>
+                    <Type>decimal(10,2)</Type>
+                    <Description>Costo de pensiÃ³n mensual de la carrera</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c20">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c21">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c22">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c23">
+                    <Name>DeletedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de borrado lógico del registro (NULL si está activo)</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Carreras</Name>
+                <Columns>
+                    <Column>c13</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a2">
+                    <Name>UK_Carreras_Codigo</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c14</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes/>
+            <TableChecks>
+                <TableCheck Id="tc2">
+                    <Name>CK_Carreras_Duracion</Name>
+                    <Description></Description>
+                    <CheckExpression>( DuracionSemestres &gt; 0 )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc3">
+                    <Name>CK_Carreras_Costos</Name>
+                    <Description></Description>
+                    <CheckExpression>( CostoMatricula &gt;= 0 AND CostoPensionMensual &gt;= 0 )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>core</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t3">
+            <Name>Estudiantes</Name>
+            <Description>InformaciÃ³n de estudiantes registrados en el instituto</Description>
+            <Columns>
+                <Column Id="c24">
+                    <Name>EstudianteId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico del estudiante</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c25">
+                    <Name>TipoDocumento</Name>
+                    <Type>char(3)</Type>
+                    <Description>Tipo de documento (DNI o CE)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>DNI</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c29">
+                    <Name>NumeroDocumento</Name>
+                    <Type>varchar(15)</Type>
+                    <Description>NÃºmero de documento (8 dÃ­gitos si DNI, 1-15 alfanumÃ©ricos si CE)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c26">
+                    <Name>Nombres</Name>
+                    <Type>nvarchar(100)</Type>
+                    <Description>Nombres del estudiante</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c27">
+                    <Name>Apellidos</Name>
+                    <Type>nvarchar(100)</Type>
+                    <Description>Apellidos del estudiante</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c28">
+                    <Name>Email</Name>
+                    <Type>varchar(100)</Type>
+                    <Description>Correo electrÃ³nico del estudiante</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c30">
+                    <Name>Celular</Name>
+                    <Type>char(9)</Type>
+                    <Description>TelÃ©fono celular del estudiante</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c31">
+                    <Name>FechaNacimiento</Name>
+                    <Type>date</Type>
+                    <Description>Fecha de nacimiento del estudiante</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c32">
+                    <Name>Genero</Name>
+                    <Type>char(1)</Type>
+                    <Description>GÃ©nero del estudiante (M, F, O)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c33">
+                    <Name>Direccion</Name>
+                    <Type>nvarchar(200)</Type>
+                    <Description>DirecciÃ³n de domicilio</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c34">
+                    <Name>UbigeoId</Name>
+                    <Type>int</Type>
+                    <Description>Ubigeo de residencia (referencia a la tabla Ubigeos)</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c37">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c38">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c39">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c40">
+                    <Name>DeletedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de borrado lógico del registro (NULL si está activo)</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Estudiantes</Name>
+                <Columns>
+                    <Column>c24</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a3">
+                    <Name>UK_Estudiantes_Documento</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c25</Column>
+                        <Column>c29</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+                <AlternateKey Id="a4">
+                    <Name>UK_Estudiantes_Email</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c28</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes>
+                <Index Id="i1">
+                    <Name>IX_Estudiantes_Apellidos</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>
+                            <Column>c27</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                        <Column>
+                            <Column>c26</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+                <Index Id="i2">
+                    <Name>IX_Estudiantes_DeletedAt</Name>
+                    <Description>Filtrado: WHERE DeletedAt IS NULL</Description>
+                    <Columns>
+                        <Column>
+                            <Column>c40</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+            </Indexes>
+            <TableChecks>
+                <TableCheck Id="tc4">
+                    <Name>CK_Estudiantes_Email</Name>
+                    <Description></Description>
+                    <CheckExpression>( Email LIKE '%@%' )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc5">
+                    <Name>CK_Estudiantes_Documento</Name>
+                    <Description></Description>
+                    <CheckExpression>( ( TipoDocumento = 'DNI' AND LEN ( NumeroDocumento ) = 8 AND NumeroDocumento NOT LIKE '%[^0-9]%' ) OR ( TipoDocumento = 'CE' AND LEN ( NumeroDocumento ) BETWEEN 1 AND 15 AND NumeroDocumento NOT LIKE '%[^0-9A-Za-z]%' ) )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc6">
+                    <Name>CK_Estudiantes_Genero</Name>
+                    <Description></Description>
+                    <CheckExpression>( Genero IN ( 'M' , 'F' , 'O' ) )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc7">
+                    <Name>CK_Estudiantes_FechaNacimiento</Name>
+                    <Description></Description>
+                    <CheckExpression>( FechaNacimiento &lt; GETDATE ( ) )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc28">
+                    <Name>CK_Estudiantes_Celular</Name>
+                    <Description></Description>
+                    <CheckExpression>( Celular IS NULL OR Celular LIKE '9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>core</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t4">
+            <Name>PeriodosAcademicos</Name>
+            <Description>Periodos acadÃ©micos (ciclos/semestres) del instituto</Description>
+            <Columns>
+                <Column Id="c41">
+                    <Name>PeriodoId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico del periodo acadÃ©mico</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c42">
+                    <Name>CodigoPeriodo</Name>
+                    <Type>varchar(10)</Type>
+                    <Description>CÃ³digo interno del periodo</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c43">
+                    <Name>NombrePeriodo</Name>
+                    <Type>nvarchar(50)</Type>
+                    <Description>Nombre del periodo acadÃ©mico</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c44">
+                    <Name>Anio</Name>
+                    <Type>int</Type>
+                    <Description>AÃ±o del periodo acadÃ©mico</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c45">
+                    <Name>Semestre</Name>
+                    <Type>int</Type>
+                    <Description>Semestre del periodo (1 o 2)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c46">
+                    <Name>FechaInicio</Name>
+                    <Type>date</Type>
+                    <Description>Fecha de inicio del periodo</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c47">
+                    <Name>FechaFin</Name>
+                    <Type>date</Type>
+                    <Description>Fecha de fin del periodo</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c48">
+                    <Name>FechaInicioMatriculas</Name>
+                    <Type>date</Type>
+                    <Description>Inicio del rango de matrÃ­culas</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c49">
+                    <Name>FechaFinMatriculas</Name>
+                    <Type>date</Type>
+                    <Description>Fin del rango de matrÃ­culas</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c50">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c51">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c52">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_PeriodosAcademicos</Name>
+                <Columns>
+                    <Column>c41</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a5">
+                    <Name>UK_PeriodosAcademicos_Codigo</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c42</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes/>
+            <TableChecks>
+                <TableCheck Id="tc8">
+                    <Name>CK_PeriodosAcademicos_Semestre</Name>
+                    <Description></Description>
+                    <CheckExpression>( Semestre IN ( 1 , 2 ) )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc9">
+                    <Name>CK_PeriodosAcademicos_Fechas</Name>
+                    <Description></Description>
+                    <CheckExpression>( FechaFin &gt; FechaInicio )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc10">
+                    <Name>CK_PeriodosAcademicos_FechasMatricula</Name>
+                    <Description></Description>
+                    <CheckExpression>( FechaFinMatriculas &gt; FechaInicioMatriculas )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>core</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t5">
+            <Name>Matriculas</Name>
+            <Description>Registro de matrÃ­culas de estudiantes</Description>
+            <Columns>
+                <Column Id="c53">
+                    <Name>MatriculaId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico de la matrÃ­cula</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c54">
+                    <Name>CodigoMatricula</Name>
+                    <Type>varchar(20)</Type>
+                    <Description>CÃ³digo interno de la matrÃ­cula</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c55">
+                    <Name>EstudianteId</Name>
+                    <Type>int</Type>
+                    <Description>Estudiante que se matricula</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c56">
+                    <Name>CarreraId</Name>
+                    <Type>int</Type>
+                    <Description>Carrera a la que se matricula</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c57">
+                    <Name>PeriodoId</Name>
+                    <Type>int</Type>
+                    <Description>Periodo acadÃ©mico de la matrÃ­cula</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c58">
+                    <Name>SedeId</Name>
+                    <Type>int</Type>
+                    <Description>Sede donde se realiza la matrÃ­cula</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c59">
+                    <Name>PromotorId</Name>
+                    <Type>int</Type>
+                    <Description>Promotor que captÃ³ al estudiante</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c60">
+                    <Name>CampaniaId</Name>
+                    <Type>int</Type>
+                    <Description>CampaÃ±a de admisiÃ³n asociada</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c61">
+                    <Name>FechaMatricula</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha en que se registrÃ³ la matrÃ­cula</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c62">
+                    <Name>MontoMatricula</Name>
+                    <Type>decimal(10,2)</Type>
+                    <Description>Monto pagado por la matrÃ­cula</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c63">
+                    <Name>EstadoMatricula</Name>
+                    <Type>varchar(20)</Type>
+                    <Description>Estado de la matrÃ­cula (Activa, Retirada, Suspendida, Culminada)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>activa</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c64">
+                    <Name>Observaciones</Name>
+                    <Type>nvarchar(500)</Type>
+                    <Description>Observaciones de la matrÃ­cula</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c65">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c66">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c67">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c68">
+                    <Name>DeletedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de borrado lógico del registro (NULL si está activo)</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Matriculas</Name>
+                <Columns>
+                    <Column>c53</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a6">
+                    <Name>UK_Matriculas_Codigo</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c54</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+                <AlternateKey Id="a7">
+                    <Name>UK_Matriculas_EstudiantePeriodoCarrera</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c55</Column>
+                        <Column>c56</Column>
+                        <Column>c57</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes>
+                <Index Id="i3">
+                    <Name>IX_Matriculas_Estudiante</Name>
+                    <Description>INCLUDE: CarreraId, PeriodoId, FechaMatricula</Description>
+                    <Columns>
+                        <Column>
+                            <Column>c55</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+                <Index Id="i4">
+                    <Name>IX_Matriculas_Periodo</Name>
+                    <Description>INCLUDE: EstudianteId, CarreraId</Description>
+                    <Columns>
+                        <Column>
+                            <Column>c57</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                        <Column>
+                            <Column>c58</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+                <Index Id="i5">
+                    <Name>IX_Matriculas_Promotor</Name>
+                    <Description>INCLUDE: MontoMatricula, EstadoMatricula</Description>
+                    <Columns>
+                        <Column>
+                            <Column>c59</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                        <Column>
+                            <Column>c61</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+                <Index Id="i6">
+                    <Name>IX_Matriculas_FechaMatricula</Name>
+                    <Description>Orden: FechaMatricula DESC</Description>
+                    <Columns>
+                        <Column>
+                            <Column>c61</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+                <Index Id="i7">
+                    <Name>IX_Matriculas_Activas</Name>
+                    <Description>Filtrado: WHERE DeletedAt IS NULL; INCLUDE: EstudianteId, CarreraId, PeriodoId, SedeId, PromotorId</Description>
+                    <Columns>
+                        <Column>
+                            <Column>c68</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+            </Indexes>
+            <TableChecks>
+                <TableCheck Id="tc11">
+                    <Name>CK_Matriculas_Monto</Name>
+                    <Description></Description>
+                    <CheckExpression>( MontoMatricula &gt;= 0 )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc12">
+                    <Name>CK_Matriculas_Estado</Name>
+                    <Description></Description>
+                    <CheckExpression>( EstadoMatricula IN ( 'Activa' , 'Retirada' , 'Suspendida' , 'Culminada' ) )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>core</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t6">
+            <Name>Profesores</Name>
+            <Description>Docentes del instituto</Description>
+            <Columns>
+                <Column Id="c69">
+                    <Name>ProfesorId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico del profesor</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c70">
+                    <Name>TipoDocumento</Name>
+                    <Type>char(3)</Type>
+                    <Description>Tipo de documento (DNI o CE)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>DNI</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c74">
+                    <Name>NumeroDocumento</Name>
+                    <Type>varchar(15)</Type>
+                    <Description>NÃºmero de documento (8 dÃ­gitos si DNI, 1-15 alfanumÃ©ricos si CE)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c71">
+                    <Name>Nombres</Name>
+                    <Type>nvarchar(100)</Type>
+                    <Description>Nombres del profesor</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c72">
+                    <Name>Apellidos</Name>
+                    <Type>nvarchar(100)</Type>
+                    <Description>Apellidos del profesor</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c73">
+                    <Name>Email</Name>
+                    <Type>varchar(100)</Type>
+                    <Description>Correo electrÃ³nico del profesor</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c75">
+                    <Name>Celular</Name>
+                    <Type>char(9)</Type>
+                    <Description>TelÃ©fono celular del profesor</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c76">
+                    <Name>EspecialidadId</Name>
+                    <Type>int</Type>
+                    <Description>Especialidad del docente (referencia a la tabla Especialidades)</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c77">
+                    <Name>GradoAcademico</Name>
+                    <Type>nvarchar(50)</Type>
+                    <Description>Grado acadÃ©mico del docente</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c78">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c79">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c80">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c81">
+                    <Name>DeletedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de borrado lógico del registro (NULL si está activo)</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Profesores</Name>
+                <Columns>
+                    <Column>c69</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a8">
+                    <Name>UK_Profesores_Documento</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c70</Column>
+                        <Column>c74</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+                <AlternateKey Id="a9">
+                    <Name>UK_Profesores_Email</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c73</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes/>
+            <TableChecks>
+                <TableCheck Id="tc13">
+                    <Name>CK_Profesores_Email</Name>
+                    <Description></Description>
+                    <CheckExpression>( Email LIKE '%@%' )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc14">
+                    <Name>CK_Profesores_Documento</Name>
+                    <Description></Description>
+                    <CheckExpression>( ( TipoDocumento = 'DNI' AND LEN ( NumeroDocumento ) = 8 AND NumeroDocumento NOT LIKE '%[^0-9]%' ) OR ( TipoDocumento = 'CE' AND LEN ( NumeroDocumento ) BETWEEN 1 AND 15 AND NumeroDocumento NOT LIKE '%[^0-9A-Za-z]%' ) )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc29">
+                    <Name>CK_Profesores_Celular</Name>
+                    <Description></Description>
+                    <CheckExpression>( Celular IS NULL OR Celular LIKE '9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>academic</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t7">
+            <Name>Cursos</Name>
+            <Description>Cursos o asignaturas dictadas en el instituto</Description>
+            <Columns>
+                <Column Id="c82">
+                    <Name>CursoId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico del curso</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c83">
+                    <Name>CodigoCurso</Name>
+                    <Type>varchar(10)</Type>
+                    <Description>CÃ³digo interno del curso</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c84">
+                    <Name>NombreCurso</Name>
+                    <Type>nvarchar(100)</Type>
+                    <Description>Nombre del curso</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c85">
+                    <Name>Descripcion</Name>
+                    <Type>nvarchar(500)</Type>
+                    <Description>DescripciÃ³n del curso</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c86">
+                    <Name>Creditos</Name>
+                    <Type>int</Type>
+                    <Description>NÃºmero de crÃ©ditos del curso</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c87">
+                    <Name>HorasTeoria</Name>
+                    <Type>int</Type>
+                    <Description>Horas de teorÃ­a por semana</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>0</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c88">
+                    <Name>HorasPractica</Name>
+                    <Type>int</Type>
+                    <Description>Horas de prÃ¡ctica por semana</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>0</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c89">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c90">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c91">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c92">
+                    <Name>DeletedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de borrado lógico del registro (NULL si está activo)</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Cursos</Name>
+                <Columns>
+                    <Column>c82</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a10">
+                    <Name>UK_Cursos_Codigo</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c83</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes/>
+            <TableChecks>
+                <TableCheck Id="tc15">
+                    <Name>CK_Cursos_Creditos</Name>
+                    <Description></Description>
+                    <CheckExpression>( Creditos &gt; 0 )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc16">
+                    <Name>CK_Cursos_Horas</Name>
+                    <Description></Description>
+                    <CheckExpression>( HorasTeoria &gt;= 0 AND HorasPractica &gt;= 0 )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>academic</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t8">
+            <Name>CarreraCursos</Name>
+            <Description>RelaciÃ³n entre carreras y cursos (malla curricular)</Description>
+            <Columns>
+                <Column Id="c93">
+                    <Name>CarreraCursoId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico de la relaciÃ³n carrera-curso</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c94">
+                    <Name>CarreraId</Name>
+                    <Type>int</Type>
+                    <Description>Carrera de la relaciÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c95">
+                    <Name>CursoId</Name>
+                    <Type>int</Type>
+                    <Description>Curso de la relaciÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c96">
+                    <Name>Semestre</Name>
+                    <Type>int</Type>
+                    <Description>Semestre en el que se dicta el curso</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c98">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_CarreraCursos</Name>
+                <Columns>
+                    <Column>c93</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a11">
+                    <Name>UK_CarreraCursos</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c94</Column>
+                        <Column>c95</Column>
+                        <Column>c96</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes>
+                <Index Id="i13">
+                    <Name>IX_CarreraCursos_Carrera</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>
+                            <Column>c94</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                        <Column>
+                            <Column>c96</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+            </Indexes>
+            <TableChecks>
+                <TableCheck Id="tc17">
+                    <Name>CK_CarreraCursos_Semestre</Name>
+                    <Description></Description>
+                    <CheckExpression>( Semestre &gt; 0 )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>academic</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t9">
+            <Name>CursoProfesor</Name>
+            <Description>AsignaciÃ³n de profesores a cursos por periodo y sede</Description>
+            <Columns>
+                <Column Id="c99">
+                    <Name>CursoProfesorId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico de la asignaciÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c100">
+                    <Name>CursoId</Name>
+                    <Type>int</Type>
+                    <Description>Curso asignado</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c101">
+                    <Name>ProfesorId</Name>
+                    <Type>int</Type>
+                    <Description>Profesor asignado</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c102">
+                    <Name>PeriodoId</Name>
+                    <Type>int</Type>
+                    <Description>Periodo acadÃ©mico de la asignaciÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c103">
+                    <Name>SedeId</Name>
+                    <Type>int</Type>
+                    <Description>Sede donde se dicta el curso</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c104">
+                    <Name>FechaAsignacion</Name>
+                    <Type>date</Type>
+                    <Description>Fecha en que se asignó el profesor al curso</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c105">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c106">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_CursoProfesor</Name>
+                <Columns>
+                    <Column>c99</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a12">
+                    <Name>UK_CursoProfesor</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c100</Column>
+                        <Column>c101</Column>
+                        <Column>c102</Column>
+                        <Column>c103</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes>
+                <Index Id="i14">
+                    <Name>IX_CursoProfesor_Profesor</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>
+                            <Column>c101</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                        <Column>
+                            <Column>c102</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+            </Indexes>
+            <TableChecks/>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>academic</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t10">
+            <Name>Promotores</Name>
+            <Description>Vendedores/promotores encargados de captar estudiantes</Description>
+            <Columns>
+                <Column Id="c107">
+                    <Name>PromotorId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico del promotor</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c108">
+                    <Name>CodigoPromotor</Name>
+                    <Type>varchar(10)</Type>
+                    <Description>CÃ³digo interno del promotor</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c109">
+                    <Name>TipoDocumento</Name>
+                    <Type>char(3)</Type>
+                    <Description>Tipo de documento (DNI o CE)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>DNI</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c113">
+                    <Name>NumeroDocumento</Name>
+                    <Type>varchar(15)</Type>
+                    <Description>NÃºmero de documento (8 dÃ­gitos si DNI, 1-15 alfanumÃ©ricos si CE)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c110">
+                    <Name>Nombres</Name>
+                    <Type>nvarchar(100)</Type>
+                    <Description>Nombres del promotor</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c111">
+                    <Name>Apellidos</Name>
+                    <Type>nvarchar(100)</Type>
+                    <Description>Apellidos del promotor</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c112">
+                    <Name>Email</Name>
+                    <Type>varchar(100)</Type>
+                    <Description>Correo electrÃ³nico del promotor</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c114">
+                    <Name>Celular</Name>
+                    <Type>char(9)</Type>
+                    <Description>TelÃ©fono celular del promotor</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c115">
+                    <Name>SedeId</Name>
+                    <Type>int</Type>
+                    <Description>Sede a la que pertenece el promotor</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c116">
+                    <Name>PorcentajeComision</Name>
+                    <Type>decimal(5,2)</Type>
+                    <Description>Porcentaje de comisiÃ³n del promotor</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>5.00</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c117">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c118">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c119">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c120">
+                    <Name>DeletedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de borrado lógico del registro (NULL si está activo)</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Promotores</Name>
+                <Columns>
+                    <Column>c107</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a13">
+                    <Name>UK_Promotores_Codigo</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c108</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+                <AlternateKey Id="a14">
+                    <Name>UK_Promotores_Documento</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c109</Column>
+                        <Column>c113</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+                <AlternateKey Id="a15">
+                    <Name>UK_Promotores_Email</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c112</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes/>
+            <TableChecks>
+                <TableCheck Id="tc18">
+                    <Name>CK_Promotores_Email</Name>
+                    <Description></Description>
+                    <CheckExpression>( Email LIKE '%@%' )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc19">
+                    <Name>CK_Promotores_Documento</Name>
+                    <Description></Description>
+                    <CheckExpression>( ( TipoDocumento = 'DNI' AND LEN ( NumeroDocumento ) = 8 AND NumeroDocumento NOT LIKE '%[^0-9]%' ) OR ( TipoDocumento = 'CE' AND LEN ( NumeroDocumento ) BETWEEN 1 AND 15 AND NumeroDocumento NOT LIKE '%[^0-9A-Za-z]%' ) )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc20">
+                    <Name>CK_Promotores_Comision</Name>
+                    <Description></Description>
+                    <CheckExpression>( PorcentajeComision &gt;= 0 AND PorcentajeComision &lt;= 100 )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc30">
+                    <Name>CK_Promotores_Celular</Name>
+                    <Description></Description>
+                    <CheckExpression>( Celular IS NULL OR Celular LIKE '9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>sales</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t11">
+            <Name>CampaniasAdmision</Name>
+            <Description>CampaÃ±as de admisiÃ³n con sus configuraciones de comisiÃ³n</Description>
+            <Columns>
+                <Column Id="c121">
+                    <Name>CampaniaId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico de la campaÃ±a</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c122">
+                    <Name>CodigoCampania</Name>
+                    <Type>varchar(20)</Type>
+                    <Description>CÃ³digo interno de la campaÃ±a</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c123">
+                    <Name>NombreCampania</Name>
+                    <Type>nvarchar(100)</Type>
+                    <Description>Nombre de la campaÃ±a de admisiÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c124">
+                    <Name>Descripcion</Name>
+                    <Type>nvarchar(500)</Type>
+                    <Description>DescripciÃ³n de la campaÃ±a</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c173">
+                    <Name>PeriodoId</Name>
+                    <Type>int</Type>
+                    <Description>Periodo acadÃ©mico de la campaÃ±a</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c125">
+                    <Name>FechaInicio</Name>
+                    <Type>date</Type>
+                    <Description>Fecha de inicio de la campaÃ±a</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c126">
+                    <Name>FechaFin</Name>
+                    <Type>date</Type>
+                    <Description>Fecha de fin de la campaÃ±a</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c127">
+                    <Name>PorcentajeComisionBase</Name>
+                    <Type>decimal(5,2)</Type>
+                    <Description>Porcentaje de comisiÃ³n base de la campaÃ±a</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c128">
+                    <Name>BonoPorMeta</Name>
+                    <Type>decimal(10,2)</Type>
+                    <Description>Bono por cumplimiento de meta</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c129">
+                    <Name>MetaMatriculas</Name>
+                    <Type>int</Type>
+                    <Description>Meta de matrÃ­culas de la campaÃ±a</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c130">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c131">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c132">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_CampaniasAdmision</Name>
+                <Columns>
+                    <Column>c121</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a16">
+                    <Name>UK_CampaniasAdmision_Codigo</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c122</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes/>
+            <TableChecks>
+                <TableCheck Id="tc21">
+                    <Name>CK_CampaniasAdmision_Fechas</Name>
+                    <Description></Description>
+                    <CheckExpression>( FechaFin &gt; FechaInicio )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc22">
+                    <Name>CK_CampaniasAdmision_Comision</Name>
+                    <Description></Description>
+                    <CheckExpression>( PorcentajeComisionBase &gt;= 0 AND PorcentajeComisionBase &lt;= 100 )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>sales</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t12">
+            <Name>Comisiones</Name>
+            <Description>Comisiones generadas por los promotores por matrÃ­culas</Description>
+            <Columns>
+                <Column Id="c133">
+                    <Name>ComisionId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico de la comisiÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c134">
+                    <Name>PromotorId</Name>
+                    <Type>int</Type>
+                    <Description>Promotor beneficiario de la comisiÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c135">
+                    <Name>MatriculaId</Name>
+                    <Type>int</Type>
+                    <Description>MatrÃ­cula que genera la comisiÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c136">
+                    <Name>CampaniaId</Name>
+                    <Type>int</Type>
+                    <Description>CampaÃ±a asociada a la comisiÃ³n</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c137">
+                    <Name>MontoBase</Name>
+                    <Type>decimal(10,2)</Type>
+                    <Description>Monto base para el cÃ¡lculo de la comisiÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c138">
+                    <Name>PorcentajeComision</Name>
+                    <Type>decimal(5,2)</Type>
+                    <Description>Porcentaje aplicado para la comisiÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c139">
+                    <Name>MontoComision</Name>
+                    <Type>decimal(10,2)</Type>
+                    <Description>Monto de la comisiÃ³n calculada</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c140">
+                    <Name>Bonificacion</Name>
+                    <Type>decimal(10,2)</Type>
+                    <Description>BonificaciÃ³n adicional sobre la comisiÃ³n</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue>0</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c141">
+                    <Name>MontoTotal</Name>
+                    <Type>decimal(10,2)</Type>
+                    <Description>Monto total de la comisiÃ³n (comisiÃ³n + bonificaciÃ³n)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c142">
+                    <Name>EstadoPago</Name>
+                    <Type>varchar(20)</Type>
+                    <Description>Estado de pago (Pendiente, Pagada, Anulada)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>pendiente</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c143">
+                    <Name>FechaPago</Name>
+                    <Type>date</Type>
+                    <Description>Fecha en que se pagÃ³ la comisiÃ³n</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c144">
+                    <Name>Observaciones</Name>
+                    <Type>nvarchar(500)</Type>
+                    <Description>Observaciones de la comisiÃ³n</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c145">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Comisiones</Name>
+                <Columns>
+                    <Column>c133</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a17">
+                    <Name>UK_Comisiones_Matricula</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c135</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes>
+                <Index Id="i8">
+                    <Name>IX_Comisiones_Promotor</Name>
+                    <Description>INCLUDE: MontoTotal, FechaPago</Description>
+                    <Columns>
+                        <Column>
+                            <Column>c134</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                        <Column>
+                            <Column>c142</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+                <Index Id="i9">
+                    <Name>IX_Comisiones_EstadoPago</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>
+                            <Column>c142</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                        <Column>
+                            <Column>c143</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+            </Indexes>
+            <TableChecks>
+                <TableCheck Id="tc23">
+                    <Name>CK_Comisiones_Montos</Name>
+                    <Description></Description>
+                    <CheckExpression>( MontoBase &gt;= 0 AND MontoComision &gt;= 0 AND MontoTotal &gt;= 0 )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+                <TableCheck Id="tc24">
+                    <Name>CK_Comisiones_Estado</Name>
+                    <Description></Description>
+                    <CheckExpression>( EstadoPago IN ( 'Pendiente' , 'Pagada' , 'Anulada' ) )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>sales</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t13">
+            <Name>Roles</Name>
+            <Description>Roles del sistema</Description>
+            <Columns>
+                <Column Id="c146">
+                    <Name>RolId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico del rol</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c147">
+                    <Name>NombreRol</Name>
+                    <Type>varchar(50)</Type>
+                    <Description>Nombre del rol</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c148">
+                    <Name>Descripcion</Name>
+                    <Type>nvarchar(200)</Type>
+                    <Description>DescripciÃ³n del rol</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c149">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c150">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Roles</Name>
+                <Columns>
+                    <Column>c146</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a18">
+                    <Name>UK_Roles_Nombre</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c147</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes/>
+            <TableChecks/>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>security</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t14">
+            <Name>Usuarios</Name>
+            <Description>Usuarios del sistema</Description>
+            <Columns>
+                <Column Id="c151">
+                    <Name>UsuarioId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico del usuario</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c152">
+                    <Name>Username</Name>
+                    <Type>varchar(50)</Type>
+                    <Description>Nombre de usuario para el acceso</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c153">
+                    <Name>PasswordHash</Name>
+                    <Type>varchar(255)</Type>
+                    <Description>Hash de la contraseÃ±a del usuario</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c154">
+                    <Name>Email</Name>
+                    <Type>varchar(100)</Type>
+                    <Description>Correo electrÃ³nico del usuario</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c155">
+                    <Name>NombresCompletos</Name>
+                    <Type>nvarchar(150)</Type>
+                    <Description>Nombres completos del usuario</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c156">
+                    <Name>RolId</Name>
+                    <Type>int</Type>
+                    <Description>Rol asignado al usuario</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c157">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c158">
+                    <Name>UltimoAcceso</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora del último acceso del usuario</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c159">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c160">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Usuarios</Name>
+                <Columns>
+                    <Column>c151</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a19">
+                    <Name>UK_Usuarios_Username</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c152</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+                <AlternateKey Id="a20">
+                    <Name>UK_Usuarios_Email</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c154</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes/>
+            <TableChecks>
+                <TableCheck Id="tc25">
+                    <Name>CK_Usuarios_Email</Name>
+                    <Description></Description>
+                    <CheckExpression>( Email LIKE '%@%' )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>security</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t15">
+            <Name>AuditLog</Name>
+            <Description>Registro de auditorÃ­a de operaciones crÃ­ticas</Description>
+            <Columns>
+                <Column Id="c161">
+                    <Name>AuditId</Name>
+                    <Type>bigint</Type>
+                    <Description>Identificador Ãºnico del registro de auditorÃ­a</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c162">
+                    <Name>TableName</Name>
+                    <Type>varchar(100)</Type>
+                    <Description>Tabla sobre la que se realizÃ³ la operaciÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c163">
+                    <Name>Operation</Name>
+                    <Type>varchar(10)</Type>
+                    <Description>Tipo de operaciÃ³n (INSERT, UPDATE, DELETE)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c164">
+                    <Name>RecordId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador del registro afectado</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c165">
+                    <Name>Usuario</Name>
+                    <Type>varchar(100)</Type>
+                    <Description>Usuario que ejecutÃ³ la operaciÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c166">
+                    <Name>FechaOperacion</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la operaciÃ³n</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c167">
+                    <Name>ValoresAnteriores</Name>
+                    <Type>nvarchar(max)</Type>
+                    <Description>Valores del registro antes de la operaciÃ³n</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c168">
+                    <Name>ValoresNuevos</Name>
+                    <Type>nvarchar(max)</Type>
+                    <Description>Valores del registro despuÃ©s de la operaciÃ³n</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c169">
+                    <Name>DireccionIP</Name>
+                    <Type>varchar(45)</Type>
+                    <Description>DirecciÃ³n IP desde la que se ejecutÃ³ la operaciÃ³n</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_AuditLog</Name>
+                <Columns>
+                    <Column>c161</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys/>
+            <Indexes>
+                <Index Id="i10">
+                    <Name>IX_AuditLog_TableName</Name>
+                    <Description>Orden: FechaOperacion DESC</Description>
+                    <Columns>
+                        <Column>
+                            <Column>c162</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                        <Column>
+                            <Column>c166</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+                <Index Id="i11">
+                    <Name>IX_AuditLog_Usuario</Name>
+                    <Description>Orden: FechaOperacion DESC</Description>
+                    <Columns>
+                        <Column>
+                            <Column>c165</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                        <Column>
+                            <Column>c166</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+                <Index Id="i12">
+                    <Name>IX_AuditLog_FechaOperacion</Name>
+                    <Description>Orden: FechaOperacion DESC</Description>
+                    <Columns>
+                        <Column>
+                            <Column>c166</Column>
+                            <Ascending>true</Ascending>
+                        </Column>
+                    </Columns>
+                    <Properties/>
+                </Index>
+            </Indexes>
+            <TableChecks>
+                <TableCheck Id="tc26">
+                    <Name>CK_AuditLog_Operation</Name>
+                    <Description></Description>
+                    <CheckExpression>( Operation IN ( 'INSERT' , 'UPDATE' , 'DELETE' ) )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>audit</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t16">
+            <Name>Ubigeos</Name>
+            <Description>Maestro de ubigeos (departamento, provincia, distrito)</Description>
+            <Columns>
+                <Column Id="c174">
+                    <Name>UbigeoId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico del ubigeo</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c175">
+                    <Name>CodigoUbigeo</Name>
+                    <Type>char(6)</Type>
+                    <Description>CÃ³digo de ubigeo de RENIEC (6 dÃ­gitos)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c176">
+                    <Name>Departamento</Name>
+                    <Type>nvarchar(50)</Type>
+                    <Description>Departamento del ubigeo</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c177">
+                    <Name>Provincia</Name>
+                    <Type>nvarchar(50)</Type>
+                    <Description>Provincia del ubigeo</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c178">
+                    <Name>Distrito</Name>
+                    <Type>nvarchar(50)</Type>
+                    <Description>Distrito del ubigeo</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c179">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c180">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c181">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Ubigeos</Name>
+                <Columns>
+                    <Column>c174</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a21">
+                    <Name>UK_Ubigeos_Codigo</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c175</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes/>
+            <TableChecks>
+                <TableCheck Id="tc27">
+                    <Name>CK_Ubigeos_Codigo</Name>
+                    <Description></Description>
+                    <CheckExpression>( LEN ( CodigoUbigeo ) = 6 AND CodigoUbigeo NOT LIKE '%[^0-9]%' )</CheckExpression>
+                    <Properties/>
+                </TableCheck>
+            </TableChecks>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>core</Value>
+                </Property>
+            </Properties>
+        </Table>
+        <Table Id="t17">
+            <Name>Especialidades</Name>
+            <Description>Especialidades acadÃ©micas de los profesores</Description>
+            <Columns>
+                <Column Id="c182">
+                    <Name>EspecialidadId</Name>
+                    <Type>int</Type>
+                    <Description>Identificador Ãºnico de la especialidad</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties>
+                        <Property>
+                            <Name>identity_seed</Name>
+                            <Value>1</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity</Name>
+                            <Value>true</Value>
+                        </Property>
+                        <Property>
+                            <Name>identity_increment</Name>
+                            <Value>1</Value>
+                        </Property>
+                    </Properties>
+                </Column>
+                <Column Id="c183">
+                    <Name>NombreEspecialidad</Name>
+                    <Type>nvarchar(100)</Type>
+                    <Description>Nombre de la especialidad</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c184">
+                    <Name>Descripcion</Name>
+                    <Type>nvarchar(300)</Type>
+                    <Description>DescripciÃ³n de la especialidad</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c185">
+                    <Name>Activo</Name>
+                    <Type>bit</Type>
+                    <Description>Indica si el registro está activo (1) o inactivo (0)</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>1</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c186">
+                    <Name>CreatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de creación del registro</Description>
+                    <Nullable>false</Nullable>
+                    <DefaultValue>getdate()</DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+                <Column Id="c187">
+                    <Name>UpdatedAt</Name>
+                    <Type>datetime</Type>
+                    <Description>Fecha y hora de la última actualización del registro</Description>
+                    <Nullable>true</Nullable>
+                    <DefaultValue></DefaultValue>
+                    <CheckExpression></CheckExpression>
+                    <Properties/>
+                </Column>
+            </Columns>
+            <PrimaryKey>
+                <Name>PK_Especialidades</Name>
+                <Columns>
+                    <Column>c182</Column>
+                </Columns>
+            </PrimaryKey>
+            <AlternateKeys>
+                <AlternateKey Id="a22">
+                    <Name>UK_Especialidades_Nombre</Name>
+                    <Description></Description>
+                    <Columns>
+                        <Column>c183</Column>
+                    </Columns>
+                    <Properties/>
+                </AlternateKey>
+            </AlternateKeys>
+            <Indexes/>
+            <TableChecks/>
+            <AdditionalSQLBefore></AdditionalSQLBefore>
+            <AdditionalSQLAfter></AdditionalSQLAfter>
+            <Properties>
+                <Property>
+                    <Name>schema</Name>
+                    <Value>academic</Value>
+                </Property>
+            </Properties>
+        </Table>
+    </Tables>
+    <ExternalTables/>
+    <Views/>
+    <MaterializedViews/>
+    <References>
+        <Reference Id="r1">
+            <Name>FK_Matriculas_Estudiante</Name>
+            <Description></Description>
+            <PKTable>t3</PKTable>
+            <FKTable>t5</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c24</PKColumn>
+                    <FKColumn>c55</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r2">
+            <Name>FK_Matriculas_Carrera</Name>
+            <Description></Description>
+            <PKTable>t2</PKTable>
+            <FKTable>t5</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c13</PKColumn>
+                    <FKColumn>c56</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r3">
+            <Name>FK_Matriculas_Periodo</Name>
+            <Description></Description>
+            <PKTable>t4</PKTable>
+            <FKTable>t5</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c41</PKColumn>
+                    <FKColumn>c57</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r4">
+            <Name>FK_Matriculas_Sede</Name>
+            <Description></Description>
+            <PKTable>t1</PKTable>
+            <FKTable>t5</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c1</PKColumn>
+                    <FKColumn>c58</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r5">
+            <Name>FK_CarreraCursos_Carrera</Name>
+            <Description></Description>
+            <PKTable>t2</PKTable>
+            <FKTable>t8</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c13</PKColumn>
+                    <FKColumn>c94</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r6">
+            <Name>FK_CarreraCursos_Curso</Name>
+            <Description></Description>
+            <PKTable>t7</PKTable>
+            <FKTable>t8</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c82</PKColumn>
+                    <FKColumn>c95</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r7">
+            <Name>FK_CursoProfesor_Curso</Name>
+            <Description></Description>
+            <PKTable>t7</PKTable>
+            <FKTable>t9</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c82</PKColumn>
+                    <FKColumn>c100</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r8">
+            <Name>FK_CursoProfesor_Profesor</Name>
+            <Description></Description>
+            <PKTable>t6</PKTable>
+            <FKTable>t9</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c69</PKColumn>
+                    <FKColumn>c101</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r9">
+            <Name>FK_CursoProfesor_Periodo</Name>
+            <Description></Description>
+            <PKTable>t4</PKTable>
+            <FKTable>t9</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c41</PKColumn>
+                    <FKColumn>c102</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r10">
+            <Name>FK_CursoProfesor_Sede</Name>
+            <Description></Description>
+            <PKTable>t1</PKTable>
+            <FKTable>t9</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c1</PKColumn>
+                    <FKColumn>c103</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r11">
+            <Name>FK_Promotores_Sede</Name>
+            <Description></Description>
+            <PKTable>t1</PKTable>
+            <FKTable>t10</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c1</PKColumn>
+                    <FKColumn>c115</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r12">
+            <Name>FK_Comisiones_Promotor</Name>
+            <Description></Description>
+            <PKTable>t10</PKTable>
+            <FKTable>t12</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c107</PKColumn>
+                    <FKColumn>c134</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r13">
+            <Name>FK_Comisiones_Matricula</Name>
+            <Description></Description>
+            <PKTable>t5</PKTable>
+            <FKTable>t12</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c53</PKColumn>
+                    <FKColumn>c135</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r14">
+            <Name>FK_Comisiones_Campania</Name>
+            <Description></Description>
+            <PKTable>t11</PKTable>
+            <FKTable>t12</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c121</PKColumn>
+                    <FKColumn>c136</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>false</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r15">
+            <Name>FK_Usuarios_Rol</Name>
+            <Description></Description>
+            <PKTable>t13</PKTable>
+            <FKTable>t14</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c146</PKColumn>
+                    <FKColumn>c156</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r16">
+            <Name>FK_Matriculas_Promotor</Name>
+            <Description></Description>
+            <PKTable>t10</PKTable>
+            <FKTable>t5</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c107</PKColumn>
+                    <FKColumn>c59</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r17">
+            <Name>FK_Sedes_Ubigeo</Name>
+            <Description></Description>
+            <PKTable>t16</PKTable>
+            <FKTable>t1</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c174</PKColumn>
+                    <FKColumn>c5</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r18">
+            <Name>FK_Matriculas_Campania</Name>
+            <Description></Description>
+            <PKTable>t11</PKTable>
+            <FKTable>t5</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c121</PKColumn>
+                    <FKColumn>c60</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>false</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r19">
+            <Name>FK_Estudiantes_Ubigeo</Name>
+            <Description></Description>
+            <PKTable>t16</PKTable>
+            <FKTable>t3</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c174</PKColumn>
+                    <FKColumn>c34</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>false</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r20">
+            <Name>FK_Profesores_Especialidad</Name>
+            <Description></Description>
+            <PKTable>t17</PKTable>
+            <FKTable>t6</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c182</PKColumn>
+                    <FKColumn>c76</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>false</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+        <Reference Id="r21">
+            <Name>FK_CampaniasAdmision_Periodo</Name>
+            <Description></Description>
+            <PKTable>t4</PKTable>
+            <FKTable>t11</FKTable>
+            <PKRole></PKRole>
+            <FKRole></FKRole>
+            <ReferenceColumns>
+                <ReferenceColumn>
+                    <PKColumn>c41</PKColumn>
+                    <FKColumn>c173</FKColumn>
+                </ReferenceColumn>
+            </ReferenceColumns>
+            <Cardinality>0..*</Cardinality>
+            <Mandatory>true</Mandatory>
+            <OnUpdateAction>None</OnUpdateAction>
+            <OnDeleteAction>None</OnDeleteAction>
+            <Properties/>
+        </Reference>
+    </References>
+    <Sequences/>
+    <Notes/>
+    <Areas/>
+    <Texts/>
+    <TableDisplays>
+        <TableDisplay Id="td1">
+            <X>5395.5</X>
+            <Y>6629.5</Y>
+            <Width>200.0</Width>
+            <Height>217.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t1</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td2">
+            <X>8077.5</X>
+            <Y>6071.5</Y>
+            <Width>264.0</Width>
+            <Height>201.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t2</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td3">
+            <X>6455.5</X>
+            <Y>6992.5</Y>
+            <Width>200.0</Width>
+            <Height>297.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t3</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td4">
+            <X>7753.5</X>
+            <Y>7273.5</Y>
+            <Width>208.0</Width>
+            <Height>217.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t4</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td5">
+            <X>7617.5</X>
+            <Y>6017.5</Y>
+            <Width>297.0</Width>
+            <Height>289.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t5</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td6">
+            <X>6863.5</X>
+            <Y>7379.5</Y>
+            <Width>216.0</Width>
+            <Height>233.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t6</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td7">
+            <X>6399.5</X>
+            <Y>8066.5</Y>
+            <Width>200.0</Width>
+            <Height>201.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t7</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td8">
+            <X>8050.5</X>
+            <Y>7938.5</Y>
+            <Width>168.0</Width>
+            <Height>121.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t8</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td9">
+            <X>6415.5</X>
+            <Y>7717.5</Y>
+            <Width>176.0</Width>
+            <Height>153.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t9</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td10">
+            <X>6251.5</X>
+            <Y>6286.5</Y>
+            <Width>248.0</Width>
+            <Height>249.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t10</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td11">
+            <X>6599.5</X>
+            <Y>6724.5</Y>
+            <Width>280.0</Width>
+            <Height>217.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t11</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td12">
+            <X>7125.5</X>
+            <Y>6856.5</Y>
+            <Width>248.0</Width>
+            <Height>233.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t12</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td13">
+            <X>5099.5</X>
+            <Y>7416.5</Y>
+            <Width>200.0</Width>
+            <Height>105.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t13</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td14">
+            <X>5390.5</X>
+            <Y>7412.5</Y>
+            <Width>240.0</Width>
+            <Height>185.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t14</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td15">
+            <X>5714.5</X>
+            <Y>7420.5</Y>
+            <Width>248.0</Width>
+            <Height>169.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t15</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td16">
+            <X>5395.5</X>
+            <Y>6290.5</Y>
+            <Width>184.0</Width>
+            <Height>217.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t16</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+        <TableDisplay Id="td17">
+            <X>7399.5</X>
+            <Y>7379.5</Y>
+            <Width>168.0</Width>
+            <Height>169.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#ffffff</FillColor>
+            <Table>t17</Table>
+            <FixedSize>false</FixedSize>
+        </TableDisplay>
+    </TableDisplays>
+    <ExternalTableDisplays/>
+    <ViewDisplays/>
+    <MaterializedViewDisplays/>
+    <ReferenceDisplays>
+        <ReferenceDisplay Id="rd1">
+            <Color>#000000</Color>
+            <Type>Cross_3CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>6644.5</X>
+                    <Y>7146.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7758.5</X>
+                    <Y>7146.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7758.5</X>
+                    <Y>6287.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td3</PkTableDisplay>
+            <FkTableDisplay>td5</FkTableDisplay>
+            <Reference>r1</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd2">
+            <Color>#000000</Color>
+            <Type>Horizontal_2CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>8086.5</X>
+                    <Y>6187.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7830.5</X>
+                    <Y>6187.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td2</PkTableDisplay>
+            <FkTableDisplay>td5</FkTableDisplay>
+            <Reference>r2</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd3">
+            <Color>#000000</Color>
+            <Type>Vertical_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>7812.5</X>
+                    <Y>7282.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7812.5</X>
+                    <Y>6800.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7812.5</X>
+                    <Y>6800.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7812.5</X>
+                    <Y>6287.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td4</PkTableDisplay>
+            <FkTableDisplay>td5</FkTableDisplay>
+            <Reference>r3</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd4">
+            <Color>#000000</Color>
+            <Type>Cross_3CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>5494.5</X>
+                    <Y>6638.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>5494.5</X>
+                    <Y>6157.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7627.5</X>
+                    <Y>6157.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td1</PkTableDisplay>
+            <FkTableDisplay>td5</FkTableDisplay>
+            <Reference>r4</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd5">
+            <Color>#000000</Color>
+            <Type>Vertical_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>8104.5</X>
+                    <Y>6261.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>8104.5</X>
+                    <Y>6992.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>8133.5</X>
+                    <Y>6992.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>8133.5</X>
+                    <Y>7947.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td2</PkTableDisplay>
+            <FkTableDisplay>td8</FkTableDisplay>
+            <Reference>r5</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd6">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>6588.5</X>
+                    <Y>8086.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7433.5</X>
+                    <Y>8086.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7433.5</X>
+                    <Y>8010.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>8059.5</X>
+                    <Y>8010.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td7</PkTableDisplay>
+            <FkTableDisplay>td8</FkTableDisplay>
+            <Reference>r6</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd7">
+            <Color>#000000</Color>
+            <Type>Vertical_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>6486.5</X>
+                    <Y>8075.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6486.5</X>
+                    <Y>7929.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6486.5</X>
+                    <Y>7929.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6486.5</X>
+                    <Y>7859.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td7</PkTableDisplay>
+            <FkTableDisplay>td9</FkTableDisplay>
+            <Reference>r7</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd8">
+            <Color>#000000</Color>
+            <Type>Vertical_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>6878.5</X>
+                    <Y>7601.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6878.5</X>
+                    <Y>7668.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6502.5</X>
+                    <Y>7668.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6502.5</X>
+                    <Y>7726.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td6</PkTableDisplay>
+            <FkTableDisplay>td9</FkTableDisplay>
+            <Reference>r8</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd9">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>7762.5</X>
+                    <Y>7489.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7195.5</X>
+                    <Y>7489.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7195.5</X>
+                    <Y>7793.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6580.5</X>
+                    <Y>7793.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td4</PkTableDisplay>
+            <FkTableDisplay>td9</FkTableDisplay>
+            <Reference>r9</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd10">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>5584.5</X>
+                    <Y>6821.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6010.5</X>
+                    <Y>6821.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6010.5</X>
+                    <Y>7793.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6424.5</X>
+                    <Y>7793.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td1</PkTableDisplay>
+            <FkTableDisplay>td9</FkTableDisplay>
+            <Reference>r10</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd11">
+            <Color>#000000</Color>
+            <Type>Cross_3CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>5524.5</X>
+                    <Y>6638.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>5524.5</X>
+                    <Y>6410.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6260.5</X>
+                    <Y>6410.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td1</PkTableDisplay>
+            <FkTableDisplay>td10</FkTableDisplay>
+            <Reference>r11</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd12">
+            <Color>#000000</Color>
+            <Type>Vertical_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>6482.5</X>
+                    <Y>6524.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6482.5</X>
+                    <Y>6649.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7248.5</X>
+                    <Y>6649.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7248.5</X>
+                    <Y>6865.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td10</PkTableDisplay>
+            <FkTableDisplay>td12</FkTableDisplay>
+            <Reference>r12</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd13">
+            <Color>#000000</Color>
+            <Type>Cross_3CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>7704.5</X>
+                    <Y>6287.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7704.5</X>
+                    <Y>6972.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7362.5</X>
+                    <Y>6972.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td5</PkTableDisplay>
+            <FkTableDisplay>td12</FkTableDisplay>
+            <Reference>r13</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd14">
+            <Color>#000000</Color>
+            <Type>Horizontal_2CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>6868.5</X>
+                    <Y>6911.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7134.5</X>
+                    <Y>6911.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td11</PkTableDisplay>
+            <FkTableDisplay>td12</FkTableDisplay>
+            <Reference>r14</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd15">
+            <Color>#000000</Color>
+            <Type>Horizontal_2CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>5288.5</X>
+                    <Y>7448.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>5399.5</X>
+                    <Y>7448.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td13</PkTableDisplay>
+            <FkTableDisplay>td14</FkTableDisplay>
+            <Reference>r15</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd16">
+            <Color>#000000</Color>
+            <Type>Horizontal_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>6460.5</X>
+                    <Y>6408.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7080.5</X>
+                    <Y>6408.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7080.5</X>
+                    <Y>6216.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7680.5</X>
+                    <Y>6216.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td10</PkTableDisplay>
+            <FkTableDisplay>td5</FkTableDisplay>
+            <Reference>r16</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd18">
+            <Color>#000000</Color>
+            <Type>Cross_3CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>6796.5</X>
+                    <Y>6749.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7648.5</X>
+                    <Y>6749.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7648.5</X>
+                    <Y>6250.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td11</PkTableDisplay>
+            <FkTableDisplay>td5</FkTableDisplay>
+            <Reference>r18</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd17">
+            <Color>#000000</Color>
+            <Type>Vertical_4CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>5487.5</X>
+                    <Y>6507.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>5487.5</X>
+                    <Y>6629.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>5487.5</X>
+                    <Y>6629.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>5487.5</X>
+                    <Y>6629.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td16</PkTableDisplay>
+            <FkTableDisplay>td1</FkTableDisplay>
+            <Reference>r17</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd19">
+            <Color>#000000</Color>
+            <Type>Horizontal_2CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>5579.5</X>
+                    <Y>6395.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6455.5</X>
+                    <Y>6395.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td16</PkTableDisplay>
+            <FkTableDisplay>td3</FkTableDisplay>
+            <Reference>r19</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd20">
+            <Color>#000000</Color>
+            <Type>Horizontal_2CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>7399.5</X>
+                    <Y>7460.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7079.5</X>
+                    <Y>7460.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td17</PkTableDisplay>
+            <FkTableDisplay>td6</FkTableDisplay>
+            <Reference>r20</Reference>
+        </ReferenceDisplay>
+        <ReferenceDisplay Id="rd21">
+            <Color>#000000</Color>
+            <Type>Cross_3CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>7912.5</X>
+                    <Y>7382.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7912.5</X>
+                    <Y>6830.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6879.5</X>
+                    <Y>6830.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <PkTableDisplay>td4</PkTableDisplay>
+            <FkTableDisplay>td11</FkTableDisplay>
+            <Reference>r21</Reference>
+        </ReferenceDisplay>
+    </ReferenceDisplays>
+    <Properties>
+        <Property>
+            <Name>pdf-printer-paper-size</Name>
+            <Value>A4</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-top</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-bottom</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-left</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-right</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-page-orientation</Name>
+            <Value>landscape</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-show-pages</Name>
+            <Value>false</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-include-footer</Name>
+            <Value>true</Value>
+        </Property>
+        <Property>
+            <Name>reference-notation</Name>
+            <Value>crows-foot</Value>
+        </Property>
+        <Property>
+            <Name>show-only-pk-fk</Name>
+            <Value>false</Value>
+        </Property>
+        <Property>
+            <Name>pages-line-color</Name>
+            <Value>#CC0000</Value>
+        </Property>
+        <Property>
+            <Name>show-grid</Name>
+            <Value>false</Value>
+        </Property>
+        <Property>
+            <Name>grid-color</Name>
+            <Value>#D9D9D9</Value>
+        </Property>
+        <Property>
+            <Name>grid-style</Name>
+            <Value>solid</Value>
+        </Property>
+        <Property>
+            <Name>grid-spacing</Name>
+            <Value>2</Value>
+        </Property>
+        <Property>
+            <Name>grid-spacing-units</Name>
+            <Value>cm</Value>
+        </Property>
+        <Property>
+            <Name>grid-subdivisions</Name>
+            <Value>1</Value>
+        </Property>
+    </Properties>
+    <DefaultAdditionalProperties>
+        <Types>
+            <Name>table</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>column</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>alternate_key</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>index</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>table_check</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>trigger</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>reference</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>view</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>sequence</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>procedure</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>all</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>view_column</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>primary_key</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>materialized_view</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>materialized_view_column</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>external_table</Name>
+            <Properties/>
+        </Types>
+        <Types>
+            <Name>external_table_column</Name>
+            <Properties/>
+        </Types>
+    </DefaultAdditionalProperties>
+</DatabaseModel>

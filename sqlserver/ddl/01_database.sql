@@ -42,8 +42,11 @@ BEGIN
         SIZE = 16MB,
         MAXSIZE = 500MB,
         FILEGROWTH = 16MB
-    )
-    COLLATE Modern_Spanish_CI_AS;
+    );
+
+    -- NOTA: la base hereda la collation del servidor
+    -- (SQL_Latin1_General_CP1_CI_AS). Es CI (case insensitive) y
+    -- compatible con caracteres espanoles (acentos y enie).
 
     -- Opciones de la base de datos
     ALTER DATABASE MatriculaCloud360DB
@@ -55,7 +58,6 @@ BEGIN
             AUTO_UPDATE_STATISTICS ON;
 
     PRINT 'OK: Base de datos MatriculaCloud360DB creada.';
-    PRINT '    - Collation: Modern_Spanish_CI_AS';
     PRINT '    - Recovery FULL (soporta respaldo y recuperacion)';
     PRINT '    - Data: 32MB (auto-crecimiento 32MB, sin limite)';
     PRINT '    - Log: 16MB (maximo 500MB, auto-crecimiento 16MB)';

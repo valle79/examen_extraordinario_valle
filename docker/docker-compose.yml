@@ -34,7 +34,11 @@ services:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=${SA_PASSWORD}
       - MSSQL_PID=${MSSQL_PID:-Developer}
-      - MSSQL_COLLATION=Modern_Spanish_CI_AS
+      # NOTA: la collation NO se configura via MSSQL_COLLATION porque el
+      # entrypoint personalizado (wait-for-sql.sh) inicia sqlservr
+      # directamente, y el cambio de collation en SQL Server 2025 reinicia
+      # el motor fallando en contenedores. La base hereda la collation del
+      # servidor (SQL_Latin1_General_CP1_CI_AS, compatible con espanol).
       - TZ=${TZ:-America/Lima}
 
     ports:

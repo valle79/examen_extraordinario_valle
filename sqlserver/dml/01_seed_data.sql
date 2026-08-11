@@ -86,7 +86,11 @@ ELSE
 GO
 
 -- =============================================
--- 4. PERIODOS ACADEMICOS (4)
+-- 4. PERIODOS ACADEMICOS (5)
+-- El periodo 2027-I mantiene su ventana de matriculas VIGENTE
+-- (2026-08-01 a 2026-10-15) para que el sistema tenga un periodo
+-- habilitado en el que se puedan registrar matriculas via
+-- core.usp_RegistrarMatricula (RN-03).
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM core.PeriodosAcademicos WHERE CodigoPeriodo = '2025-1')
 BEGIN
@@ -96,9 +100,10 @@ BEGIN
         (1, '2025-1', 'Periodo 2025-I', 2025, 1, '2025-03-01', '2025-07-31', '2025-01-15', '2025-02-28'),
         (2, '2025-2', 'Periodo 2025-II', 2025, 2, '2025-08-01', '2025-12-20', '2025-06-15', '2025-07-31'),
         (3, '2026-1', 'Periodo 2026-I', 2026, 1, '2026-03-01', '2026-07-31', '2026-01-15', '2026-02-28'),
-        (4, '2026-2', 'Periodo 2026-II', 2026, 2, '2026-08-01', '2026-12-20', '2026-06-15', '2026-07-31');
+        (4, '2026-2', 'Periodo 2026-II', 2026, 2, '2026-08-01', '2026-12-20', '2026-06-15', '2026-07-31'),
+        (5, '2027-1', 'Periodo 2027-I', 2027, 1, '2027-03-01', '2027-07-31', '2026-08-01', '2026-10-15');
     SET IDENTITY_INSERT core.PeriodosAcademicos OFF;
-    PRINT 'OK: 4 periodos academicos insertados.';
+    PRINT 'OK: 5 periodos academicos insertados.';
 END
 ELSE
     PRINT 'OK: Periodos ya cargados (se omite).';
@@ -180,7 +185,7 @@ ELSE
 GO
 
 -- =============================================
--- 8. MALLA CURRICULAR: CARRERA-CURSOS (16)
+-- 8. MALLA CURRICULAR: CARRERA-CURSOS (20)
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM academic.CarreraCursos WHERE CarreraCursoId = 1)
 BEGIN
@@ -193,6 +198,11 @@ BEGIN
         (3, 1, 3, 3),
         (4, 1, 4, 4),
         (5, 1, 5, 5),
+        -- Ingenieria Industrial
+        (17, 2, 1, 1),
+        (18, 2, 6, 1),
+        (19, 2, 7, 2),
+        (20, 2, 8, 3),
         -- Administracion de Empresas (comparte Matematica con Sistemas)
         (6, 3, 1, 1),
         (7, 3, 6, 1),
@@ -210,7 +220,7 @@ BEGIN
         -- Gastronomia y Turismo
         (16, 7, 10, 1);
     SET IDENTITY_INSERT academic.CarreraCursos OFF;
-    PRINT 'OK: 16 relaciones carrera-curso insertadas.';
+    PRINT 'OK: 20 relaciones carrera-curso insertadas.';
 END
 ELSE
     PRINT 'OK: CarreraCursos ya cargados (se omite).';
@@ -238,7 +248,7 @@ ELSE
 GO
 
 -- =============================================
--- 10. CAMPANAS DE ADMISION (4)
+-- 10. CAMPANAS DE ADMISION (5)
 -- Cada campana esta vinculada a su periodo academico (RN-09).
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM sales.CampaniasAdmision WHERE CodigoCampania = 'CAMP-2025-1')
@@ -249,9 +259,10 @@ BEGIN
         (1, 'CAMP-2025-1', 'Campana Verano 2025', 'Campana de admision periodo 2025-I', 1, '2025-01-01', '2025-02-28', 10.00, 500.00, 50),
         (2, 'CAMP-2025-2', 'Campana Invierno 2025', 'Campana de admision periodo 2025-II', 2, '2025-06-01', '2025-07-31', 10.00, 500.00, 50),
         (3, 'CAMP-2026-1', 'Campana Verano 2026', 'Campana de admision periodo 2026-I', 3, '2026-01-01', '2026-02-28', 12.00, 600.00, 60),
-        (4, 'CAMP-2026-2', 'Campana Invierno 2026', 'Campana de admision periodo 2026-II', 4, '2026-06-01', '2026-07-31', 12.00, 600.00, 60);
+        (4, 'CAMP-2026-2', 'Campana Invierno 2026', 'Campana de admision periodo 2026-II', 4, '2026-06-01', '2026-07-31', 12.00, 600.00, 60),
+        (5, 'CAMP-2027-1', 'Campana Pre-Admision 2027', 'Campana de admision anticipada periodo 2027-I', 5, '2026-08-01', '2026-10-15', 12.00, 600.00, 60);
     SET IDENTITY_INSERT sales.CampaniasAdmision OFF;
-    PRINT 'OK: 4 campanas de admision insertadas.';
+    PRINT 'OK: 5 campanas de admision insertadas.';
 END
 ELSE
     PRINT 'OK: Campanias ya cargadas (se omite).';
@@ -310,33 +321,7 @@ ELSE
 GO
 
 -- =============================================
--- 13. COMISIONES (10)
--- Calculadas con el 12% de la campana vigente CAMP-2026-1.
--- =============================================
-IF NOT EXISTS (SELECT 1 FROM sales.Comisiones WHERE MatriculaId = 1)
-BEGIN
-    SET IDENTITY_INSERT sales.Comisiones ON;
-    INSERT INTO sales.Comisiones (ComisionId, PromotorId, MatriculaId, CampaniaId, MontoBase, PorcentajeComision, MontoComision, Bonificacion, MontoTotal, EstadoPago)
-    VALUES
-        (1, 1, 1, 3, 250.00, 12.00, 30.00, 0.00, 30.00, 'Pendiente'),
-        (2, 1, 2, 3, 250.00, 12.00, 30.00, 0.00, 30.00, 'Pendiente'),
-        (3, 3, 3, 3, 250.00, 12.00, 30.00, 0.00, 30.00, 'Pendiente'),
-        (4, 3, 4, 3, 220.00, 12.00, 26.40, 0.00, 26.40, 'Pendiente'),
-        (5, 2, 5, 3, 220.00, 12.00, 26.40, 0.00, 26.40, 'Pendiente'),
-        (6, 4, 6, 3, 200.00, 12.00, 24.00, 0.00, 24.00, 'Pendiente'),
-        (7, 5, 7, 3, 280.00, 12.00, 33.60, 0.00, 33.60, 'Pendiente'),
-        (8, 6, 8, 3, 300.00, 12.00, 36.00, 0.00, 36.00, 'Pendiente'),
-        (9, 1, 9, 3, 250.00, 12.00, 30.00, 0.00, 30.00, 'Pendiente'),
-        (10, 2, 10, 3, 220.00, 12.00, 26.40, 0.00, 26.40, 'Pendiente');
-    SET IDENTITY_INSERT sales.Comisiones OFF;
-    PRINT 'OK: 10 comisiones insertadas.';
-END
-ELSE
-    PRINT 'OK: Comisiones ya cargadas (se omite).';
-GO
-
--- =============================================
--- 14. ROLES DE SEGURIDAD (5)
+-- 13. ROLES DE SEGURIDAD (5)
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM security.Roles WHERE NombreRol = 'Administrador')
 BEGIN
@@ -357,19 +342,21 @@ GO
 
 -- =============================================
 -- 15. USUARIOS DEL SISTEMA (5)
--- NOTA: los hashes son de ejemplo; el Sprint 2 implementara
--- el hash real de contrasenas (bcrypt/HASHBYTES + salt).
+-- =============================================
+-- 14. USUARIOS DEL SISTEMA (5)
+-- Las contrasenas se almacenan como hash SHA2-256 de
+-- "Clave#2026" (solo para propositos de desarrollo).
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM security.Usuarios WHERE Username = 'admin')
 BEGIN
     SET IDENTITY_INSERT security.Usuarios ON;
     INSERT INTO security.Usuarios (UsuarioId, Username, PasswordHash, Email, NombresCompletos, RolId)
     VALUES
-        (1, 'admin', 'HASH_Admin123!', 'admin@edufuturo.edu.pe', 'Administrador del Sistema', 1),
-        (2, 'coord_acad', 'HASH_Admin123!', 'coordinador@edufuturo.edu.pe', 'Coordinador Academico Principal', 2),
-        (3, 'prom_juan', 'HASH_Admin123!', 'juan.perez@edufuturo.edu.pe', 'Juan Carlos Perez Gutierrez', 3),
-        (4, 'prom_maria', 'HASH_Admin123!', 'maria.lopez@edufuturo.edu.pe', 'Maria Isabel Lopez Ramirez', 3),
-        (5, 'secretaria1', 'HASH_Admin123!', 'secretaria@edufuturo.edu.pe', 'Rosa Maria Gomez Torres', 4);
+        (1, 'admin', HASHBYTES('SHA2_256', 'Admin#2026'), 'admin@edufuturo.edu.pe', 'Administrador del Sistema', 1),
+        (2, 'coord_acad', HASHBYTES('SHA2_256', 'Coord#2026'), 'coordinador@edufuturo.edu.pe', 'Coordinador Academico Principal', 2),
+        (3, 'prom_juan', HASHBYTES('SHA2_256', 'Promo#2026'), 'juan.perez@edufuturo.edu.pe', 'Juan Carlos Perez Gutierrez', 3),
+        (4, 'prom_maria', HASHBYTES('SHA2_256', 'Promo#2026'), 'maria.lopez@edufuturo.edu.pe', 'Maria Isabel Lopez Ramirez', 3),
+        (5, 'secretaria1', HASHBYTES('SHA2_256', 'Secre#2026'), 'secretaria@edufuturo.edu.pe', 'Rosa Maria Gomez Torres', 4);
     SET IDENTITY_INSERT security.Usuarios OFF;
     PRINT 'OK: 5 usuarios del sistema insertados.';
 END
@@ -378,7 +365,7 @@ ELSE
 GO
 
 -- =============================================
--- 16. ASIGNACIONES CURSO-PROFESOR (10)
+-- 15. ASIGNACIONES CURSO-PROFESOR (10)
 -- Periodo 2026-I en las sedes correspondientes.
 -- =============================================
 IF NOT EXISTS (SELECT 1 FROM academic.CursoProfesor WHERE CursoProfesorId = 1)
