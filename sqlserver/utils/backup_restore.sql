@@ -81,7 +81,7 @@ SELECT TOP 10
     bs.type AS Tipo,
     bs.backup_finish_date AS FechaFin,
     CAST(bs.backup_size / 1048576.0 AS DECIMAL(10,2)) AS TamanoMB,
-    bs.physical_device_name AS Archivo
+    bmf.physical_device_name AS Archivo
 FROM msdb.dbo.backupset bs
 INNER JOIN msdb.dbo.backupmediafamily bmf ON bs.media_set_id = bmf.media_set_id
 WHERE bs.database_name = 'MatriculaCloud360DB'

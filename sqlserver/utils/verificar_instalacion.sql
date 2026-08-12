@@ -11,6 +11,8 @@
 --   - Datos iniciales cargados (143 registros: seed + prueba Sprint 2)
 --   - Integridad referencial sin huerfanos
 --   - Objetos del Sprint 2 (funciones, vistas, triggers, procedimientos)
+--   - Seguridad RN-06 (perfiles MC_Admin/MC_Coordinador/MC_Promotor con
+--     permisos GRANT/DENY comprobados mediante EXECUTE AS)
 --
 -- Uso: docker compose exec sqlserver /opt/mssql-tools18/bin/sqlcmd
 --        -S localhost -U SA -P "$SA_PASSWORD" -C -i /sqlserver/utils/verificar_instalacion.sql
@@ -450,6 +452,141 @@ ELSE
 BEGIN
     PRINT '   [ERROR] Objetos Sprint 2 faltantes:';
     SELECT '   - ' + Tipo + ': ' + Nombre FROM @FaltantesSprint2;
+    SET @TotalErrores = @TotalErrores + 1;
+END
+
+PRINT '';
+PRINT '';
+
+-- ==========================================================
+-- 13. SEGURIDAD (RN-06): perfiles con permisos diferentes
+-- ==========================================================
+PRINT '13. SEGURIDAD (RN-06)';
+PRINT '    ----------------------------------------------';
+
+DECLARE @UsuariosSeguridad TABLE (LoginUsuario VARCHAR(50) COLLATE DATABASE_DEFAULT);
+INSERT INTO @UsuariosSeguridad VALUES ('MC_Admin'), ('MC_Coordinador'), ('MC_Promotor');
+
+DECLARE @FaltantesSeguridad TABLE (Nombre VARCHAR(50) COLLATE DATABASE_DEFAULT);
+INSERT INTO @FaltantesSeguridad
+SELECT LoginUsuario FROM @UsuariosSeguridad
+WHERE LoginUsuario NOT IN (SELECT name COLLATE DATABASE_DEFAULT FROM sys.sql_logins)
+   OR LoginUsuario NOT IN (SELECT name COLLATE DATABASE_DEFAULT FROM sys.database_principals WHERE type = 'S');
+
+IF NOT EXISTS (SELECT 1 FROM @FaltantesSeguridad)
+    PRINT '   [OK] Perfiles SQL creados: MC_Admin, MC_Coordinador, MC_Promotor (login + usuario)';
+ELSE
+BEGIN
+    PRINT '   [ERROR] Perfiles SQL faltantes:';
+    SELECT '   - ' + Nombre FROM @FaltantesSeguridad;
+    SET @TotalErrores = @TotalErrores + 1;
+END
+
+IF IS_ROLEMEMBER('db_owner', 'MC_Admin') = 1
+    PRINT '   [OK] MC_Admin: miembro de db_owner (acceso completo)';
+ELSE
+BEGIN
+    PRINT '   [ERROR] MC_Admin no es miembro de db_owner';
+    SET @TotalErrores = @TotalErrores + 1;
+END
+
+-- Pruebas de cumplimiento mediante EXECUTE AS (no modifican datos).
+-- Patron seguro: solo se ejecuta REVERT si la suplantacion se establecio,
+-- para no abandonar el contexto de sa/dbo ante un error esperado.
+DECLARE @TryingImp BIT;
+DECLARE @TestDenegado BIT;
+DECLARE @TestPermitido BIT;
+
+-- 13.1 MC_Promotor NO puede leer security.Usuarios (error 229 esperado)
+SET @TryingImp = 0; SET @TestDenegado = 0;
+BEGIN TRY
+    EXECUTE AS USER = 'MC_Promotor';
+    SET @TryingImp = 1;
+    SELECT TOP (1) 1 FROM security.Usuarios;
+    REVERT;
+    SET @TryingImp = 0;
+END TRY
+BEGIN CATCH
+    IF @TryingImp = 1 REVERT;
+    IF ERROR_NUMBER() IN (229, 297) SET @TestDenegado = 1;
+END CATCH
+
+IF @TestDenegado = 1
+    PRINT '   [OK] MC_Promotor: lectura de security.Usuarios DENEGADA (error 229)';
+ELSE
+BEGIN
+    PRINT '   [ERROR] MC_Promotor pudo leer security.Usuarios';
+    SET @TotalErrores = @TotalErrores + 1;
+END
+
+-- 13.2 MC_Promotor SI puede ejecutar usp_RegistrarEstudiante
+-- (SP rechaza con 51001 un documento duplicado: probar que el EXECUTE
+--  esta permitido y la validacion de negocio sigue intacta)
+SET @TryingImp = 0; SET @TestPermitido = 0;
+BEGIN TRY
+    EXECUTE AS USER = 'MC_Promotor';
+    SET @TryingImp = 1;
+    DECLARE @IdDesc INT, @ErrDesc NVARCHAR(500);
+    EXEC core.usp_RegistrarEstudiante 'DNI', '70123456', 'X', 'Y', 'x.desc@gmail.com',
+         '987000001', '2004-01-01', 'M', NULL, 1, @IdDesc OUTPUT, @ErrDesc OUTPUT;
+    REVERT;
+    SET @TryingImp = 0;
+END TRY
+BEGIN CATCH
+    IF @TryingImp = 1 REVERT;
+    IF ERROR_NUMBER() = 51001 SET @TestPermitido = 1;
+END CATCH
+
+IF @TestPermitido = 1
+    PRINT '   [OK] MC_Promotor: puede registrar estudiantes via core.usp_RegistrarEstudiante (rechazo 51001 = SP operativo)';
+ELSE
+BEGIN
+    PRINT '   [ERROR] MC_Promotor NO pudo ejecutar core.usp_RegistrarEstudiante';
+    SET @TotalErrores = @TotalErrores + 1;
+END
+
+-- 13.3 MC_Coordinador NO puede consultar comisiones (denegado)
+SET @TryingImp = 0; SET @TestDenegado = 0;
+BEGIN TRY
+    EXECUTE AS USER = 'MC_Coordinador';
+    SET @TryingImp = 1;
+    SELECT TOP (1) 1 FROM sales.vw_ComisionesDetalle;
+    REVERT;
+    SET @TryingImp = 0;
+END TRY
+BEGIN CATCH
+    IF @TryingImp = 1 REVERT;
+    IF ERROR_NUMBER() = 229 SET @TestDenegado = 1;
+END CATCH
+
+IF @TestDenegado = 1
+    PRINT '   [OK] MC_Coordinador: comisiones DENEGADAS (solo administracion/promotor)';
+ELSE
+BEGIN
+    PRINT '   [ERROR] MC_Coordinador pudo consultar comisiones';
+    SET @TotalErrores = @TotalErrores + 1;
+END
+
+-- 13.4 MC_Coordinador SI puede consultar la malla curricular (reportes academicos)
+SET @TryingImp = 0; SET @TestPermitido = 0;
+BEGIN TRY
+    EXECUTE AS USER = 'MC_Coordinador';
+    SET @TryingImp = 1;
+    DECLARE @MallaVisible INT;
+    SELECT @MallaVisible = COUNT(*) FROM academic.vw_MallaCurricular;
+    REVERT;
+    SET @TryingImp = 0;
+    IF @MallaVisible > 0 SET @TestPermitido = 1;
+END TRY
+BEGIN CATCH
+    IF @TryingImp = 1 REVERT;
+END CATCH
+
+IF @TestPermitido = 1
+    PRINT '   [OK] MC_Coordinador: consulta de academic.vw_MallaCurricular PERMITIDA';
+ELSE
+BEGIN
+    PRINT '   [ERROR] MC_Coordinador no pudo consultar la malla curricular';
     SET @TotalErrores = @TotalErrores + 1;
 END
 

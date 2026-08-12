@@ -20,7 +20,7 @@ Programar los objetos de base de datos (funciones, vistas, triggers y procedimie
 | RN-03 | La matrícula exige datos previos y período con ventana abierta | `fn_PeriodoMatriculaHabilitado` |
 | RN-04 | Matrícula transaccional (se revierte todo ante error) | `BEGIN/COMMIT/ROLLBACK` + `TRY...CATCH` |
 | RN-05 | Malla curricular N:M carreras-cursos | Tabla `CarreraCursos` + `vw_MallaCurricular` |
-| RN-06 | Perfiles de seguridad (Administrador, Coordinador, Promotor) | Tabla `security.Roles` |
+| RN-06 | Perfiles de seguridad (Administrador, Coordinador, Promotor) | `security.Roles` + logins SQL `MC_Admin`/`MC_Coordinador`/`MC_Promotor` con permisos `GRANT`/`DENY` |
 | RN-07 | Auditoría de operaciones críticas | 4 triggers → `audit.AuditLog` (usuario, fecha, valores, IP) |
 | RN-08 | Promotor y sede obligatorios en la matrícula | FKs NOT NULL + validación en SP |
 | RN-09 | Comisión automática por campaña + bono por meta; anulación al retirar | `TRG_Comision_Automatica` + funciones |
@@ -108,7 +108,7 @@ T18 Reportes vw_* con datos        → todos > 0 [OK]
 
 ## 5. Verificación Integral de la Instalación
 
-`utils/verificar_instalacion.sql` valida 12 secciones:
+`utils/verificar_instalacion.sql` valida 13 secciones:
 
 1. Base de datos (collation y recovery FULL)
 2. Esquemas (6)
@@ -122,13 +122,19 @@ T18 Reportes vw_* con datos        → todos > 0 [OK]
 10. Reglas de negocio (sin duplicados)
 11. Control de versiones (1.0.0)
 12. **Objetos Sprint 2 (6 funciones, 7 vistas, 5 triggers, 9 procedimientos)**
+13. **Seguridad RN-06**: perfiles SQL existentes, `MC_Admin` en `db_owner`, y pruebas en vivo de permisos con `EXECUTE AS` (promotor denegado en seguridad/auditoría, coordinador denegado en comisiones, ambos permitidos en sus áreas)
 
 Resultado: **INSTALACIÓN PERFECTA — ESTADO: APROBADO**.
 
 ## 6. Seguridad y Auditoría
 
+- **RN-06 ampliada**: además de los 5 roles de catálogo (`security.Roles`), se implementaron **permisos reales de SQL Server** en `sqlserver/security/01_usuarios_permisos.sql`: logins `MC_Admin`, `MC_Coordinador` y `MC_Promotor` con `GRANT`/`DENY` específicos por perfil.
+  - `MC_Admin` → `db_owner` (acceso completo).
+  - `MC_Coordinador` → vistas académicas/core, registra/retira matrículas, actualiza estudiantes; **denegado** el acceso a comisiones, seguridad y auditoría.
+  - `MC_Promotor` → registro de estudiantes vía SP y consulta de sus comisiones; **denegado** el acceso a matrículas, seguridad y auditoría.
+  - El acceso a datos se otorga solo vía vistas/SP (encadenamiento de propiedad, todo es `dbo`), aplicando el principio de menor privilegio.
 - Contraseñas con **hash SHA2-256** (`HASHBYTES`) en el seed.
-- Auditoría completa (RN-07): usuario (`SUSER_SNAME()`), fecha/hora, operación, valores anteriores/nuevos (JSON) e IP del cliente para estudiantes, matrículas, promotores y comisiones.
+- Auditoría completa (RN-07): usuario (`SUSER_SNAME()`, ahora el login real que opera: `MC_Admin`, `MC_Coordinador`, `MC_Promotor`...), fecha/hora, operación, valores anteriores/nuevos (JSON) e IP del cliente para estudiantes, matrículas, promotores y comisiones.
 - Códigos de error propios (51000-53999) por dominio para diagnóstico en la aplicación.
 
 ## 7. Consideraciones de Operación
@@ -140,8 +146,9 @@ Resultado: **INSTALACIÓN PERFECTA — ESTADO: APROBADO**.
 ## 8. Entregables
 
 - `sqlserver/ddl/04_constraints.sql` (17 PK, 21 FK, 22 UK, 30 CK)
+- `sqlserver/security/01_usuarios_permisos.sql` (perfiles RN-06: logins, usuarios, GRANT/DENY)
 - `sqlserver/programmability/` (6 `fn_*.sql`, 5 `trg_*.sql`, 7 `vw_*.sql`, 9 `usp_*.sql`)
 - `sqlserver/dml/02_test_data.sql`, `03_test_cases.sql`
-- `docker/init/init.sql` (34 pasos)
+- `docker/init/init.sql` (35 pasos)
 - Verificación ampliada en `utils/verificar_instalacion.sql`
 - Documentación actualizada (README raíz, `docker/README.md`, `datasets/README.md`)

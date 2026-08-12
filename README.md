@@ -21,7 +21,7 @@ La solución está construida sobre:
 - **SQL Server 2025 Developer Edition (Preview)**
 - **Docker & Docker Compose**
 - **Persistencia de datos mediante volúmenes nombrados**
-- **Inicialización automática de la base de datos** (init.sql → 34 pasos)
+- **Inicialización automática de la base de datos** (init.sql → 35 pasos)
 
 ## 📁 Estructura del Proyecto
 
@@ -33,7 +33,7 @@ MatriculaCloud360Enterprise/
 │   ├── .env                        # Variables de entorno (no versionado)
 │   ├── .env.example                # Plantilla de variables
 │   ├── init/                       # Scripts de inicialización
-│   │   ├── init.sql               # Script maestro (34 pasos, Sprint 1 + 2)
+│   │   ├── init.sql               # Script maestro (35 pasos, Sprint 1 + 2)
 │   │   └── wait-for-sql.sh        # Entrypoint: espera el servidor y ejecuta init
 │   └── volumes/                    # Persistencia local (solo .gitkeep versionados)
 │       ├── data/                   # Datos (los datos reales viven en volúmenes nombrados)
@@ -55,6 +55,8 @@ MatriculaCloud360Enterprise/
 │   │   ├── triggers/              # 5 triggers de auditoría y comisiones (trg_*.sql)
 │   │   ├── views/                 # 7 vistas de reporte (vw_*.sql)
 │   │   └── procedures/            # 9 procedimientos almacenados (usp_*.sql)
+│   ├── security/                   # Seguridad RN-06 (Sprint 2)
+│   │   └── 01_usuarios_permisos.sql # Logins, usuarios y permisos por perfil
 │   └── utils/                      # Utilidades
 │       ├── verificar_instalacion.sql  # Auditoría completa de instalación
 │       ├── backup_restore.sql         # Plantilla de respaldo/restauración
@@ -102,7 +104,7 @@ MatriculaCloud360Enterprise/
    ```bash
    docker compose up -d
    ```
-   El contenedor queda `healthy` en ~30-60 segundos tras ejecutar los 34 pasos de inicialización (base, esquemas, tablas, constraints, funciones, triggers, vistas, procedimientos, seed, datos de prueba y casos de prueba).
+   El contenedor queda `healthy` en ~30-60 segundos tras ejecutar los 35 pasos de inicialización (base, esquemas, tablas, constraints, funciones, triggers, vistas, procedimientos, perfiles de seguridad, seed, datos de prueba y casos de prueba).
 
 4. **Verificar el estado:**
    ```bash
@@ -153,13 +155,17 @@ Estudiantes, Carreras, Cursos, Sedes, Promotores, Matrículas, Períodos Académ
 
 ## 🔒 Seguridad
 
-El sistema implementa perfiles de seguridad (RN-06):
+El sistema implementa perfiles de seguridad (RN-06) con **permisos reales de SQL Server** (logins, usuarios y `GRANT`/`DENY`) aplicados automáticamente por `sqlserver/security/01_usuarios_permisos.sql`:
 
-1. **Administrador**: Acceso completo al sistema
-2. **Coordinador Académico**: Gestión académica y reportes
-3. **Promotor**: Registro de estudiantes y consulta de comisiones
+| Perfil | Login SQL | Credencial (dev) | Permisos |
+|---|---|---|---|
+| **Administrador** | `MC_Admin` | `MCAdmin#2026` | Acceso completo (`db_owner`) |
+| **Coordinador Académico** | `MC_Coordinador` | `MCCoord#2026` | Reportes académicos, registra/retira matrículas, actualiza estudiantes. Sin acceso a comisiones, seguridad ni auditoría |
+| **Promotor** | `MC_Promotor` | `MCPromo#2026` | Registro de estudiantes (vía SP) y consulta de sus comisiones. Sin matrículas, seguridad ni auditoría |
 
-Las contraseñas se almacenan con hash SHA2-256 y todas las operaciones críticas quedan registradas en `audit.AuditLog` (RN-07) con usuario, fecha, operación, valores y dirección IP.
+Principio de **menor privilegio**: el acceso a los datos se otorga solo a través de vistas y procedimientos (encadenamiento de propiedad), con `DENY` explícito sobre las áreas sensibles (matrículas, comisiones, seguridad y auditoría). El `verificador de instalación` ejecuta pruebas de cumplimiento que comprueban las denegaciones y permisos en vivo.
+
+Las contraseñas de la tabla `security.Usuarios` (usuarios de aplicación) se almacenan con hash SHA2-256 y todas las operaciones críticas quedan registradas en `audit.AuditLog` (RN-07) con usuario, fecha, operación, valores y dirección IP.
 
 ## 📊 Características Implementadas
 
@@ -181,6 +187,7 @@ Las contraseñas se almacenan con hash SHA2-256 y todas las operaciones crítica
 - ✅ Reglas de negocio RN-01 a RN-10 implementadas y probadas
 - ✅ 18 casos de prueba automáticos (18/18 superados)
 - ✅ Datos de prueba registrados mediante los procedimientos del sistema
+- ✅ Seguridad RN-06: perfiles SQL (`MC_Admin`, `MC_Coordinador`, `MC_Promotor`) con permisos `GRANT`/`DENY` verificados
 
 ### Próximos Sprints
 
