@@ -5,7 +5,7 @@
 
 # Variables de entorno (nunca versionar contrasenas)
 
-!docker/.env.example
+
 
 # Datos del contenedor (persistencia local, se regeneran con docker compose up)
 docker/volumes/data/*
