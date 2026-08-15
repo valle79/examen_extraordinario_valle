@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Matricula Cloud 360 Enterprise - Dashboard Sprint 3</title>
+<style>
+  body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; background: #f3f6fa; color: #22303f; }
+  header { background: linear-gradient(90deg, #0f4c81, #1d6fb8); color: #fff; padding: 22px 28px; }
+  header h1 { margin: 0; font-size: 22px; }
+  header p { margin: 4px 0 0; opacity: .85; font-size: 13px; }
+  main { padding: 24px; max-width: 1100px; margin: 0 auto; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 26px; }
+  .kpi { background: #fff; border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); border-top: 4px solid #1d6fb8; }
+  .kpi .v { font-size: 24px; fo
+nt-weight: 700; color: #0f4c81; }
+  .kpi .l { font-size: 12px; color: #5a6b7b; margin-top: 2px; }
+  .card { background: #fff; border-radius: 10px; padding: 18px 20px; margin-bottom: 22px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .card h2 { margin: 0 0 12px; font-size: 16px; color: #0f4c81; border-left: 4px solid #1d6fb8; padding-left: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: #5a6b7b; font-weight: 600; border-bottom: 2px solid #dbe4ec; padding: 8px 6px; }
+  td { border-bottom: 1px solid #eef2f6; padding: 7px 6px; }
+  .num { text-align: right; }
+  .bar { background: #eef2f6; border-radius: 5px; height: 14px; width: 220px; }
+  .fill { background: #1d6fb8; height: 14px; border-radius: 5px; }
+  footer { text-align: center; co
+lor: #8b9aa8; font-size: 12px; padding: 18px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Matricula Cloud 360 Enterprise</h1>
+  <p>Dashboard de indicadores institucionales - Sprint 3 (auditoria, indices, seguridad, respaldo)</p>
+  <p>Generado: 15/08/2026 02:29:00</p>
+</header>
+<main>
+  <div class="kpis">
+    <div class="kpi"><div class="v">20</div><div class="l">Matriculas activas</div></div>
+    <div class="kpi"><div class="v">20</div><div class="l">Estudiantes activos</div></div>
+    <div class="kpi"><div class="v">20</div><div class="l">Carreras</div></div>
+    <div class="kpi"><div class="v">20</div><div class="l">Sedes</div></div>
+    <div class="kpi"><div class="v">20</div><div class="l">Periodos academicos</div></div>
+    <div class="kpi"><div class="v">20</div><div class="l">Campanas 
+de admision</div></div>
+    <div class="kpi"><div class="v">21</div><div class="l">Promotores</div></div>
+    <div class="kpi"><div class="v">0</div><div class="l">Comisiones pagadas</div></div>
+    <div class="kpi"><div class="v">4,910</div><div class="l">Monto recaudado (S/)</div></div>
+    <div class="kpi"><div class="v">535</div><div class="l">Comisiones por pagar (S/)</div></div>
+  </div>  <div class="card">
+    <h2>Matriculas por carrera (core.vw_IndicadoresMatricula)</h2>
+    <table><tr><th>Carrera</th><th>Distribucion</th><th class="num">Matriculas</th><th class="num">Monto (S/)</th></tr><tr><td>Ingenieria de Sistemas</td><td><div class="bar"><div class="fill" style="width:100.000000000000%"></div></div></td><td class="num">4</td><td class="num">1,000</td></tr><tr><td>Administracio
+n de Empresas</td><td><div class="bar"><div class="fill" style="width:75.000000000000%"></div></div></td><td class="num">3</td><td class="num">660</td></tr><tr><td>Contabilidad y Finanzas</td><td><div class="bar"><div class="fill" style="width:50.000000000000%"></div></div></td><td class="num">2</td><td class="num">440</td></tr><tr><td>Enfermeria Tecnica</td><td><div class="bar"><div class="fill" style="width:50.000000000000%"></div></div></td><td class="num">2</td><td class="num">560</td></tr><tr><td>Gastronomia y Turismo</td><td><div class="bar"><div class="fill" style="width:50.000000000000%"></div></div></td><td class="num">2</td><td class="num">600</td></tr><tr><td>Ingenieria Civil</td><td><div class="bar"><div class="fill" style="width:50.000000000000%"></div></div></td><td class="nu
+m">2</td><td class="num">500</td></tr><tr><td>Ingenieria Industrial</td><td><div class="bar"><div class="fill" style="width:50.000000000000%"></div></div></td><td class="num">2</td><td class="num">500</td></tr><tr><td>Marketing Digital</td><td><div class="bar"><div class="fill" style="width:50.000000000000%"></div></div></td><td class="num">2</td><td class="num">400</td></tr><tr><td>Ingenieria Electronica</td><td><div class="bar"><div class="fill" style="width:25.000000000000%"></div></div></td><td class="num">1</td><td class="num">250</td></tr></table></div>  <div class="card">
+    <h2>Matriculas por sede</h2>
+    <table><tr><th>Sede</th><th>Distribucion</th><th class="num">Matriculas</th><th class="num">Monto (S/)</th></tr><tr><td>Sede Lima Centro</td><td><div class="bar"><div class="fil
+l" style="width:100.000000000000%"></div></div></td><td class="num">8</td><td class="num">1,960</td></tr><tr><td>Sede Ate Vitarte</td><td><div class="bar"><div class="fill" style="width:63.000000000000%"></div></div></td><td class="num">5</td><td class="num">1,220</td></tr><tr><td>Sede Cusco</td><td><div class="bar"><div class="fill" style="width:38.000000000000%"></div></div></td><td class="num">3</td><td class="num">670</td></tr><tr><td>Sede Arequipa</td><td><div class="bar"><div class="fill" style="width:25.000000000000%"></div></div></td><td class="num">2</td><td class="num">480</td></tr><tr><td>Sede Trujillo</td><td><div class="bar"><div class="fill" style="width:25.000000000000%"></div></div></td><td class="num">2</td><td class="num">580</td></tr></table></div>  <div class="card">
+  
+  <h2>Matriculas por periodo (ventana: participacion porcentual)</h2>
+    <table><tr><th>Periodo</th><th class="num">Matriculas</th><th class="num">Monto (S/)</th><th class="num">Participacion</th></tr><tr><td>2025-1</td><td class="num">6</td><td class="num">1,390</td><td class="num">30.000000000000%</td></tr><tr><td>2026-1</td><td class="num">10</td><td class="num">2,440</td><td class="num">50.000000000000%</td></tr><tr><td>2027-1</td><td class="num">4</td><td class="num">1,080</td><td class="num">20.000000000000%</td></tr></table></div>  <div class="card">
+    <h2>Matriculas por campana de admision</h2>
+    <table><tr><th>Campana</th><th>Codigo</th><th class="num">Matriculas</th><th class="num">Monto (S/)</th></tr><tr><td>Campana Verano 2026</td><td>CAMP-2026-1</td><td class="num">10</td
+><td class="num">2,440</td></tr><tr><td>Campana Verano 2025</td><td>CAMP-2025-1</td><td class="num">6</td><td class="num">1,390</td></tr><tr><td>Campana Pre-Admision 2027</td><td>CAMP-2027-1</td><td class="num">4</td><td class="num">1,080</td></tr><tr><td>Campana Verano 2023</td><td>CAMP-2023-1</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Invierno 2023</td><td>CAMP-2023-2</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Verano 2024</td><td>CAMP-2024-1</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Invierno 2024</td><td>CAMP-2024-2</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Invierno 2027</td><td>CAMP-2027-2</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Verano 2028</td><td>CAMP-
+2028-1</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Invierno 2028</td><td>CAMP-2028-2</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Verano 2029</td><td>CAMP-2029-1</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Invierno 2029</td><td>CAMP-2029-2</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Verano 2030</td><td>CAMP-2030-1</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Invierno 2030</td><td>CAMP-2030-2</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Verano 2031</td><td>CAMP-2031-1</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Invierno 2031</td><td>CAMP-2031-2</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Verano 20
+32</td><td>CAMP-2032-1</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Invierno 2032</td><td>CAMP-2032-2</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Invierno 2025</td><td>CAMP-2025-2</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Campana Invierno 2026</td><td>CAMP-2026-2</td><td class="num">0</td><td class="num">0</td></tr></table></div>  <div class="card">
+    <h2>Ranking de promotores - top 10 (sales.vw_RankingPromotores, RANK + LAG)</h2>
+    <table><tr><th>#</th><th>Promotor</th><th>Periodo</th><th class="num">Matriculas</th><th class="num">Comision (S/)</th><th class="num">Variacion vs period. ant.</th></tr><tr><td class="num">1</td><td>Juan Carlos Perez Gutierrez</td><td>2025-1</td><td class="num">2</td><td class="num">50</td
+><td class="num">-</td></tr><tr><td class="num">2</td><td>Pedro Antonio Gonzalez Silva</td><td>2025-1</td><td class="num">2</td><td class="num">47</td><td class="num">-</td></tr><tr><td class="num">3</td><td>Maria Isabel Lopez Ramirez</td><td>2025-1</td><td class="num">1</td><td class="num">22</td><td class="num">-</td></tr><tr><td class="num">4</td><td>Sofia Alejandra Torres Medina</td><td>2025-1</td><td class="num">1</td><td class="num">20</td><td class="num">-</td></tr><tr><td class="num">1</td><td>Pedro Antonio Gonzalez Silva</td><td>2026-1</td><td class="num">2</td><td class="num">60</td><td class="num">27.700000%</td></tr><tr><td class="num">1</td><td>Juan Carlos Perez Gutierrez</td><td>2026-1</td><td class="num">2</td><td class="num">60</td><td class="num">20.000000%</td></tr><tr><t
+d class="num">4</td><td>Maria Isabel Lopez Ramirez</td><td>2026-1</td><td class="num">2</td><td class="num">52.80</td><td class="num">140.000000%</td></tr><tr><td class="num">1</td><td>Juan Carlos Perez Gutierrez</td><td>2027-1</td><td class="num">1</td><td class="num">36</td><td class="num">-40.000000%</td></tr><tr><td class="num">3</td><td>Pedro Antonio Gonzalez Silva</td><td>2027-1</td><td class="num">1</td><td class="num">30</td><td class="num">-50.000000%</td></tr><tr><td class="num">3</td><td>Sofia Alejandra Torres Medina</td><td>2027-1</td><td class="num">1</td><td class="num">30</td><td class="num">50.000000%</td></tr></table></div>  <div class="card">
+    <h2>Tendencia diaria de matriculas (running total + LAG)</h2>
+    <table><tr><th>Fecha</th><th class="num">Matriculas del dia</
+th><th class="num">Acumulado</th><th class="num">Monto del dia (S/)</th><th class="num">Crecimiento</th></tr><tr><td>12/02/2026</td><td class="num">1</td><td class="num">15</td><td class="num">220</td><td class="num">0.000000000000%</td></tr><tr><td>10/02/2026</td><td class="num">1</td><td class="num">14</td><td class="num">220</td><td class="num">0.000000000000%</td></tr><tr><td>08/02/2026</td><td class="num">1</td><td class="num">13</td><td class="num">250</td><td class="num">0.000000000000%</td></tr><tr><td>05/02/2026</td><td class="num">1</td><td class="num">12</td><td class="num">250</td><td class="num">0.000000000000%</td></tr><tr><td>03/02/2026</td><td class="num">1</td><td class="num">11</td><td class="num">250</td><td class="num">0.000000000000%</td></tr><tr><td>01/02/2026</td><td
+ class="num">1</td><td class="num">10</td><td class="num">220</td><td class="num">0.000000000000%</td></tr><tr><td>25/01/2026</td><td class="num">1</td><td class="num">9</td><td class="num">250</td><td class="num">0.000000000000%</td></tr><tr><td>22/01/2026</td><td class="num">1</td><td class="num">8</td><td class="num">300</td><td class="num">0.000000000000%</td></tr><tr><td>20/01/2026</td><td class="num">1</td><td class="num">7</td><td class="num">280</td><td class="num">0.000000000000%</td></tr><tr><td>05/02/2025</td><td class="num">1</td><td class="num">6</td><td class="num">200</td><td class="num">0.000000000000%</td></tr><tr><td>03/02/2025</td><td class="num">1</td><td class="num">5</td><td class="num">220</td><td class="num">0.000000000000%</td></tr><tr><td>01/02/2025</td><td class=
+"num">1</td><td class="num">4</td><td class="num">220</td><td class="num">0.000000000000%</td></tr><tr><td>25/01/2025</td><td class="num">1</td><td class="num">3</td><td class="num">250</td><td class="num">0.000000000000%</td></tr><tr><td>22/01/2025</td><td class="num">1</td><td class="num">2</td><td class="num">250</td><td class="num">0.000000000000%</td></tr><tr><td>20/01/2025</td><td class="num">1</td><td class="num">1</td><td class="num">250</td><td class="num">-</td></tr></table></div>  <div class="card">
+    <h2>Ultimas operaciones registradas en auditoria (audit.AuditLog)</h2>
+    <table><tr><th>Fecha</th><th>Tabla</th><th>Operacion</th><th class="num">Registro</th><th>Usuario</th></tr><tr><td>15/08/2026 02:25:13</td><td>core.Matriculas</td><td>UPDATE</td><td class="num">21</td><td>
+sa</td></tr><tr><td>15/08/2026 02:25:13</td><td>core.Estudiantes</td><td>UPDATE</td><td class="num">21</td><td>sa</td></tr><tr><td>15/08/2026 02:25:13</td><td>sales.Comisiones</td><td>UPDATE</td><td class="num">21</td><td>sa</td></tr><tr><td>15/08/2026 02:25:13</td><td>core.Matriculas</td><td>UPDATE</td><td class="num">21</td><td>sa</td></tr><tr><td>15/08/2026 02:25:13</td><td>sales.Comisiones</td><td>UPDATE</td><td class="num">21</td><td>sa</td></tr><tr><td>15/08/2026 02:25:13</td><td>sales.Comisiones</td><td>UPDATE</td><td class="num">21</td><td>sa</td></tr><tr><td>15/08/2026 02:25:13</td><td>core.Matriculas</td><td>UPDATE</td><td class="num">21</td><td>sa</td></tr><tr><td>15/08/2026 02:25:13</td><td>core.Estudiantes</td><td>UPDATE</td><td class="num">21</td><td>sa</td></tr><tr><td>15/08
+/2026 02:25:12</td><td>core.Matriculas</td><td>UPDATE</td><td class="num">21</td><td>sa</td></tr><tr><td>15/08/2026 02:25:12</td><td>sales.Comisiones</td><td>UPDATE</td><td class="num">21</td><td>sa</td></tr></table></div>  <div class="card">
+    <h2>Respaldo y mantenimiento automatizado</h2>
+    <table>
+      <tr><th>Ultimo respaldo FULL</th><td>FULL 15/08/2026 02:25:37 (94.13 MB) - /var/opt/mssql/backup/MatriculaCloud360DB_FULL_20260815_022535.bak</td></tr>
+      <tr><th>Jobs de SQL Agent (MC360_*)</th><td>MC360_BackupCompleto, MC360_BackupLog, MC360_VerificacionIntegridad, MC360_MantenimientoIndices, MC360_BackupDiferencial</td></tr>
+      <tr><th>Modelo de recuperacion</th><td>FULL</td></tr>
+    </table></div>
+</main>
+<footer>Generado con consultas analiticas T-SQL (CTE + funciones de 
+ventana) - Matricula Cloud 360 Enterprise</footer>
+</body>
+</html>

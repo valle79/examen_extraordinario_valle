@@ -8,9 +8,9 @@
 --   - 17 tablas creadas
 --   - 21 Foreign Keys, 22 Unique, 30 Check
 --   - 17 indices no agrupados de optimizacion (14 Sprint 1 + 3 Sprint 3)
---   - Datos iniciales cargados (seed + prueba Sprint 2; los conteos
---     de Matriculas/Comisiones se validan segun la ventana del
---     periodo 2027-I este abierta o cerrada)
+--   - Datos iniciales cargados (cada tabla de negocio tiene AL MENOS
+--     20 registros, requisito del cliente; las comisiones se generan
+--     automaticamente con las matriculas via trigger RN-09)
 --   - Integridad referencial sin huerfanos
 --   - Objetos del Sprint 2 (funciones, vistas, triggers, procedimientos)
 --   - Seguridad RN-06 (perfiles MC_Admin/MC_Coordinador/MC_Promotor con
@@ -246,8 +246,10 @@ PRINT '';
 
 -- ==========================================================
 -- 8. DATOS INICIALES
+-- Requisito del cliente: CADA tabla de negocio tiene AL MENOS
+-- 20 registros. Se valida ">= 20" en lugar de un valor exacto.
 -- ==========================================================
-PRINT '8. DATOS INICIALES';
+PRINT '8. DATOS INICIALES (minimo 20 registros por tabla)';
 PRINT '   ----------------------------------------------';
 
 DECLARE @Resultados TABLE (
@@ -257,10 +259,9 @@ DECLARE @Resultados TABLE (
     Estado VARCHAR(10)
 );
 
--- La matricula de prueba del Sprint 2 (periodo 2027-I) solo se
--- registra si su ventana esta abierta (RN-03). Los conteos esperados
--- de Matriculas y Comisiones (que la comision genera automaticamente:
--- RN-09) dependen de ello; se calculan en lugar de fijarse.
+-- La matricula y comision de prueba del Sprint 2 (periodo 2027-I)
+-- solo se registran si su ventana esta abierta (RN-03); incluso sin
+-- ella, el seed aporta 20 matriculas, asi que el minimo se cumple.
 DECLARE @VentanaPruebasAbierta INT =
     CASE WHEN EXISTS (
         SELECT 1 FROM core.PeriodosAcademicos
@@ -269,33 +270,34 @@ DECLARE @VentanaPruebasAbierta INT =
     ) THEN 1 ELSE 0 END;
 
 INSERT INTO @Resultados
-SELECT 'core.Ubigeos', COUNT(*), 11, CASE WHEN COUNT(*) = 11 THEN '[OK]' ELSE '[ERR]' END FROM core.Ubigeos
-UNION ALL SELECT 'core.Sedes', COUNT(*), 5, CASE WHEN COUNT(*) = 5 THEN '[OK]' ELSE '[ERR]' END FROM core.Sedes
-UNION ALL SELECT 'core.Carreras', COUNT(*), 7, CASE WHEN COUNT(*) = 7 THEN '[OK]' ELSE '[ERR]' END FROM core.Carreras
-UNION ALL SELECT 'core.Estudiantes', COUNT(*), 11, CASE WHEN COUNT(*) = 11 THEN '[OK]' ELSE '[ERR]' END FROM core.Estudiantes
-UNION ALL SELECT 'core.PeriodosAcademicos', COUNT(*), 5, CASE WHEN COUNT(*) = 5 THEN '[OK]' ELSE '[ERR]' END FROM core.PeriodosAcademicos
-UNION ALL SELECT 'core.Matriculas', COUNT(*), 10 + @VentanaPruebasAbierta, CASE WHEN COUNT(*) = 10 + @VentanaPruebasAbierta THEN '[OK]' ELSE '[ERR]' END FROM core.Matriculas
-UNION ALL SELECT 'academic.Especialidades', COUNT(*), 10, CASE WHEN COUNT(*) = 10 THEN '[OK]' ELSE '[ERR]' END FROM academic.Especialidades
-UNION ALL SELECT 'academic.Profesores', COUNT(*), 10, CASE WHEN COUNT(*) = 10 THEN '[OK]' ELSE '[ERR]' END FROM academic.Profesores
-UNION ALL SELECT 'academic.Cursos', COUNT(*), 10, CASE WHEN COUNT(*) = 10 THEN '[OK]' ELSE '[ERR]' END FROM academic.Cursos
-UNION ALL SELECT 'academic.CarreraCursos', COUNT(*), 20, CASE WHEN COUNT(*) = 20 THEN '[OK]' ELSE '[ERR]' END FROM academic.CarreraCursos
-UNION ALL SELECT 'academic.CursoProfesor', COUNT(*), 10, CASE WHEN COUNT(*) = 10 THEN '[OK]' ELSE '[ERR]' END FROM academic.CursoProfesor
-UNION ALL SELECT 'sales.Promotores', COUNT(*), 7, CASE WHEN COUNT(*) = 7 THEN '[OK]' ELSE '[ERR]' END FROM sales.Promotores
-UNION ALL SELECT 'sales.CampaniasAdmision', COUNT(*), 5, CASE WHEN COUNT(*) = 5 THEN '[OK]' ELSE '[ERR]' END FROM sales.CampaniasAdmision
-UNION ALL SELECT 'sales.Comisiones', COUNT(*), 10 + @VentanaPruebasAbierta, CASE WHEN COUNT(*) = 10 + @VentanaPruebasAbierta THEN '[OK]' ELSE '[ERR]' END FROM sales.Comisiones
-UNION ALL SELECT 'security.Roles', COUNT(*), 5, CASE WHEN COUNT(*) = 5 THEN '[OK]' ELSE '[ERR]' END FROM security.Roles
-UNION ALL SELECT 'security.Usuarios', COUNT(*), 5, CASE WHEN COUNT(*) = 5 THEN '[OK]' ELSE '[ERR]' END FROM security.Usuarios;
+SELECT 'core.Ubigeos', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM core.Ubigeos
+UNION ALL SELECT 'core.Sedes', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM core.Sedes
+UNION ALL SELECT 'core.Carreras', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM core.Carreras
+UNION ALL SELECT 'core.Estudiantes', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM core.Estudiantes
+UNION ALL SELECT 'core.PeriodosAcademicos', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM core.PeriodosAcademicos
+UNION ALL SELECT 'core.Matriculas', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM core.Matriculas
+UNION ALL SELECT 'academic.Especialidades', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM academic.Especialidades
+UNION ALL SELECT 'academic.Profesores', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM academic.Profesores
+UNION ALL SELECT 'academic.Cursos', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM academic.Cursos
+UNION ALL SELECT 'academic.CarreraCursos', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM academic.CarreraCursos
+UNION ALL SELECT 'academic.CursoProfesor', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM academic.CursoProfesor
+UNION ALL SELECT 'sales.Promotores', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM sales.Promotores
+UNION ALL SELECT 'sales.CampaniasAdmision', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM sales.CampaniasAdmision
+UNION ALL SELECT 'sales.Comisiones', COUNT(*), 20, CASE WHEN COUNT(*) >= 20 THEN '[OK]' ELSE '[ERR]' END FROM sales.Comisiones
+UNION ALL SELECT 'security.Roles', COUNT(*), 3, CASE WHEN COUNT(*) >= 3 THEN '[OK]' ELSE '[ERR]' END FROM security.Roles
+UNION ALL SELECT 'security.Usuarios', COUNT(*), 4, CASE WHEN COUNT(*) >= 4 THEN '[OK]' ELSE '[ERR]' END FROM security.Usuarios;
 
 DECLARE @ErroresDatos INT;
 SELECT @ErroresDatos = COUNT(*) FROM @Resultados WHERE Estado = '[ERR]';
 
 IF @ErroresDatos = 0
 BEGIN
-    PRINT '   [OK] Las 16 tablas tienen la cantidad exacta de registros (seed + datos de prueba del Sprint 2)';
+    PRINT '   [OK] 14 tablas de negocio con al menos 20 registros;';
+    PRINT '   [OK] Roles (3) y Usuarios (4) segun el caso de negocio';
 END
 ELSE
 BEGIN
-    PRINT '   [ERROR] Cantidades incorrectas:';
+    PRINT '   [ERROR] Cantidades insuficientes:';
     SELECT '   ' + Estado + ' ' + Tabla + ': ' + CAST(Registros AS VARCHAR) + '/' + CAST(Esperado AS VARCHAR) AS Detalle
     FROM @Resultados WHERE Estado = '[ERR]';
     SET @TotalErrores = @TotalErrores + @ErroresDatos;
