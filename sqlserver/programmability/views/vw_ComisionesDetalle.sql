@@ -7,6 +7,8 @@
 -- IDEMPOTENTE: CREATE OR ALTER VIEW.
 -- =============================================
 
+
+
 USE MatriculaCloud360DB;
 GO
 

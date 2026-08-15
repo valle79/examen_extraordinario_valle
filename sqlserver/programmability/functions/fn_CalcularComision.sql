@@ -6,6 +6,12 @@
 --   MontoComision = MontoBase x PorcentajeComisionBase(campana) / 100
 -- Si la campana no existe o esta inactiva, devuelve 0.
 --
+-- El parametro @PromotorId se recibe por compatibilidad de firma con
+-- el trigger trg_Comision_Automatica y casos de prueba (permite
+-- ampliar la formula a futuro, p. ej. aplicar el porcentaje propio
+-- del promotor). La formula vigente (RN-09) usa SOLO el porcentaje
+-- de la campana vigente.
+--
 -- IDEMPOTENTE: se crea con CREATE OR ALTER / guardian de existencia.
 -- =============================================
 

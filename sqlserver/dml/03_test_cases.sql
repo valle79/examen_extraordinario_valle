@@ -24,7 +24,7 @@ USE MatriculaCloud360DB;
 GO
 
 -- Requerido para actualizar tablas con indices filtrados
--- (IX_Estudiantes_DeletedAt, IX_Matriculas_DeletedAt).
+-- (IX_Estudiantes_DeletedAt, IX_Matriculas_Activas).
 SET QUOTED_IDENTIFIER ON;
 GO
 

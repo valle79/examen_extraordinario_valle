@@ -37,7 +37,9 @@ SELECT
     e.UpdatedAt,
     e.DeletedAt
 FROM core.Estudiantes e
-LEFT JOIN core.Ubigeos u ON u.UbigeoId = e.UbigeoId;
+LEFT JOIN core.Ubigeos u ON u.UbigeoId = e.UbigeoId
+-- RN-10: las vistas operativas excluyen los borrados logicos (DeletedAt)
+WHERE e.DeletedAt IS NULL;
 GO
 
 PRINT 'OK: core.vw_EstudiantesDetalle.';

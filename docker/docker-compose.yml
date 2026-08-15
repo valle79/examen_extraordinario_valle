@@ -34,6 +34,9 @@ services:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=${SA_PASSWORD}
       - MSSQL_PID=${MSSQL_PID:-Developer}
+      # Habilita SQL Server Agent para el mantenimiento automatizado
+      # del Sprint 3 (respaldo FULL/diferencial/log, indices, integridad).
+      - MSSQL_AGENT_ENABLED=true
       # NOTA: la collation NO se configura via MSSQL_COLLATION porque el
       # entrypoint personalizado (wait-for-sql.sh) inicia sqlservr
       # directamente, y el cambio de collation en SQL Server 2025 reinicia
@@ -49,6 +52,8 @@ services:
       - ./init:/docker-entrypoint-initdb.d
       # Scripts SQL del proyecto (ddl, dml, utils)
       - ../sqlserver:/sqlserver
+      # Dashboard de indicadores (genera /dashboard/indicadores.html en el host)
+      - ../dashboard:/dashboard
       # ----------------------------------------------------------
       # Persistencia de datos mediante VOLUMENES NOMBRADOS de Docker.
       # Se usan volumenes nombrados (y no bind mounts a carpetas de

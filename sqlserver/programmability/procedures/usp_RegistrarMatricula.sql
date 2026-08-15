@@ -79,12 +79,18 @@ BEGIN
         SELECT @Monto = CostoMatricula FROM core.Carreras WHERE CarreraId = @CarreraId;
 
         -- Insertar la matricula (la comision la genera el trigger RN-09)
+        -- El codigo temporal PEND-XXXXXX es UNICO por insercion (sufijo
+        -- aleatorio) para no colisionar con la UK_Matriculas_Codigo en
+        -- operaciones CONCURRENTES; el codigo definitivo MAT-AAAA-NNNNNN
+        -- se asigna inmediatamente despues en la misma transaccion.
+        DECLARE @CodigoTemp VARCHAR(20) = 'PEND-' + RIGHT(REPLACE(CONVERT(VARCHAR(36), NEWID()), '-', ''), 8);
+
         INSERT INTO core.Matriculas
             (CodigoMatricula, EstudianteId, CarreraId, PeriodoId, SedeId,
              PromotorId, CampaniaId, FechaMatricula, MontoMatricula,
              EstadoMatricula, Observaciones)
         VALUES
-            ('PENDIENTE', @EstudianteId, @CarreraId, @PeriodoId, @SedeId,
+            (@CodigoTemp, @EstudianteId, @CarreraId, @PeriodoId, @SedeId,
              @PromotorId, @CampaniaId, GETDATE(), @Monto, 'Activa', @Observaciones);
 
         SET @MatriculaId = SCOPE_IDENTITY();

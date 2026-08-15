@@ -31,8 +31,10 @@ AS
 BEGIN
     SET NOCOUNT ON;
     BEGIN TRY
-        IF NOT EXISTS (SELECT 1 FROM core.Estudiantes WHERE EstudianteId = @EstudianteId)
-            THROW 51004, 'El estudiante indicado no existe.', 1;
+        -- RN-10: un estudiante con borrado logico no puede editarse
+        IF NOT EXISTS (SELECT 1 FROM core.Estudiantes
+                       WHERE EstudianteId = @EstudianteId AND DeletedAt IS NULL)
+            THROW 51004, 'El estudiante indicado no existe o esta inactivo (borrado logico).', 1;
 
         -- RN-01: documento y email unicos (excluyendo al propio estudiante)
         IF core.fn_ExisteEstudianteConDocumento(@TipoDocumento, @NumeroDocumento, @EstudianteId) = 1

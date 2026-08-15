@@ -26,6 +26,12 @@ BEGIN
                        WHERE MatriculaId = @MatriculaId AND DeletedAt IS NULL)
             THROW 52008, 'La matricula indicada no existe.', 1;
 
+        -- No permite retirar dos veces la misma matricula: la primera
+        -- retirada anula la comision (RN-09); una segunda no tiene efecto
+        IF EXISTS (SELECT 1 FROM core.Matriculas
+                   WHERE MatriculaId = @MatriculaId AND EstadoMatricula = 'Retirada')
+            THROW 52009, 'La matricula ya fue retirada anteriormente.', 1;
+
         UPDATE core.Matriculas
         SET EstadoMatricula = 'Retirada',
             Observaciones = ISNULL(@Motivo, Observaciones),
