@@ -29,7 +29,7 @@
 
 | Técnica | Uso |
 |---|---|
-| CTE (WITH) | Q1 dashboard, Q2 ranking, Q5 variación, Q8 campañas, Q9 franjas horarias |
+| CTE (WITH) | Q1 analítica, Q2 ranking, Q5 variación, Q8 campañas, Q9 franjas horarias |
 | CTE recursiva | Q9 malla curricular por semestre (créditos acumulados) |
 | Funciones de ventana | `ROW_NUMBER` (Q2, Q5), `RANK`/`DENSE_RANK` (Q3), `LAG` (Q5), `SUM OVER` (Q4 acumulado, Q10 tendencia) |
 | Agregados extendidos | `ROLLUP` (Q1 matrículas por periodo/carrera/sede con subtotales) |
@@ -43,7 +43,7 @@
 
 | Índice | Tabla | Tipo | Para qué consulta |
 |---|---|---|---|
-| `IX_Matriculas_PeriodoEstado` | `core.Matriculas` | Compuesto + filtrado + covering | Q1 dashboard (matrículas por periodo/sede, solo activas) |
+| `IX_Matriculas_PeriodoEstado` | `core.Matriculas` | Compuesto + filtrado + covering | Q1 analítica (matrículas por periodo/sede, solo activas) |
 | `IX_Matriculas_PromotorPeriodo` | `core.Matriculas` | Compuesto | Q2/Q3 ranking de promotores |
 | `IX_Comisiones_Campania` | `sales.Comisiones` | Compuesto | Q4/Q8 comisiones y campañas |
 
@@ -89,13 +89,7 @@ Resultado esperado: reducción de lecturas lógicas (logical reads) y de tiempo 
 
 `maintenance/03_maintenance.sql` crea 5 jobs idempotentes (se eliminan y recrean) con horarios definidos, y demuestra además la consulta de fragmentación (`sys.dm_db_index_physical_stats`) que alimenta el reindexado.
 
-## 8. Analíticas e indicadores institucionales
-
-**Dashboard:** `dashboard/generar_indicadores.sql` → genera `dashboard/indicadores.html` (autocontenido, sin dependencias externas).
-
-Indicadores por: **matrículas** (totales, por periodo, tendencia diaria con acumulado y crecimiento), **carreras** (participación %), **sedes** (distribución), **campañas** (captación y monto), **promotores** (ranking con RANK + LAG de variación vs. periodo anterior). Incluye KPIs, últimas operaciones de auditoría y estado de respaldo/jobs.
-
-## 9. Pruebas integradas (Sprint 3)
+## 8. Pruebas integradas (Sprint 3)
 
 | Archivo | Cobertura |
 |---|---|
@@ -104,7 +98,7 @@ Indicadores por: **matrículas** (totales, por periodo, tendencia diaria con acu
 | `testing/recovery_tests.sql` | Respaldo → pérdida simulada → restauración → verificación + CHECKDB, devolviendo la BD a MULTI_USER |
 | `utils/verificar_instalacion.sql` | Verificación integral (17 tablas, 21 FK, 22 UK, 30 CK, 17 índices, datos por ventana, objetos, roles y permisos) |
 
-## 10. Guía rápida de ejecución
+## 9. Guía rápida de ejecución
 
 ```bash
 # 1. Levantar el entorno (recrea la BD con los 49 pasos de init.sql)
@@ -117,10 +111,6 @@ docker compose -f docker/docker-compose.yml exec sqlserver /opt/mssql-tools18/bi
 # 3. Demo para la sustentación (preguntas probables del profesor)
 docker compose -f docker/docker-compose.yml exec sqlserver /opt/mssql-tools18/bin/sqlcmd \
   -S localhost -U SA -P "$SA_PASSWORD" -C -i /sqlserver/utils/demo_profesor_sprint3.sql
-
-# 4. Dashboard de indicadores (genera dashboard/indicadores.html)
-docker compose -f docker/docker-compose.yml exec sqlserver /opt/mssql-tools18/bin/sqlcmd \
-  -S localhost -U SA -P "$SA_PASSWORD" -C -i /dashboard/generar_indicadores.sql
 ```
 
 > **Nota:** tanto `init.sql` como cada script individual son **idempotentes**: se pueden ejecutar cuantas veces se quiera sin errores ni pérdida de datos.

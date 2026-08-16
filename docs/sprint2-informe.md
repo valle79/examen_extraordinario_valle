@@ -113,4 +113,4 @@ Contrasenas documentadas en el `README.md` para la sustentacion. El Sprint 3 ref
 
 ---
 
-> **Nota:** el Sprint 3 amplia este trabajo con auditoria integral, borrado logico `INSTEAD OF DELETE`, consultas avanzadas, indices, rol-based security, respaldo FULL+DIFERENCIAL+LOG, SQL Agent y dashboard (ver `docs/sprint3-informe.md`).
+> **Nota:** el Sprint 3 amplia este trabajo con auditoria integral, borrado logico `INSTEAD OF DELETE`, consultas avanzadas, indices, rol-based security, respaldo FULL+DIFERENCIAL+LOG y SQL Agent (ver `docs/sprint3-informe.md`).

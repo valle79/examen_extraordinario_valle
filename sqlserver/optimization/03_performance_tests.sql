@@ -5,8 +5,8 @@
 -- Descripcion (Sprint 3): Pruebas ANTES / DESPUES de la estrategia
 -- de indexacion sobre las consultas criticas del sistema:
 --
---   PARTE A - Consultas criticas reales (dashboard y reporteria):
---     Q1: Matriculas por periodo y estado (dashboard)
+--   PARTE A - Consultas criticas reales (analitica y reporteria):
+--     Q1: Matriculas por periodo y estado (analitica)
 --     Q2: Ranking de promotores por periodo (ventana)
 --     Q3: Comisiones por campana y estado (plan de pagos)
 --     Metodo: se DESHABILITAN los indices del Sprint 3
@@ -110,7 +110,7 @@ WHILE @iteracion <= 3
 BEGIN
     DBCC DROPCLEANBUFFERS WITH NO_INFOMSGS;
 
-    -- Q1: dashboard - matriculas por periodo y estado
+    -- Q1: analitica - matriculas por periodo y estado
     SET @t1 = SYSDATETIME();
     SELECT @dummy = COUNT(*) FROM (
         SELECT m.PeriodoId, m.EstadoMatricula, COUNT(*) Total, SUM(m.MontoMatricula) Monto

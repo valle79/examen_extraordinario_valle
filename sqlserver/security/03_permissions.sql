@@ -79,7 +79,7 @@ GRANT SELECT ON OBJECT::core.vw_ReporteMatriculasPeriodo   TO [rol_Coordinador_A
 GRANT SELECT ON OBJECT::academic.vw_MallaCurricular        TO [rol_Coordinador_Academico];
 GRANT SELECT ON OBJECT::academic.vw_ProfesoresDetalle      TO [rol_Coordinador_Academico];
 
--- Vistas analiticas del Sprint 3 (dashboard institucional)
+-- Vistas analiticas del Sprint 3 (indicadores institucionales)
 GRANT SELECT ON OBJECT::core.vw_IndicadoresMatricula       TO [rol_Coordinador_Academico];
 GRANT SELECT ON OBJECT::sales.vw_RankingPromotores         TO [rol_Coordinador_Academico];
 GRANT SELECT ON OBJECT::core.vw_TendenciaMatriculas        TO [rol_Coordinador_Academico];

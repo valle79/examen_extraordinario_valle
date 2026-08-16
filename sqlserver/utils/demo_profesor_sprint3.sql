@@ -24,7 +24,7 @@
 --   P12 Seguridad: MC_Coordinador no ve comisiones (DENY)
 --   P13 Seguridad: roles y membresias
 --   P14 Respaldo: historial de backups en msdb
---   P15 Analiticas: indicadores del dashboard
+--   P15 Analiticas: indicadores institucionales
 --   P16 Vistas analiticas del Sprint 3
 --
 -- SEGURO: las escrituras de demostracion corren dentro de una
@@ -363,7 +363,7 @@ FROM msdb.dbo.sysjobs WHERE name LIKE 'MC360_%' ORDER BY name;
 GO
 
 -- ============================================================
--- P15/P16. ANALITICAS / DASHBOARD
+-- P15/P16. ANALITICAS
 -- ============================================================
 PRINT '';
 PRINT 'P15-P16. CONSULTAS ANALITICAS E INDICADORES';

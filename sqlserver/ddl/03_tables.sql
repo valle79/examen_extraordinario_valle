@@ -516,7 +516,7 @@ BEGIN
 END
 GO
 
--- Matriculas recientes (dashboard)
+-- Matriculas recientes (analitica)
 IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_Matriculas_FechaMatricula' AND object_id = OBJECT_ID('core.Matriculas'))
 BEGIN
     CREATE NONCLUSTERED INDEX IX_Matriculas_FechaMatricula

@@ -8,11 +8,11 @@
 -- en el Sprint 1 (03_tables.sql) con indices compuestos, filtrados
 -- y con columnas incluidas (covering) que eliminan operaciones
 -- costosas (INDEX SCAN / KEY LOOKUP / RID LOOKUP) en las consultas
--- mas frecuentes del dashboard y reporteria analitica.
+-- mas frecuentes de la reporteria analitica.
 --
 -- CONSULTA CRITICA ANALIZADA        -> INDICE CREADO EN ESTE SCRIPT
 -- -------------------------------------------------------------------
--- Q1 Dashboard: matriculas por      -> IX_Matriculas_PeriodoEstado
+-- Q1 Analitica: matriculas por        -> IX_Matriculas_PeriodoEstado
 --    periodo y estado (agrupadas)      (compuesto + filtrado + cover)
 -- Q2 vw_RankingPromotores: ranking  -> IX_Matriculas_PromotorPeriodo
 --    de promotores por periodo          (compuesto + filtrado + cover)
@@ -41,7 +41,7 @@ GO
 
 -- =============================================
 -- INDICE 1: IX_Matriculas_PeriodoEstado
--- Justificacion: Q1 (dashboard) agrupa matriculas activas por
+-- Justificacion: Q1 (analitica) agrupa matriculas activas por
 -- PeriodoId y EstadoMatricula sumando MontoMatricula.
 --   - Compuesto (PeriodoId, EstadoMatricula) -> Seek + agregacion
 --   - Filtrado (DeletedAt IS NULL) -> solo activas (mas pequeño)
@@ -53,7 +53,7 @@ BEGIN
         ON core.Matriculas(PeriodoId, EstadoMatricula)
         INCLUDE (MontoMatricula, PromotorId, SedeId, CampaniaId)
         WHERE DeletedAt IS NULL;
-    PRINT 'OK: IX_Matriculas_PeriodoEstado creado (Q1 dashboard).';
+    PRINT 'OK: IX_Matriculas_PeriodoEstado creado (Q1 analitica).';
 END
 ELSE
     PRINT 'OK: IX_Matriculas_PeriodoEstado ya existe.';

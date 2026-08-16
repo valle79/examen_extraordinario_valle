@@ -55,7 +55,7 @@
 
 - Imagen oficial `mcr.microsoft.com/mssql/server:2025-latest` (SQL Server 2025 Developer Edition), puerto host `1434` para no conflictuar con una instancia local.
 - `MSSQL_AGENT_ENABLED=true`: habilita SQL Agent (necesario para los jobs del Sprint 3).
-- **Volumenes nombrados**: `matricula_cloud_data` (datos), `matricula_cloud_backup` (respaldos); montajes bind para el codigo SQL (`/sqlserver`) y el dashboard (`/dashboard`).
+- **Volumenes nombrados**: `matricula_cloud_data` (datos), `matricula_cloud_backup` (respaldos); un montaje bind para el codigo SQL (`/sqlserver`).
 - **Healthcheck**: el contenedor solo se considera sano cuando SQL Server responde a las consultas.
 - **`init.sql` automatico e idempotente**: al primer arranque (`wait-for-sql.sh` espera que SQL este listo) ejecuta los 49 pasos que crean la BD, los objetos y los datos; se puede re-ejecutar las veces que se quiera sin errores.
 - **Variables de entorno** en `.env` (password del SA, `MSSQL_PID=Developer`, codificacion). La contrasena se documenta para la sustentacion academica.

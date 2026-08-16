@@ -82,9 +82,6 @@ MatriculaCloud360Enterprise/
 │       ├── backup_restore.sql         # Plantilla de respaldo/restauración
 │       └── generate_diccionario.sql   # Genera el diccionario de datos
 │
-├── dashboard/                      # Consultas analíticas e indicadores (Sprint 3)
-│   ├── generar_indicadores.sql   # Genera dashboard/indicadores.html (matrículas, carreras, sedes, campañas, promotores)
-│   └── indicadores.html          # Dashboard generado (autocontenido)
 ├── datasets/                        # Modelos y diccionarios del Sprint 1
 │   ├── MODELO_LOGICO_V2.png        # Modelo lógico
 │   ├── MODELO_FISICO_V2.png        # Modelo físico
@@ -163,9 +160,6 @@ docker exec sqlserver_matricula_cloud /opt/mssql-tools18/bin/sqlcmd -S localhost
 
 # Demo para la sustentación (preguntas probables del profesor, Sprint 3)
 docker exec sqlserver_matricula_cloud /opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P "MatriculaCloud360!" -C -i /sqlserver/utils/demo_profesor_sprint3.sql
-
-# Generar el dashboard de indicadores (dashboard/indicadores.html)
-docker exec sqlserver_matricula_cloud /opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P "MatriculaCloud360!" -C -i /dashboard/generar_indicadores.sql
 ```
 
 ## 🗄️ Modelo de Datos
@@ -229,7 +223,6 @@ Las contraseñas de la tabla `security.Usuarios` (usuarios de aplicación) se al
 - ✅ Seguridad por roles (`rol_Administrador`, `rol_Coordinador_Academico`, `rol_Promotor`) con matriz GRANT/DENY/REVOKE verificada (S01–S10)
 - ✅ Estrategia de respaldo FULL + DIFERENCIAL + LOG automatizada con 5 jobs de SQL Agent
 - ✅ Prueba completa de recuperación (respaldo → pérdida simulada → restauración → DBCC CHECKDB → MULTI_USER)
-- ✅ Dashboard de indicadores institucionales (matrículas, carreras, sedes, campañas, promotores) → `dashboard/indicadores.html`
 - ✅ Pruebas funcionales F01–F08, de seguridad S01–S10 y de recuperación; verificación integral actualizada
 - ✅ Informe técnico `docs/sprint3-informe.md`
 
