@@ -39,3 +39,6 @@ desktop.ini
 # Temporales
 *.tmp
 *.temp
+
+# Informes técnicos (se entregan por separado, no se versionan)
+docs/

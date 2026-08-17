@@ -79,19 +79,13 @@ MatriculaCloud360Enterprise/
 │   └── utils/                      # Utilidades
 │       ├── verificar_instalacion.sql  # Auditoría completa de instalación
 │       ├── demo_profesor_sprint3.sql  # Demo de preguntas probables del profesor (Sprint 3)
-│       ├── backup_restore.sql         # Plantilla de respaldo/restauración
-│       └── generate_diccionario.sql   # Genera el diccionario de datos
+│       └── backup_restore.sql         # Plantilla de respaldo/restauración
 │
 ├── datasets/                        # Modelos y diccionarios del Sprint 1
 │   ├── MODELO_LOGICO_V2.png        # Modelo lógico
 │   ├── MODELO_FISICO_V2.png        # Modelo físico
 │   ├── catalogo_datos.xlsx         # Catálogo de datos (información inicial del cliente)
 │   └── diccionario_datos.pdf       # Diccionario de datos (17 tablas)
-│
-├── docs/                           # Informes técnicos
-│   ├── sprint1-informe.md         # Informe técnico del Sprint 1
-│   ├── sprint2-informe.md         # Informe técnico del Sprint 2
-│   └── sprint3-informe.md         # Informe técnico del Sprint 3
 │
 ├── .gitignore                      # Archivos ignorados por Git
 └── README.md                       # Este archivo
@@ -224,7 +218,6 @@ Las contraseñas de la tabla `security.Usuarios` (usuarios de aplicación) se al
 - ✅ Estrategia de respaldo FULL + DIFERENCIAL + LOG automatizada con 5 jobs de SQL Agent
 - ✅ Prueba completa de recuperación (respaldo → pérdida simulada → restauración → DBCC CHECKDB → MULTI_USER)
 - ✅ Pruebas funcionales F01–F08, de seguridad S01–S10 y de recuperación; verificación integral actualizada
-- ✅ Informe técnico `docs/sprint3-informe.md`
 
 ## 🛠️ Tecnologías
 

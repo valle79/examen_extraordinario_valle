@@ -18,13 +18,11 @@
 
 ## 🛠️ ¿Cómo se generó el diccionario físico?
 
-El diccionario físico se genera con el script:
-
-```
-sqlserver/utils/generate_diccionario.sql
-```
-
-que consulta el catálogo del sistema (`sys.tables`, `sys.columns`, `sys.foreign_keys`, `sys.check_constraints`, etc.) de `MatriculaCloud360DB`, y luego se exporta a PDF (Redgate Data Modeler).
+El diccionario físico se generó en **Vertabelo** (herramienta de modelado de datos)
+a partir del modelo físico del Sprint 1 (`MODELO_FISICO_V2.png`), y se exportó a
+PDF (`diccionario_datos.pdf`). Los nombres de esquemas, tablas, tipos de datos y
+restricciones del PDF coinciden 1:1 con los creados por `sqlserver/ddl/03_tables.sql`
+(verificable con `sqlserver/utils/verificar_instalacion.sql`).
 
 ## 🔄 Mantenimiento
 
@@ -32,5 +30,5 @@ Si el modelo de datos cambia (nueva tabla, columna o restricción):
 
 1. Actualizar `sqlserver/ddl/03_tables.sql`.
 2. Recrear el contenedor (`docker compose down -v && docker compose up -d` en `docker/`).
-3. Regenerar el diccionario con `generate_diccionario.sql` y exportar el PDF.
+3. Regenerar el diccionario en Vertabelo y exportar el PDF.
 4. Actualizar los diagramas desde SQL Server Management Studio (Diagramas de base de datos).

@@ -3,8 +3,8 @@
 -- optimization/01_indexes.sql | Estrategia de indices (Sprint 3)
 -- =============================================
 -- Descripcion: Nuevos indices creados a partir del ANALISIS DE LAS
--- CONSULTAS CRITICAS (ver optimization/03_performance_tests.sql y
--- docs/sprint3-informe.md). Se complementan los 14 indices creados
+-- CONSULTAS CRITICAS (ver optimization/03_performance_tests.sql).
+-- Se complementan los 14 indices creados
 -- en el Sprint 1 (03_tables.sql) con indices compuestos, filtrados
 -- y con columnas incluidas (covering) que eliminan operaciones
 -- costosas (INDEX SCAN / KEY LOOKUP / RID LOOKUP) en las consultas
