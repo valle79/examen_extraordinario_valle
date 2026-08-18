@@ -19,8 +19,10 @@
 --   2. Devuelve el historial de respaldos registrados en msdb.
 --
 -- Los archivos se guardan en /var/opt/mssql/backup (volumen Docker
--- matricula_cloud_backup); para extraerlos al host:
---   docker cp sqlserver_matricula_cloud:/var/opt/mssql/backup/<archivo>.bak ./docker/volumes/backup/
+-- matricula_cloud_backup). El contenedor los copia AUTOMATICAMENTE a
+-- docker/volumes/backup del proyecto (wait-for-sql.sh sincroniza cada
+-- 15 segundos), por lo que cada respaldo queda en ambos lugares.
+-- Fallback manual: docker cp sqlserver_matricula_cloud:/var/opt/mssql/backup/<archivo>.bak ./docker/volumes/backup/
 --
 -- IDEMPOTENTE y SEGURO: solo escribe archivos nuevos de respaldo.
 -- =============================================

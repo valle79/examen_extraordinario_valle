@@ -9,8 +9,12 @@
 --   2) Respaldos de log     (BACKUP LOG) para restauracion
 --      a un punto especifico del tiempo.
 --
--- Los archivos se escriben en /var/opt/mssql/backup, carpeta que
--- en Docker se encuentra en docker/volumes/backup del proyecto.
+-- Los archivos se escriben en /var/opt/mssql/backup (volumen nombrado
+-- de Docker matricula_cloud_backup). El contenedor los copia
+-- AUTOMATICAMENTE (wait-for-sql.sh) a docker/volumes/backup del
+-- proyecto, por lo que cada respaldo queda guardado en ambos lugares:
+--   - Docker Desktop (volumen nombrado)
+--   - La carpeta docker/volumes/backup del proyecto
 --
 -- IMPORTANTE: con RECOVERY FULL, el log crece hasta que se ejecuta
 -- un BACKUP LOG. Se recomienda programar respaldos periodicos

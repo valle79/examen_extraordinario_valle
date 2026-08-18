@@ -37,6 +37,11 @@ services:
       # Habilita SQL Server Agent para el mantenimiento automatizado
       # del Sprint 3 (respaldo FULL/diferencial/log, indices, integridad).
       - MSSQL_AGENT_ENABLED=true
+      # Retencion de respaldos: los .bak (FULL/DIFF) se conservan N dias
+      # y los .trn (LOG) M dias; lo mas antiguo se elimina solo tanto del
+      # volumen nombrado como de docker/volumes/backup (wait-for-sql.sh).
+      - BACKUP_RETENTION_FULL_DAYS=${BACKUP_RETENTION_FULL_DAYS:-7}
+      - BACKUP_RETENTION_LOG_DAYS=${BACKUP_RETENTION_LOG_DAYS:-2}
       # NOTA: la collation NO se configura via MSSQL_COLLATION porque el
       # entrypoint personalizado (wait-for-sql.sh) inicia sqlservr
       # directamente, y el cambio de collation en SQL Server 2025 reinicia
@@ -53,6 +58,18 @@ services:
       # Scripts SQL del proyecto (ddl, dml, utils)
       - ../sqlserver:/sqlserver
       # ----------------------------------------------------------
+      # COPIA DE RESPALDOS EN LA CARPETA DEL PROYECTO:
+      # wait-for-sql.sh copia automaticamente cada respaldo nuevo
+      # (.bak/.trn) desde /var/opt/mssql/backup (volumen nombrado)
+      # hacia /var/opt/mssql/backup-host, que es este bind-mount a
+      # docker/volumes/backup. Asi los respaldos quedan en DOBLE
+      # lugar: el volumen nombrado de Docker Desktop y el proyecto.
+      # SQL Server NUNCA escribe en esta carpeta (solo el script de
+      # sync), evitando los problemas conocidos de bind-mounts con
+      # Docker Desktop (error 31 / tempdb).
+      # ----------------------------------------------------------
+      - ./volumes/backup:/var/opt/mssql/backup-host
+      # ----------------------------------------------------------
       # Persistencia de datos mediante VOLUMENES NOMBRADOS de Docker.
       # Se usan volumenes nombrados (y no bind mounts a carpetas de
       # Windows) porque SQL Server requiere operaciones de archivo que
@@ -62,7 +79,7 @@ services:
       #
       # Nombre de los volumenes: matricula_cloud_data / _log / _backup
       # Para inspeccionarlos: docker volume inspect matricula_cloud_data
-      # Para extraer un respaldo: docker cp sqlserver_matricula_cloud:/var/opt/mssql/backup/archivo.bak ./docker/volumes/backup/
+      # Para extraer un respaldo manualmente: docker cp sqlserver_matricula_cloud:/var/opt/mssql/backup/archivo.bak ./docker/volumes/backup/
       # ----------------------------------------------------------
       - mssql_data:/var/opt/mssql/data
       - mssql_log:/var/opt/mssql/log

@@ -80,5 +80,59 @@ else
     echo "[init] La base de datos puede estar incompleta. Revisa los logs."
 fi
 
+# =============================================
+# Sincronizacion de respaldos hacia el proyecto:
+# SQL Server escribe los respaldos en /var/opt/mssql/backup
+# (volumen nombrado de Docker). Este bucle en segundo plano copia
+# cada respaldo nuevo (.bak/.trn) tambien a /var/opt/mssql/backup-host,
+# que es el bind-mount a docker/volumes/backup del proyecto.
+# SQL Server jamas escribe en esa carpeta (evita el error 31 de
+# Docker Desktop); solo este script (ejecutado como root) la llena.
+#
+# RETENCION: se eliminan automaticamente los respaldos mas antiguos
+# que los dias configurados (BACKUP_RETENTION_FULL_DAYS para .bak y
+# BACKUP_RETENTION_LOG_DAYS para .trn), tanto en el volumen nombrado
+# como en la carpeta del proyecto. Por defecto: 7 y 2 dias.
+# =============================================
+BACKUP_HOST=/var/opt/mssql/backup-host
+SYNC_INTERVAL=15
+RETENTION_BAK_DAYS=${BACKUP_RETENTION_FULL_DAYS:-7}
+RETENTION_TRN_DAYS=${BACKUP_RETENTION_LOG_DAYS:-2}
+CLEANUP_EVERY=$(( (6 * 60 * 60) / SYNC_INTERVAL ))   # cada 6 horas
+CLEANUP_COUNTER=0
+
+cleanup_backups() {
+    if [ "${RETENTION_BAK_DAYS}" -gt 0 ]; then
+        find /var/opt/mssql/backup -maxdepth 1 -name '*.bak' -mtime "+${RETENTION_BAK_DAYS}" -delete 2>/dev/null
+        [ -d "$BACKUP_HOST" ] && find "$BACKUP_HOST" -maxdepth 1 -name '*.bak' -mtime "+${RETENTION_BAK_DAYS}" -delete 2>/dev/null
+    fi
+    if [ "${RETENTION_TRN_DAYS}" -gt 0 ]; then
+        find /var/opt/mssql/backup -maxdepth 1 -name '*.trn' -mtime "+${RETENTION_TRN_DAYS}" -delete 2>/dev/null
+        [ -d "$BACKUP_HOST" ] && find "$BACKUP_HOST" -maxdepth 1 -name '*.trn' -mtime "+${RETENTION_TRN_DAYS}" -delete 2>/dev/null
+    fi
+}
+
+# Limpieza inicial al arrancar + limpieza periodica dentro del bucle.
+cleanup_backups
+echo "[init] Sincronizacion y retencion de respaldos activas (cada $SYNC_INTERVAL s hacia $BACKUP_HOST; retencion ${RETENTION_BAK_DAYS}d .bak / ${RETENTION_TRN_DAYS}d .trn)."
+
+(
+    while true; do
+        for f in /var/opt/mssql/backup/*.bak /var/opt/mssql/backup/*.trn; do
+            [ -f "$f" ] || continue
+            # Solo copia archivos cerrados (sin escribirle hace 5 seg).
+            AGE=$(( $(date +%s) - $(stat -c %Y "$f" 2>/dev/null || echo 0) ))
+            [ "${AGE:-0}" -ge 5 ] || continue
+            cp -n "$f" "$BACKUP_HOST/" 2>/dev/null
+        done
+        CLEANUP_COUNTER=$((CLEANUP_COUNTER + 1))
+        if [ "$CLEANUP_COUNTER" -ge "$CLEANUP_EVERY" ]; then
+            cleanup_backups
+            CLEANUP_COUNTER=0
+        fi
+        sleep "$SYNC_INTERVAL"
+    done
+) &
+
 echo "[init] Contenedor operativo. Manteniendo SQL Server activo..."
 wait $SQL_PID
